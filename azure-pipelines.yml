@@ -10,9 +10,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
 - task: AzurePowerShell@5
   inputs:
     ScriptType: 'FilePath'
@@ -20,10 +17,10 @@ steps:
     FailOnStandardError: true
     azurePowerShellVersion: 'LatestVersion'
     pwsh: true
-
 - task: AzureFileCopy@4
   inputs:
     azureSubscription: 'AZ-PAYG(1)(ef69ddac-98e8-4607-aad6-d2d109143798)'
+    SourcePath: /src/blog
     Destination: 'AzureBlob'
     storage: 'datablog'
     ContainerName: 'datablog'
