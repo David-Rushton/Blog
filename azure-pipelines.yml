@@ -1,0 +1,30 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- task: AzurePowerShell@5
+  inputs:
+    ScriptType: 'FilePath'
+    ScriptPath: '/scripts/build.ps1'
+    FailOnStandardError: true
+    azurePowerShellVersion: 'LatestVersion'
+    pwsh: true
+
+- task: AzureFileCopy@4
+  inputs:
+    azureSubscription: 'AZ-PAYG(1)(ef69ddac-98e8-4607-aad6-d2d109143798)'
+    Destination: 'AzureBlob'
+    storage: 'datablog'
+    ContainerName: 'datablog'
+    BlobPrefix: 'Blob Containers/$web'
