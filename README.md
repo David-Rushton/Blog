@@ -36,16 +36,6 @@ Let's try this again.  This time:
 
 - [ ] Cool domain name, that is useful for career building ( hello@david-rushton.com | hello@david-rushton.io | hello@david-rushton.dev | hello@data-news.xxx )
 
-## Issues!
-
-- [ ] Yaml frontmatter.  Maybe [this](https://github.com/cloudbase/powershell-yaml)?
-- [ ] Md links should re-pointed to html
-- [ ] Local hot debugging
-- [ ] Sitemap and robots
-- [ ] LICENSE - mine, images, bootstrap and highlight.js
-- [ ] Copy to clipboard
-- [ ] Images https://www.pexels.com/search/engineering/
-
 ## Vars
 
 - $(last-updated)
