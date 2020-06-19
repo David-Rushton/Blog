@@ -15,14 +15,13 @@ steps:
     azureSubscription: 'AZ-PAYG(2)(ef69ddac-98e8-4607-aad6-d2d109143798)'
     ScriptType: 'FilePath'
     ScriptPath: 'scripts/build.ps1'
+    ScriptArguments: '-Verbose'
     FailOnStandardError: true
     azurePowerShellVersion: 'LatestVersion'
     pwsh: true
-- task: AzureFileCopy@4
+- task: CopyFiles@2
   inputs:
-    azureSubscription: 'AZ-PAYG(1)(ef69ddac-98e8-4607-aad6-d2d109143798)'
-    SourcePath: src/blog
-    Destination: 'AzureBlob'
-    storage: 'datablog'
-    ContainerName: 'datablog'
-    BlobPrefix: 'Blob Containers/$web'
+    SourceFolder: '$(Build.SourcesDirectory)/src/blog'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/blog'
+    CleanTargetFolder: true
