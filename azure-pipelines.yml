@@ -12,11 +12,13 @@ pool:
 steps:
 - task: AzurePowerShell@5
   inputs:
+    azureSubscription: 'AZ-PAYG(2)(ef69ddac-98e8-4607-aad6-d2d109143798)'
     ScriptType: 'FilePath'
     ScriptPath: '/scripts/build.ps1'
     FailOnStandardError: true
     azurePowerShellVersion: 'LatestVersion'
     pwsh: true
+    workingDirectory: '.'
 - task: AzureFileCopy@4
   inputs:
     azureSubscription: 'AZ-PAYG(1)(ef69ddac-98e8-4607-aad6-d2d109143798)'
