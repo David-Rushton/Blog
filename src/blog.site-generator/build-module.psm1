@@ -106,7 +106,7 @@ function Get-Article {
         return @{
             MetaData = $metaData
             ArticlePath = [System.IO.Path]::ChangeExtension($Path, '.html')
-            ArticleUrl = "./articles/$([System.IO.Path]::GetFileNameWithoutExtension($Path)).html"
+            ArticleUrl = "./blog.articles/$([System.IO.Path]::GetFileNameWithoutExtension($Path)).html"
             Article = New-Article -MetaData $metaData -MarkdownArticle $markdownArticle
         }
     }
