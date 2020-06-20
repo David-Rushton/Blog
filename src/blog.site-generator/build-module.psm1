@@ -35,7 +35,7 @@ function Set-ContentVariableValues {
     }
 
     foreach ($keyValue in $KeyValuePairs) {
-        $Content = $Content.Replace($keyValue.Key, $keyValue.Value.Trim())
+        $Content = $Content.Replace($keyValue.Key, $keyValue.Value.ToString().Trim())
     }
 
     if ($Path) {
@@ -63,7 +63,7 @@ function Get-ArticlePaths {
     [CmdletBinding()]
     param()
 
-    $articlesPath = Join-Path -Path $PSScriptRoot '..' 'blog' 'articles'
+    $articlesPath = Join-Path -Path $PSScriptRoot '..' 'blog' 'blog.articles'
     if (-not (Test-Path -Path $articlesPath)) {
         throw "Cannot find articles"
     }
@@ -125,7 +125,7 @@ function New-Article {
     )
 
 
-    $template = Get-Content -Path "$PSScriptRoot/../blog/articles/article.template.html" -Raw
+    $template = Get-Content -Path "$PSScriptRoot/../blog/blog.articles/article.template.html" -Raw
 
 
     # Inject meta
