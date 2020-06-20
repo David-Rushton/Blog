@@ -1,11 +1,11 @@
 ---
+title: Simple Design
 slug: It is strangely satisfying to see complimentary colour combinations
 tags: inspiration, design, colour
 date: 2020-06-11
-image: /blog.articles/media/person-writing-on-notebook-669615.jpg
+image: /blog.articles/media/colours-palette-5933.jpg
+image-credit: Photo by Kaboompics .com from Pexels
 ---
-
-# Simple Design
 
 I'm not a graphic designer.  Of course you don't need me to tell you that.  You are looking at a site I designed right
 now.  I love complimentary colour combinations, [negative space](https://en.wikipedia.org/wiki/Negative_space) and

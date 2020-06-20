@@ -1,11 +1,11 @@
 ---
+title: SQL Server and the Logical Processing Order
 slug: Why column aliases are available to the order by clause but not the group by?
 tags: sql-server
 date: 2020-06-19
 image: /blog.articles/media/person-writing-on-notebook-669615.jpg
+image-credit: Photo by Lukas from Pexels
 ---
-
-# SQL Server and the Logical Processing Order
 
 Have you ever wondered why you can use a column alias in the `ORDER BY` clause but not the `GROUP BY`?  This is a
 consequence of how SQL Server processes your queries.  Each query clause is executed in a set order.  This has a catchy
