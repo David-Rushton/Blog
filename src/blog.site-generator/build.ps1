@@ -20,8 +20,8 @@
 [CmdletBinding()]
 param(
     [Parameter()]
-    [int]
-    $BuildNumber = 0,
+    [string]
+    $BuildNumber = '0.0.0.0-Dev',
 
     [Parameter()]
     [string]
