@@ -1,6 +1,8 @@
 
 # Unnamed Data Blog
 
+![Azure Static Web Apps CI/CD](https://github.com/David-Rushton/Blog/workflows/Azure%20Static%20Web%20Apps%20CI/CD/badge.svg)
+
 Let's try this again.  This time:
 
 ## Learn!
@@ -49,6 +51,8 @@ Let's try this again.  This time:
 - $(article-path)
 - $(meta-tags)
 - $(article-content)
+- $(build-number)
+- $(build-sha)
 
 ## Finish!
 
