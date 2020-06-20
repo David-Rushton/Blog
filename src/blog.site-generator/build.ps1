@@ -19,11 +19,25 @@
 #Requires -Version 7.0
 [CmdletBinding()]
 param(
+    [Parameter()]
+    [int]
+    $BuildNumber = 0,
+
+    [Parameter()]
+    [string]
+    $BuildSHA
+
+
 )
 
 Set-StrictMode -Version 'Latest'
 
 Import-Module "$PSScriptRoot/build-module.psm1" -Force
+
+
+if (-not $BuildSHA) {
+    $BuildSHA = git rev-parse HEAD
+}
 
 
 # Blog is built from scratch during each build
@@ -33,7 +47,7 @@ Remove-Item -Path "$PSScriptRoot/../blog" -ErrorAction 'SilentlyContinue' -Force
 
 # Copy template and articles
 Copy-Item -Path "$PSScriptRoot/../blog.template" -Filter '*.*' -Destination "$PSScriptRoot/../blog" -ErrorAction 'SilentlyContinue' -Recurse
-Copy-Item -Path "$PSScriptRoot/../articles" -Filter '*.*' -Destination "$PSScriptRoot/../blog" -ErrorAction 'SilentlyContinue' -Recurse
+Copy-Item -Path "$PSScriptRoot/../blog.articles" -Filter '*.*' -Destination "$PSScriptRoot/../blog" -ErrorAction 'SilentlyContinue' -Recurse
 
 
 # Inject content into the website
@@ -99,4 +113,10 @@ foreach($article in $articles) {
     $articleNumber++
 }
 
-Set-ContentVariableValues -Path "$PSScriptRoot/../blog/index.html" -KeyValuePairs @( @{ Key = '$(article-previews)' ; Value = $recentArticles } ) -Verbose
+
+$kvPairs = @(
+    @{ Key = '$(article-previews)'  ; Value = $recentArticles }
+    @{ Key = '$(build-number)'      ; Value = $BuildNumber    }
+    @{ Key = '$(build-sha)'         ; Value = $BuildSHA       }
+)
+Set-ContentVariableValues -Path "$PSScriptRoot/../blog/index.html" -KeyValuePairs $kvPairs -Verbose

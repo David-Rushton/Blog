@@ -51,6 +51,8 @@ Let's try this again.  This time:
 - $(article-path)
 - $(meta-tags)
 - $(article-content)
+- $(build-number)
+- $(build-sha)
 
 ## Finish!
 
