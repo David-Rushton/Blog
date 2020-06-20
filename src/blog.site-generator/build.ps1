@@ -102,18 +102,3 @@ foreach($article in $articles) {
 }
 
 Set-ContentVariableValues -Path "$PSScriptRoot/../src/blog/index.html" -KeyValuePairs @( @{ Key = '$(article-previews)' ; Value = $recentArticles } )
-
-
-
-#$PSScriptRoot/. \/ \/ \/
-# docker run `
-#     -d `
-#     --name untitled-data-blog `
-#     --mount type=bind,source=E:/Repos/Untitled-Data-Blog/src/blog/,target=/usr/share/nginx/html `
-#     -p 8080:80 `
-#     nginx:alpine
-
-
-# docker build -t untitled-data-blog:v4 $PSScriptRoot/..
-# docker run -d -p 8080:80 untitled-data-blog:v4
-# & start "http://localhost:8080"
