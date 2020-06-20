@@ -19,7 +19,7 @@ jobs:
         with:
           submodules: true
       - name: Generate Site
-        run: src/blog.site-generator/build.ps1 -Verbose
+        run: src/blog.site-generator/build.ps1 -Verbose -BuildNumber ${GITHUB_RUN_NUMBER} -BuildSHA ${GITHUB_SHA}
         shell: pwsh
       - name: Build And Deploy
         id: builddeploy
