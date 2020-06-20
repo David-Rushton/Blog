@@ -21,7 +21,7 @@
 param(
     [Parameter()]
     [string]
-    $BuildNumber = '0.0.0.0-Dev',
+    $BuildNumber = '0-Dev',
 
     [Parameter()]
     [string]
@@ -115,8 +115,8 @@ foreach($article in $articles) {
 
 
 $kvPairs = @(
-    @{ Key = '$(article-previews)'  ; Value = $recentArticles }
-    @{ Key = '$(build-number)'      ; Value = $BuildNumber    }
-    @{ Key = '$(build-sha)'         ; Value = $BuildSHA       }
+    @{ Key = '$(article-previews)'  ; Value = $recentArticles                               }
+    @{ Key = '$(build-number)'      ; Value = Get-VersionNumber -BuildNumber $BuildNumber   }
+    @{ Key = '$(build-sha)'         ; Value = $BuildSHA                                     }
 )
 Set-ContentVariableValues -Path "$PSScriptRoot/../blog/index.html" -KeyValuePairs $kvPairs -Verbose

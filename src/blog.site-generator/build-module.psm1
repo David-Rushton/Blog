@@ -9,6 +9,24 @@
 Set-StrictMode -Version 'Latest'
 
 
+# Returns the current version number
+# Format: Major.Minor.Patch.Build
+function Get-VersionNumber {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [string]
+        $BuildNumber
+    )
+
+    $versionPath = Join-Path -Path $PSScriptRoot -ChildPath '..' 'common' 'version.xml'
+    $version = Select-Xml -Path $versionPath -XPath '/version'
+
+    return "$($version.Node.major).$($version.Node.minor).$($version.Node.patch).$($BuildNumber)"
+}
+Export-ModuleMember -Function 'Get-VersionNumber'
+
+
 # Replaces variables within a template file with a value
 function Set-ContentVariableValues {
     [CmdletBinding()]
