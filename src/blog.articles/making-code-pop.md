@@ -2,7 +2,7 @@
 slug: I spend a lot of time writing my code, I want to look its best
 tags: intro
 date: 2020-06-14
-image: /articles/media/person-pointing-numeric-print-1342460.jpg
+image: /blog.articles/media/person-pointing-numeric-print-1342460.jpg
 ---
 
 # Making Code Pop

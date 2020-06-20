@@ -2,7 +2,7 @@
 slug: It is strangely satisfying to see complimentary colour combinations
 tags: inspiration, design, colour
 date: 2020-06-11
-image: /articles/media/person-writing-on-notebook-669615.jpg
+image: /blog.articles/media/person-writing-on-notebook-669615.jpg
 ---
 
 # Simple Design

@@ -2,7 +2,7 @@
 slug: This isn't my first blog, but I'm hoping it will be my last
 tags: intro
 date: 2020-06-09
-image: /articles/media/blur-close-up-code-computer-546819.jpg
+image: /blog.articles/media/blur-close-up-code-computer-546819.jpg
 ---
 
 # Hola mundo!

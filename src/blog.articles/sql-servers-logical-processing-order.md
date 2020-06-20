@@ -2,7 +2,7 @@
 slug: Why column aliases are available to the order by clause but not the group by?
 tags: sql-server
 date: 2020-06-19
-image: /articles/media/person-writing-on-notebook-669615.jpg
+image: /blog.articles/media/person-writing-on-notebook-669615.jpg
 ---
 
 # SQL Server and the Logical Processing Order
