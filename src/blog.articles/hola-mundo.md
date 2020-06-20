@@ -1,11 +1,11 @@
 ---
+title: Hola mundo!
 slug: This isn't my first blog, but I'm hoping it will be my last
 tags: intro
 date: 2020-06-09
-image: /blog.articles/media/blur-close-up-code-computer-546819.jpg
+image: /blog.articles/media/black-iphone-7-on-brown-table-699122.jpg
+image-credit: Photo by Tyler Lastovich from Pexels
 ---
-
-# Hola mundo!
 
 This is my third attempt at writing a blog.  My first was forgotten shortly after the birth of my eldest.  The second
 was abandoned during a tough period at work.  A previous employer had drastically cut their workforce.  Keeping my team

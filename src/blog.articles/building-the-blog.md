@@ -1,11 +1,11 @@
 ---
+title: Building the Blog
 slug: I like to define what I'm trying to achieve
 tags: code, intro, jamstack, ci-cd, sdlc
 date: 2020-06-10
 image: /blog.articles/media/chart-close-up-data-desk-590022.jpg
+image-credit: Photo by Lukas from Pexels
 ---
-
-# Building the Blog
 
 I love a list.  The act of writing them helps me to clarify my thoughts.  Ticking off completed tasks provides a
 satisfying sense of achievement.  And of course; organising data is kind of my thing.  So where else could my blog start

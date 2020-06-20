@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/default.min.css">
 
-    <title>Hello, world!</title>
+    <title>$(article-title)</title>
   </head>
   <body>
 
@@ -58,7 +58,10 @@
     </header>
 
 
-    <div class="jumbotron text-center" style="  margin-top: 50px; background-image: url('$(article-image)'); background-size: cover; ">
+    <div class="jumbotron text-center" style=" background-image: url('$(article-image)'); background-size: cover; ">
+        <h1 class="display-1 text-white" style=" text-shadow: 0 2px 0 black; ">$(article-title)</h1>
+        <h2 class="display-4 text-white" style=" text-shadow: 0 2px 0 black; ">$(article-slug)</h2>
+        <h3 class="display-6 text-white" style=" text-shadow: 0 2px 0 black; ">author: $(article-author) | posted: $(article-posted) | image by: $(article-image-credit)</h3>
     </div>
 
 

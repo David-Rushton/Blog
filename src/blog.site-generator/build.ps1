@@ -78,7 +78,6 @@ foreach($article in $articles) {
                 @{ Key = '$(article-title)'   ; Value = $article.MetaData.Title   }
                 @{ Key = '$(article-slug)'    ; Value = $article.MetaData.Slug    }
                 @{ Key = '$(article-path)'    ; Value = $article.ArticleUrl       }
-                @{ Key = '$(article-preview)' ; Value = $article.MetaData.Preview }
                 @{ Key = '$(article-image)'   ; Value = $article.MetaData.Image   }
             )
         }
@@ -92,7 +91,6 @@ foreach($article in $articles) {
                 @{ Key = '$(article-title)'   ; Value = $article.MetaData.Title   }
                 @{ Key = '$(article-slug)'    ; Value = $article.MetaData.Slug    }
                 @{ Key = '$(article-path)'    ; Value = $article.ArticleUrl       }
-                @{ Key = '$(article-preview)' ; Value = $article.MetaData.Preview }
                 @{ Key = '$(article-image)'   ; Value = $article.MetaData.Image   }
             )
         }

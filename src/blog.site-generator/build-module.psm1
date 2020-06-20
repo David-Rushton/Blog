@@ -112,10 +112,6 @@ function Get-Article {
         $metaData = Get-YamlFrontMatter -Path $Path | ConvertFrom-YamlFrontMatter -ErrorAction 'SilentlyContinue'
         $markdownArticle = Get-MarkdownContent -Path $Path -ErrorAction 'SilentlyContinue'
 
-        $metaData['title'] = ($markdownArticle -split "`n")[0].SubString(1).Trim()
-        $metaData['preview'] = ($markdownArticle -split "`n")[2].SubString(0, 50).Trim()
-
-
         if(-not (Test-Article -MetaData $metaData -MarkdownArticle $markdownArticle)) {
             throw "Article does not conform to the standard: $Path"
         }
@@ -158,8 +154,13 @@ function New-Article {
 
     # Inject content
     $htmlArticle = (ConvertFrom-Markdown -InputObject $MarkdownArticle).Html
+    $template = $template.Replace('$(article-title)', $MetaData['title'])
+    $template = $template.Replace('$(article-slug)', $MetaData['slug'])
+    $template = $template.Replace('$(article-posted)', $MetaData['date'])
+    $template = $template.Replace('$(article-author)', $MetaData['author'])
     $template = $template.Replace('$(article-content)', $htmlArticle)
     $template = $template.Replace('$(article-image)', $MetaData.Image)
+    $template = $template.Replace('$(article-image-credit)', $MetaData['image-credit'])
 
 
     return $template
@@ -210,14 +211,13 @@ function Get-MarkdownContent {
         $Path
     )
 
-    $markdownArticleStart = Select-String -Path $Path -Pattern '^#\s(\w).*$'
-    if($markdownArticleStart.LineNumber -gt 1) {
-        return (Get-Content -Path $Path | Select-Object -Skip ($markdownArticleStart.LineNumber - 1)) -join "`n"
+    $yamlMatches = Select-String -Path $Path -Pattern '^---(\s)*$'
+    if ($yamlMatches.Count -ge 2) {
+        $markdown = (Get-Content -Path $Path | Select-Object -Skip ($yamlMatches[1].LineNumber)) -join "`n"
     }
 
 
-    # Could find title
-    return $null
+    return $markdown.Trim()
 }
 
 
