@@ -19,8 +19,6 @@
 #Requires -Version 7.0
 [CmdletBinding()]
 param(
-    [switch]
-    $LocalBuild
 )
 
 Set-StrictMode -Version 'Latest'
@@ -41,7 +39,7 @@ Copy-Item -Path "$PSScriptRoot/../articles" -Filter '*.*' -Destination "$PSScrip
 # Inject content into the website
 $recentArticles = ''
 $articleNumber = 1
-$articles = Get-Articles -Verbose:$LocalBuild -Debug:$LocalBuild
+$articles = Get-Articles
 foreach($article in $articles) {
 
     # Build index page
