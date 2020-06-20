@@ -39,7 +39,7 @@ Copy-Item -Path "$PSScriptRoot/../articles" -Filter '*.*' -Destination "$PSScrip
 # Inject content into the website
 $recentArticles = ''
 $articleNumber = 1
-$articles = Get-Articles
+$articles = Get-Articles -Verbose
 foreach($article in $articles) {
 
     # Build index page
@@ -54,7 +54,7 @@ foreach($article in $articles) {
                 @{ Key = '$(lead-article-image)' ; Value = $article.MetaData.Image }
             )
         }
-        Set-ContentVariableValues @articleArgs
+        Set-ContentVariableValues @articleArgs -Verbose
     }
 
     if ($articleNumber -in @(2, 4, 6)) {
@@ -68,7 +68,7 @@ foreach($article in $articles) {
                 @{ Key = '$(article-image)'   ; Value = $article.MetaData.Image   }
             )
         }
-        $recentArticles += Set-ContentVariableValues @articleArgs
+        $recentArticles += Set-ContentVariableValues @articleArgs -Verbose
     }
 
     if ($articleNumber -in @(3, 5)) {
@@ -82,7 +82,7 @@ foreach($article in $articles) {
                 @{ Key = '$(article-image)'   ; Value = $article.MetaData.Image   }
             )
         }
-        $recentArticles += Set-ContentVariableValues @articleArgs
+        $recentArticles += Set-ContentVariableValues @articleArgs -Verbose
     }
 
 
@@ -99,4 +99,4 @@ foreach($article in $articles) {
     $articleNumber++
 }
 
-Set-ContentVariableValues -Path "$PSScriptRoot/../blog/index.html" -KeyValuePairs @( @{ Key = '$(article-previews)' ; Value = $recentArticles } )
+Set-ContentVariableValues -Path "$PSScriptRoot/../blog/index.html" -KeyValuePairs @( @{ Key = '$(article-previews)' ; Value = $recentArticles } ) -Verbose
