@@ -63,7 +63,7 @@ function Get-ArticlePaths {
     [CmdletBinding()]
     param()
 
-    $articlesPath = Join-Path -Path $PSScriptRoot '..' 'src' 'blog' 'articles'
+    $articlesPath = Join-Path -Path $PSScriptRoot '..' 'blog' 'articles'
     if (-not (Test-Path -Path $articlesPath)) {
         throw "Cannot find articles"
     }
@@ -125,7 +125,7 @@ function New-Article {
     )
 
 
-    $template = Get-Content -Path "$PSScriptRoot/../src/blog/articles/article.template.html" -Raw
+    $template = Get-Content -Path "$PSScriptRoot/../blog/articles/article.template.html" -Raw
 
 
     # Inject meta

@@ -30,12 +30,12 @@ Import-Module "$PSScriptRoot/build-module.psm1" -Force
 
 # Blog is built from scratch during each build
 # Only applies to local builds
-Remove-Item -Path "$PSScriptRoot/../src/blog" -ErrorAction 'SilentlyContinue' -Force -Recurse
+Remove-Item -Path "$PSScriptRoot/../blog" -ErrorAction 'SilentlyContinue' -Force -Recurse
 
 
 # Copy template and articles
-Copy-Item -Path "$PSScriptRoot/../src/blog.template" -Filter '*.*' -Destination "$PSScriptRoot/../src/blog" -ErrorAction 'SilentlyContinue' -Recurse
-Copy-Item -Path "$PSScriptRoot/../src/articles" -Filter '*.*' -Destination "$PSScriptRoot/../src/blog" -ErrorAction 'SilentlyContinue' -Recurse
+Copy-Item -Path "$PSScriptRoot/../blog.template" -Filter '*.*' -Destination "$PSScriptRoot/../blog" -ErrorAction 'SilentlyContinue' -Recurse
+Copy-Item -Path "$PSScriptRoot/../articles" -Filter '*.*' -Destination "$PSScriptRoot/../blog" -ErrorAction 'SilentlyContinue' -Recurse
 
 
 # Inject content into the website
@@ -47,7 +47,7 @@ foreach($article in $articles) {
     # Build index page
     if ($articleNumber -eq 1) {
         $articleArgs = @{
-            Path = "$PSScriptRoot/../src/blog/index.html"
+            Path = "$PSScriptRoot/../blog/index.html"
             KeyValuePairs = @(
                 @{ Key = '$(last-updated)'       ; Value = $article.MetaData.Date  }
                 @{ Key = '$(lead-article-title)' ; Value = $article.MetaData.Title }
@@ -61,7 +61,7 @@ foreach($article in $articles) {
 
     if ($articleNumber -in @(2, 4, 6)) {
         $articleArgs = @{
-            Content = (Get-Content -Path "$PSScriptRoot/../src/blog/index.article-preview-even.fragment.template.html" -Raw)
+            Content = (Get-Content -Path "$PSScriptRoot/../blog/index.article-preview-even.fragment.template.html" -Raw)
             KeyValuePairs = @(
                 @{ Key = '$(article-title)'   ; Value = $article.MetaData.Title   }
                 @{ Key = '$(article-slug)'    ; Value = $article.MetaData.Slug    }
@@ -75,7 +75,7 @@ foreach($article in $articles) {
 
     if ($articleNumber -in @(3, 5)) {
         $articleArgs = @{
-            Content = (Get-Content -Path "$PSScriptRoot/../src/blog/index.article-preview-odd.fragment.template.html" -Raw)
+            Content = (Get-Content -Path "$PSScriptRoot/../blog/index.article-preview-odd.fragment.template.html" -Raw)
             KeyValuePairs = @(
                 @{ Key = '$(article-title)'   ; Value = $article.MetaData.Title   }
                 @{ Key = '$(article-slug)'    ; Value = $article.MetaData.Slug    }
@@ -101,4 +101,4 @@ foreach($article in $articles) {
     $articleNumber++
 }
 
-Set-ContentVariableValues -Path "$PSScriptRoot/../src/blog/index.html" -KeyValuePairs @( @{ Key = '$(article-previews)' ; Value = $recentArticles } )
+Set-ContentVariableValues -Path "$PSScriptRoot/../blog/index.html" -KeyValuePairs @( @{ Key = '$(article-previews)' ; Value = $recentArticles } )
