@@ -7,7 +7,7 @@ Let's try this again.  This time:
 
 ## Learn!
 
-- [x] Docker deploy for local testing
+- [ ] Docker deploy for local testing
 - [x] Fully automated CD pipeline
 - [x] Cloud hosted
 - [x] JAMStack
