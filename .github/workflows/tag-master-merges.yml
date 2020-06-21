@@ -15,8 +15,7 @@ jobs:
       id: ver
       run: |
         Import-Module "$env:GITHUB_WORKSPACE/src/blog.site-generator/build-module.psm1" -Force
-        $versionNumber = Get-VersionNumber -BuildNumber $env:GITHUB_RUN_NUMBER
-        echo "::set-output name=BLOG_VERSION_NUMBER::$versionNumber"
+        echo "::set-output name=version_number::$( Get-VersionNumber -BuildNumber $env:GITHUB_RUN_NUMBER )"
       shell: pwsh
 
     - name: Create Tag
@@ -27,7 +26,7 @@ jobs:
           --header authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "tag": "${{ steps.ver.BLOG_VERSION_NUMBER }}",
+            "tag": "${{ steps.ver.version_number }}",
             "message": "Release version ${{ BLOG_VERSION_NUMBER }}",
             "object": "${{ github.sha }}",
             "type": "commit"
