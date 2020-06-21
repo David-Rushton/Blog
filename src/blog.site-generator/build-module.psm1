@@ -10,7 +10,7 @@ Set-StrictMode -Version 'Latest'
 
 
 # Returns the current version number
-# Format: Major.Minor.Patch.Build
+# Format: Major.Minor.Build
 function Get-VersionNumber {
     [CmdletBinding()]
     param(
@@ -22,7 +22,7 @@ function Get-VersionNumber {
     $versionPath = Join-Path -Path $PSScriptRoot -ChildPath '..' 'common' 'version.xml'
     $version = Select-Xml -Path $versionPath -XPath '/version'
 
-    return "$($version.Node.major).$($version.Node.minor).$($version.Node.patch).$($BuildNumber)"
+    return "$($version.Node.major).$($version.Node.minor).$($BuildNumber)"
 }
 Export-ModuleMember -Function 'Get-VersionNumber'
 
