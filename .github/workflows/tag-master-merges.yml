@@ -27,7 +27,7 @@ jobs:
           --header 'content-type: application/json' \
           --data '{
             "tag": "${{ steps.ver.version_number }}",
-            "message": "Release version ${{ BLOG_VERSION_NUMBER }}",
+            "message": "Release version ${{ steps.ver.version_number }}",
             "object": "${{ github.sha }}",
             "type": "commit"
           }'
