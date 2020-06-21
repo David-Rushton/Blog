@@ -1,0 +1,16 @@
+name: Tag master merge
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Generate Tag
+      run: src/blog.site-generator/tag-release.ps1 -Verbose -BuildNumber $env:GITHUB_RUN_NUMBER
+      shell: pwsh
