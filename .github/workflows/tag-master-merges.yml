@@ -20,26 +20,26 @@ jobs:
 
     - name: Create Tag
       run: |
-      curl \
-        --request post \
-        --url https://api.github.com/repos/${{ github.repository }}/git/tags \
-        --header authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-        --header 'content-type: application/json' \
-        --data '{
-          "tag": "${{ BLOG_VERSION_NUMBER }}",
-          "message": "Release version ${{ BLOG_VERSION_NUMBER }}",
-          "object": "${{ github.sha }}",
-          "type": "commit"
-        }'
+        curl \
+          --request post \
+          --url https://api.github.com/repos/${{ github.repository }}/git/tags \
+          --header authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "tag": "${{ BLOG_VERSION_NUMBER }}",
+            "message": "Release version ${{ BLOG_VERSION_NUMBER }}",
+            "object": "${{ github.sha }}",
+            "type": "commit"
+          }'
 
     - name: Create Tag Reference
-    run: |
-      curl \
-        --request post \
-        --url /repos/${{ github.repository }}/git/refs \
-        --header authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-        --header 'content-type: application/json' \
-        --data '{
-          "ref": "refs/head/master",
-          "sha": "${{ github.sha }}"
-        }'
+      run: |
+        curl \
+          --request post \
+          --url /repos/${{ github.repository }}/git/refs \
+          --header authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "ref": "refs/head/master",
+            "sha": "${{ github.sha }}"
+          }'
