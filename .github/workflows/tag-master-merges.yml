@@ -15,7 +15,7 @@ jobs:
       run: |
         Import-Module "$env:GITHUB_WORKSPACE/src/blog.site-generator/build-module.psm1" -Force
         $versionNumber = Get-VersionNumber -BuildNumber $env:GITHUB_RUN_NUMBER
-        Write-Output "::set-env name=BLOG_VERSION_NUMBER::$versionNumber"
+        echo "::set-env name=BLOG_VERSION_NUMBER::$versionNumber"
       shell: pwsh
 
     - name: Create Tag
