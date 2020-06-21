@@ -7,7 +7,7 @@ param(
 
 Set-StrictMode -Version 'Latest'
 
-Import-Module ./build-module.psm1 -Force
+Import-Module "$PSScriptRoot/build-module.psm1" -Force
 
 
 $versionNumber = Get-VersionNumber -BuildNumber $BuildNumber
