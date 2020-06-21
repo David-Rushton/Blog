@@ -11,6 +11,35 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Generate Tag
-      run: src/blog.site-generator/tag-release.ps1 -Verbose -BuildNumber $env:GITHUB_RUN_NUMBER
+    - name: Get Version Number
+      run: |
+        Import-Module "$env:GITHUB_WORKSPACE/src/blog.site-generator/build-module.psm1" -Force
+        $versionNumber = Get-VersionNumber -BuildNumber $env:GITHUB_RUN_NUMBER
+        Write-Output "::set-env name=BLOG_VERSION_NUMBER::$versionNumber"
       shell: pwsh
+
+    - name: Create Tag
+      run: |
+      curl \
+        --request post \
+        --url https://api.github.com/repos/${{ github.repository }}/git/tags \
+        --header authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        --header 'content-type: application/json' \
+        --data '{
+          "tag": "${{ BLOG_VERSION_NUMBER }}",
+          "message": "Release version ${{ BLOG_VERSION_NUMBER }}",
+          "object": "${{ github.sha }}",
+          "type": "commit"
+        }'
+
+    - name: Create Tag Reference
+    run: |
+      curl \
+        --request post \
+        --url /repos/${{ github.repository }}/git/refs \
+        --header authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        --header 'content-type: application/json' \
+        --data '{
+          "ref": "refs/head/master",
+          "sha": "${{ github.sha }}"
+        }'
