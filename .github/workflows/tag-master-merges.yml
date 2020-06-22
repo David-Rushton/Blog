@@ -16,7 +16,7 @@ jobs:
       id: ver
       run: |
         $xml = [xml](Get-Content -Path "${env:GITHUB_WORKSPACE}/src/common/version.xml" -Raw)
-        $version = "v$($xml.version.major).$($xml.version.minor).${env:GITHUB_RUN_NUMBER}"
+        $version = "v$($xml.version.major).$($xml.version.minor).${env:GITHUB_RUN_ID}"
         Write-Verbose "Returning version: v$version"
         echo "::set-env name=version_number::$version"
       shell: pwsh
