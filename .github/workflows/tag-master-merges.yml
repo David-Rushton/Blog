@@ -15,14 +15,15 @@ jobs:
       id: ver
       run: |
         $xml = [xml](Get-Content -Path "${env:GITHUB_WORKSPACE}/src/common/version.xml" -Raw)
-        $version = "$($xml.version.major).$($xml.version.minor).${env:GITHUB_RUN_NUMBER}"
-        Write-Verbose "Returning version: $version"
+        $version = "v$($xml.version.major).$($xml.version.minor).${env:GITHUB_RUN_NUMBER}"
+        Write-Verbose "Returning version: v$version"
         echo "::set-env name=version_number::$version"
       shell: pwsh
 
-    - name: Tag Commit with Version Number
-      uses: tvdias/github-tagger@v0.0.2
+    - name: Create a Release
+      uses: actions/create-release@v1.1.1
       with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        tag: ${{ version_number }}
-        commit-sha: ${{ github.sha }}
+        tag_name: ${{ env.version_number }}
+        release_name: "Release ${{ env.version_number }}"
+        prerelease: true
+        commitish: ${{ github.sha }}
