@@ -20,30 +20,10 @@ jobs:
         echo "::set-env name=version_number::$version"
       shell: pwsh
 
-    - run: echo $version_number
+    - name: Tag Commit with Version Number
+      uses: tvdias/github-tagger@v0.0.2
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        tag: $version_number
+        commit-sha: ${{ github.sha }}
 
-    - name: Create Tag
-      run: |
-        curl \
-          --request post \
-          --url https://api.github.com/repos/${{ github.repository }}/git/tags \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "tag": "$version_number",
-            "message": "Release version $version_number",
-            "object": "${{ github.sha }}",
-            "type": "commit"
-          }'
-
-    - name: Create Tag Reference
-      run: |
-        curl \
-          --request post \
-          --url /repos/${{ github.repository }}/git/refs \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "ref": "refs/head/master",
-            "sha": "${{ github.sha }}"
-          }'
