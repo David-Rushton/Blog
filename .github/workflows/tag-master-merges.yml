@@ -7,6 +7,7 @@ on:
 jobs:
   tag_release_job:
     runs-on: ubuntu-latest
+    name: Tag Release Job
 
     steps:
     - uses: actions/checkout@v2
@@ -22,6 +23,8 @@ jobs:
 
     - name: Create a Release
       uses: actions/create-release@v1.1.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ env.version_number }}
         release_name: "Release ${{ env.version_number }}"
