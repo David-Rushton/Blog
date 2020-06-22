@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  Tag Release:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,8 +17,10 @@ jobs:
         $xml = [xml](Get-Content -Path "${env:GITHUB_WORKSPACE}/src/common/version.xml" -Raw)
         $version = "$($xml.version.major).$($xml.version.minor).${env:GITHUB_RUN_NUMBER}"
         Write-Verbose "Returning version: $version"
-        echo "::set-output name=version_number::$version"
+        echo "::set-env name=version_number::$version"
       shell: pwsh
+
+    - run: echo $version_number
 
     - name: Create Tag
       run: |
@@ -28,8 +30,8 @@ jobs:
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
-            "tag": "${{ steps.ver.version_number }}",
-            "message": "Release version ${{ steps.ver.version_number }}",
+            "tag": "$version_number",
+            "message": "Release version $version_number",
             "object": "${{ github.sha }}",
             "type": "commit"
           }'
