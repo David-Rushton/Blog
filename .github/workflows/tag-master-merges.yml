@@ -14,8 +14,10 @@ jobs:
     - name: Get Version Number
       id: ver
       run: |
-        Import-Module "$env:GITHUB_WORKSPACE/src/blog.site-generator/build-module.psm1" -Force
-        echo "::set-output name=version_number::$( Get-VersionNumber -BuildNumber $env:GITHUB_RUN_NUMBER )"
+        $xml = [xml](Get-Content -Path "$env:GITHUB_WORKSPACE/src/common/version.xml" -Raw)
+        $version = "$($xml.version.major).$($xml.version.minor).$($env:GITHUB_RUN_NUMBER)"
+        Write-Verbose "Returning version: $version"
+        echo "::set-output name=version_number::$version"
       shell: pwsh
 
     - name: Create Tag
