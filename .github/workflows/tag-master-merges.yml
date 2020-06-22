@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  tag_release:
+  tag_release_job:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,4 +26,3 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         tag: $version_number
         commit-sha: ${{ github.sha }}
-
