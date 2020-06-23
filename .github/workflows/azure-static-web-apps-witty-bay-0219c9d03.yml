@@ -37,15 +37,6 @@ jobs:
           app_artifact_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@master
-        env:
-          SLACK_CHANNEL: blog
-          SLACK_MESSAGE: "The site has been built and deployed"
-          SLACK_TITLE: "Site Build and Deploy Complete"
-          SLACK_USERNAME: "Blog Actions"
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
