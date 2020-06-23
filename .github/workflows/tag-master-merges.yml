@@ -36,6 +36,6 @@ jobs:
       env:
         SLACK_CHANNEL: blog
         SLACK_MESSAGE: "A new release has been created"
-        SLACK_TITLE: "Release v${{ env.version_number }}"
+        SLACK_TITLE: "Release ${{ env.version_number }}"
         SLACK_USERNAME: "Blog Actions"
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}

@@ -25,18 +25,18 @@ Let's try this again.  This time:
 
 ## Share!
 
-- [ ] Data thoughts and news
+- [ ] Data thoughts and news (republish?  what is the plan here?)
 - [ ] Profile and links
 
 ## Enjoy!
 
 - [x] Bright, light and colourful
-- [x] Simple, clean and full of negative space
+- [ ] Simple, clean and full of negative space
 - [ ] Hidden features (console output and feature flags)
 
 ## Profit!
 
-- [ ] Great domain name, that is useful for career building ( hello@david-rushton.com | hello@david-rushton.io | hello@david-rushton.dev | hello@data-news.xxx )
+- [x] Great domain name, that is useful for career building
 
 ## Vars
 
