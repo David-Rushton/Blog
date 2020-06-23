@@ -71,7 +71,7 @@ function Get-Articles {
     [CmdletBinding()]
     param()
 
-    return Get-ArticlePaths | Get-Article | Sort-Object { $_.MetaData.date }
+    return Get-ArticlePaths | Get-Article | Sort-Object { $_.MetaData.date } -Descending
 }
 Export-ModuleMember -Function Get-Articles
 
