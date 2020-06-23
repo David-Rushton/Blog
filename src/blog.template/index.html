@@ -60,9 +60,11 @@
 
 
     <div class="jumbotron text-center" style=" background-image: url('$(lead-article-image)'); background-size: cover; ">
-        <h1 class="display-4 text-white" style=" text-shadow: 0 2px 0 black; ">$(lead-article-title)</h1>
-        <p class="lead text-white" style=" text-shadow: 0 2px 0 black; ">$(lead-article-slug)</p>
-        <a class="btn btn-primary btn-lg" href="$(lead-article-path)" role="button">read more</a>
+        <div style=" backdrop-filter: opacity(80%); border-radius: 25px; text-shadow: 0 2px 0 black; border-width: 10px 0px; ">
+            <h1 class="display-3 text-white" >$(lead-article-title)</h1>
+            <h3 class="text-white">$(lead-article-slug)</h3>
+            <a  class="btn btn-primary btn-lg" href="$(lead-article-path)" role="button">read more</a>
+        </div>
     </div>
 
 
