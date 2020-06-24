@@ -59,9 +59,11 @@
 
 
     <div class="jumbotron text-center" style=" background-image: url('$(article-image)'); background-size: cover; ">
-        <h1 class="display-1 text-white" style=" text-shadow: 0 2px 0 black; ">$(article-title)</h1>
-        <h2 class="display-4 text-white" style=" text-shadow: 0 2px 0 black; ">$(article-slug)</h2>
-        <h3 class="display-6 text-white" style=" text-shadow: 0 2px 0 black; ">author: $(article-author) | posted: $(article-posted) | image by: $(article-image-credit)</h3>
+        <div style=" backdrop-filter: opacity(80%); border-radius: 25px; text-shadow: 0 2px 0 black; border-width: 10px 0px; ">
+            <h2 class="text-white">$(article-title)</h4>
+            <h3 class="text-white">$(article-slug)</h5>
+            <h6 class="text-white">author: $(article-author) | posted: $(article-posted) | image by: $(article-image-credit)</h6>
+        </div>
     </div>
 
 
