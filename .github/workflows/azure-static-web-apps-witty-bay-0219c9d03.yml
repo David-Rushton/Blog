@@ -12,15 +12,20 @@ on:
 jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+
     runs-on: ubuntu-latest
+    env:
+      SHA8: ${GITHUB_SHA::8}
+
     name: Build and Deploy Job
     steps:
+
       - uses: actions/checkout@v2
         with:
           submodules: true
 
       - name: Generate Site
-        run: src/blog.site-generator/build.ps1 -Verbose -BuildNumber $env:GITHUB_RUN_ID -BuildSHA $env:GITHUB_SHA
+        run: src/blog.site-generator/build.ps1 -Verbose -BuildNumber $env:GITHUB_RUN_ID -BuildSHA $env:SHA8
         shell: pwsh
 
       - name: Build And Deploy
@@ -42,6 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:
+
       - name: Close Pull Request
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
