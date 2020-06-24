@@ -15,17 +15,20 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      SHA8: ${GITHUB_SHA::8}
 
     name: Build and Deploy Job
     steps:
+
+      - name: Get Short SHA
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - uses: actions/checkout@v2
         with:
           submodules: true
 
       - name: Generate Site
-        run: src/blog.site-generator/build.ps1 -Verbose -BuildNumber $env:GITHUB_RUN_ID -BuildSHA $env:SHA8
+        run: src/blog.site-generator/build.ps1 -Verbose -BuildNumber $env:GITHUB_RUN_ID -BuildSHA ${{ steps.vars.outputs.sha_short }}
         shell: pwsh
 
       - name: Build And Deploy
