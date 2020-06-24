@@ -12,15 +12,22 @@ on:
 jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+
     runs-on: ubuntu-latest
+
     name: Build and Deploy Job
     steps:
+
       - uses: actions/checkout@v2
         with:
           submodules: true
 
+      - name: Get Short SHA
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
       - name: Generate Site
-        run: src/blog.site-generator/build.ps1 -Verbose -BuildNumber $env:GITHUB_RUN_ID -BuildSHA $env:GITHUB_SHA
+        run: src/blog.site-generator/build.ps1 -Verbose -BuildNumber $env:GITHUB_RUN_ID -BuildSHA ${{ steps.vars.outputs.sha_short }}
         shell: pwsh
 
       - name: Build And Deploy
@@ -33,7 +40,7 @@ jobs:
           ###### Repository/Build Configurations - These values can be configured to match you app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "src/blog" # App source code path
-          api_location: "" # Api source code path - optional
+          api_location: "src/api" # Api source code path - optional
           app_artifact_location: "" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 
@@ -42,6 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:
+
       - name: Close Pull Request
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
