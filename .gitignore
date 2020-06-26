@@ -1,3 +1,7 @@
-
 # Blog is the build artifact
 src/blog/
+
+
+# .net core build items
+bin/
+obj/

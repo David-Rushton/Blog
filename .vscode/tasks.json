@@ -5,12 +5,18 @@
     "tasks": [
         {
             "label": "local-build",
-            "detail": "build an drun locally in a Docker container",
+            "detail": "rebuilds the site on local dev machine",
             "type": "shell",
-            "command": "${workspaceFolder}/src/blog.site-generator/build.ps1",
+            "options": {
+                "cwd": "${workspaceFolder}/src/blog.generator/"
+            },
+            "command": "dotnet",
             "args": [
-                "-Verbose",
-                "-Debug"
+                "run",
+                "--",
+                "--template-root", "${workspaceFolder}/src/blog.template",
+                "--articles-root", "${workspaceFolder}/src/blog.articles",
+                "--blog-root",     "${workspaceFolder}/src/blog"
             ],
             "promptOnClose": false,
             "group": {
