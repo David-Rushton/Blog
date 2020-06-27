@@ -1,7 +1,7 @@
 ---
 title: Hola mundo!
 slug: This isn't my first blog, but I'm hoping it will be my last
-tags: intro
+tags: [intro]
 date: 2020-06-09
 image: /blog.articles/media/black-iphone-7-on-brown-table-699122.jpg
 image-credit: Photo by Tyler Lastovich from Pexels

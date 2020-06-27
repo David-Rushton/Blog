@@ -14,6 +14,8 @@
             "args": [
                 "run",
                 "--",
+                "--build-number",  "0.0.0.0-dev",
+                "--build-sha",     "abcdefg",
                 "--template-root", "${workspaceFolder}/src/blog.template",
                 "--articles-root", "${workspaceFolder}/src/blog.articles",
                 "--blog-root",     "${workspaceFolder}/src/blog"
@@ -23,6 +25,44 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/blog.generator/blog.generator.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/src/blog.generator/blog.generator.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/src/blog.generator/blog.generator.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
         },
         {
             "type": "func",

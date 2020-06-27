@@ -5,6 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug Blog.Generator",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/blog.generator/bin/Debug/netcoreapp3.1/blog.generator.dll",
+            "args": [
+                "--build-number",  "0.0.0.0-dev",
+                "--build-sha",     "abcdefg",
+                "--template-root", "${workspaceFolder}/src/blog.template",
+                "--articles-root", "${workspaceFolder}/src/blog.articles",
+                "--blog-root",     "${workspaceFolder}/src/blog"
+            ],
+            "cwd": "${workspaceFolder}/src/blog.generator",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
             "name": "PowerShell: Launch Current File",
             "type": "PowerShell",
             "request": "launch",
