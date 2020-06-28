@@ -1,15 +1,9 @@
 ﻿using blog.generator.contexts;
 using blog.generator.processors;
-using Markdig;
 using System;
 using System.CommandLine.DragonFruit;
 using System.IO;
 using System.Threading.Tasks;
-using YamlDotNet;
-using YamlDotNet.Core;
-using YamlDotNet.Helpers;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 
 namespace blog.generator
@@ -25,7 +19,7 @@ namespace blog.generator
         {
             try {
                 ValidateInputArgs();
-                _ = (await Bootstrap()).InvokeAsync();
+                await (await Bootstrap()).InvokeAsync();
                 Console.WriteLine("Blog generated!");
             }
             catch (Exception e)
@@ -55,18 +49,13 @@ namespace blog.generator
                 var articleTemplate = File.ReadAllTextAsync(Path.Join(templateRoot, "blog.articles", "article.template.html"));
                 var config = new Config(buildNumber, buildSha, templateRoot, articlesRoot, blogRoot);
                 var contextBuilder = new ContextBuilder(config);
-                var markdownPipeline = new MarkdownPipelineBuilder()
-                    .UseAdvancedExtensions()
-                    .UseYamlFrontMatter()
-                    .Build()
-                ;
-                var yamlPipeline = new DeserializerBuilder()
-                    .WithNamingConvention(HyphenatedNamingConvention.Instance)
-                    .Build()
-                ;
-                var processorPipeline = new ProcessorPipelineBuilder()
-                    .RegisterPipelineProcessor(new YamlProcessor(yamlPipeline))
-                    .RegisterPipelineProcessor(new MarkdownProcessor(markdownPipeline, await articleTemplate))
+
+                var processorPipeline = new ProcessorPipelineBuilder(config)
+                    .UseDropExistingSiteProcessor()
+                    .UseCloneSiteFromTemplateProcessor()
+                    .UseInjectMarkdownArticlesProcessor()
+                    .UseYamlProcessor()
+                    .UseMarkdownProcessor(await articleTemplate)
                     .Build()
                 ;
 
