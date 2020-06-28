@@ -5,7 +5,7 @@ using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 
-namespace blog.generator.processors
+namespace Blog.Generator.Processors
 {
     public static class ProcessorPipelineBuilderExtensions
     {
@@ -16,6 +16,7 @@ namespace blog.generator.processors
             var target = pipelineBuilder._config.BlogRoot;
             pipelineBuilder.RegisterPipelineProcessor(new DropExistingSiteProcessor(target));
 
+            Console.WriteLine($"Pipline processor added: Drop Existing Site");
             return pipelineBuilder;
         }
 
@@ -27,6 +28,7 @@ namespace blog.generator.processors
             var target = pipelineBuilder._config.BlogRoot;
             pipelineBuilder.RegisterPipelineProcessor(new CloneSiteFromTemplateProcessor(source, target));
 
+            Console.WriteLine($"Pipline processor added: Cline Site from Template");
             return pipelineBuilder;
         }
 
@@ -38,6 +40,7 @@ namespace blog.generator.processors
             var target = Path.Join(pipelineBuilder._config.BlogRoot, "blog.articles");
             pipelineBuilder.RegisterPipelineProcessor(new InjectMarkdownArticlesProcessor(source, target));
 
+            Console.WriteLine($"Pipline processor added: Inject Markdown Articles");
             return pipelineBuilder;
         }
 
@@ -50,6 +53,7 @@ namespace blog.generator.processors
 
             pipelineBuilder.RegisterPipelineProcessor(new YamlProcessor(yamlPipeline));
 
+            Console.WriteLine($"Pipline processor added: Yaml Front Matter Reader");
             return pipelineBuilder;
         }
 
@@ -63,6 +67,7 @@ namespace blog.generator.processors
 
             pipelineBuilder.RegisterPipelineProcessor(new MarkdownProcessor(markdownPipeline, articleTempate));
 
+            Console.WriteLine($"Pipline processor added: Markdown Converter");
             return pipelineBuilder;
         }
     }

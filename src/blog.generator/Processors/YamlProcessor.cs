@@ -1,5 +1,6 @@
-using blog.generator.contexts;
-using blog.generator.processors.Models;
+using Blog.Generator.Contexts;
+using Blog.Generator.Processors.Abstractions;
+using Blog.Generator.Processors.Models;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -8,9 +9,9 @@ using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 
 
-namespace blog.generator.processors
+namespace Blog.Generator.Processors
 {
-    public class YamlProcessor : Processor
+    public class YamlProcessor : MarkupProcessor
     {
         readonly IDeserializer _yamlPipeline;
 

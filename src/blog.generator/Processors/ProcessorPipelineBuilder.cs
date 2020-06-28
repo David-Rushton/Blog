@@ -1,14 +1,15 @@
+using Blog.Generator.Processors.Abstractions;
 using System;
 using System.Collections.Generic;
 
 
-namespace blog.generator.processors
+namespace Blog.Generator.Processors
 {
     public class ProcessorPipelineBuilder
     {
-        List<Processor> _scaffoldProcessors = new List<Processor>();
-        List<Processor> _markupProcessors = new List<Processor>();
-        List<Processor> _finaliseProcessors = new List<Processor>();
+        List<ScaffoldProcessor> _scaffoldProcessors = new List<ScaffoldProcessor>();
+        List<MarkupProcessor> _markupProcessors = new List<MarkupProcessor>();
+        List<FinaliseProcessor> _finaliseProcessors = new List<FinaliseProcessor>();
         readonly internal Config _config;
 
 
@@ -17,31 +18,31 @@ namespace blog.generator.processors
         ;
 
 
-        public ProcessorPipelineBuilder RegisterPipelineProcessor(Processor processor)
+        public ProcessorPipelineBuilder RegisterPipelineProcessor(object processor)
         {
-            switch(processor.Type)
+            switch(processor)
             {
-                case ProcessorType.ScaffoldProcessor:
-                    _scaffoldProcessors.Add(processor);
+                case ScaffoldProcessor scaffold:
+                    _scaffoldProcessors.Add((ScaffoldProcessor)processor);
                     break;
 
-                case ProcessorType.MarkupProcessor:
-                    _markupProcessors.Add(processor);
+                case MarkupProcessor markup:
+                    _markupProcessors.Add((MarkupProcessor)processor);
                     break;
 
-                case ProcessorType.FinaliseProcessor:
-                    _finaliseProcessors.Add(processor);
+                case FinaliseProcessor finalise:
+                    _finaliseProcessors.Add((FinaliseProcessor)processor);
                     break;
 
                 default:
-                    throw new Exception($"Processor type not supported: {processor.Type}");
+                    throw new Exception($"Processor type not supported: {processor.GetType()}");
             };
 
             return this;
         }
 
         public ProcessorPipeline Build()
-            => new ProcessorPipeline(_markupProcessors)
+            => new ProcessorPipeline(_scaffoldProcessors, _markupProcessors, _finaliseProcessors)
         ;
     }
 }

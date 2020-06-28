@@ -1,13 +1,14 @@
-using blog.generator.contexts;
+using Blog.Generator.Contexts;
+using Blog.Generator.Processors.Abstractions;
 using Markdig;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
 
-namespace blog.generator.processors
+namespace Blog.Generator.Processors
 {
-    public class MarkdownProcessor : Processor
+    public class MarkdownProcessor : MarkupProcessor
     {
         readonly MarkdownPipeline _markdownPipeline;
         readonly string _htmlTemplate;

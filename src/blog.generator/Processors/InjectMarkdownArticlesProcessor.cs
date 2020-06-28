@@ -1,11 +1,12 @@
-using blog.generator.contexts;
+using Blog.Generator.Contexts;
+using Blog.Generator.Processors.Abstractions;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace blog.generator.processors
+namespace Blog.Generator.Processors
 {
-    public class InjectMarkdownArticlesProcessor : Processor
+    public class InjectMarkdownArticlesProcessor : ScaffoldProcessor
     {
         readonly string _source;
         readonly string _target;

@@ -1,11 +1,12 @@
-using blog.generator.contexts;
+using Blog.Generator.Contexts;
+using Blog.Generator.Processors.Abstractions;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace blog.generator.processors
+namespace Blog.Generator.Processors
 {
-    public class CloneSiteFromTemplateProcessor : Processor
+    public class CloneSiteFromTemplateProcessor : ScaffoldProcessor
     {
         readonly string _source;
         readonly string _target;
@@ -16,14 +17,10 @@ namespace blog.generator.processors
         ;
 
 
-        public override ProcessorType Type
-            => ProcessorType.ScaffoldProcessor
-        ;
-
-
         public override Task InvokeAsync(Context context)
         {
             FileSystemHelper.DeepCopyDirectory(_source, _target);
+            return ;
         }
     }
 }

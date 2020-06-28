@@ -2,7 +2,7 @@ using System;
 using YamlDotNet.Serialization;
 
 
-namespace blog.generator.processors.Models
+namespace Blog.Generator.Processors.Models
 {
     public class FrontMatterModel
     {
