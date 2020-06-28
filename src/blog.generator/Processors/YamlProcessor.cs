@@ -20,6 +20,9 @@ namespace blog.generator.processors
         ;
 
 
+        public override ProcessorType Type => ProcessorType.MarkupProcessor;
+
+
         public async override Task InvokeAsync(Context context, NextDelegate next)
         {
             var task = Task.Run(() =>
@@ -35,7 +38,6 @@ namespace blog.generator.processors
                 context.Article.Image.Path =  frontMatter.Image;
 
 
-
                 FrontMatterModel GetArticleFrontMatter(string article)
                 {
                     using var contentIncludingYaml = new StringReader(article);
@@ -48,7 +50,6 @@ namespace blog.generator.processors
             });
 
             await task;
-            await next(context);
         }
     }
 }

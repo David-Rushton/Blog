@@ -12,41 +12,24 @@ namespace blog.generator.processors
 
     public class ProcessorPipeline
     {
-        readonly List<Processor> _processors = new List<Processor>();
-        Context? _context;
+        readonly List<Processor> _scaffoldProcessors = new List<Processor>();
+        readonly List<Processor> _markupProcessors = new List<Processor>();
+        readonly List<Processor> _finaliseProcessors = new List<Processor>();
 
 
-        public ProcessorPipeline(List<Processor> processors)
-            => (_processors) = (processors)
+        public ProcessorPipeline(
+            List<Processor> scaffoldProcessors,
+            List<Processor> markupProcessors,
+            List<Processor> finaliseProcessors
+        )
+            => (_scaffoldProcessors, _markupProcessors, _finaliseProcessors)
+            =  ( scaffoldProcessors,  markupProcessors,  finaliseProcessors)
         ;
 
 
-        public async Task<Context> InvokePipelineAsync(Context context)
-        {
-            return await Task.Run(async() =>
-            {
-                Queue<Processor> processors = new Queue<Processor>(_processors);
-                Context returnContext = context;
+        public List<Processor> ScaffoldProcessors => _scaffoldProcessors;
+        public List<Processor> MarkupProcessors => _markupProcessors;
+        public List<Processor> FinaliseProcessors => _finaliseProcessors;
 
-
-                if (processors.Count > 0)
-                    await processors.Dequeue().InvokeAsync(context, GetNextDelegate());
-
-                return returnContext;
-
-
-                NextDelegate GetNextDelegate()
-                    => processors.Count == 0 ? FinalDelegate() : NextProcessor()
-                ;
-
-                NextDelegate NextProcessor()
-                    => async(Context context) => await processors.Dequeue().InvokeAsync(context, GetNextDelegate())
-                ;
-
-                NextDelegate FinalDelegate()
-                    => async(Context context) => await Task.Run(() => returnContext = context)
-                ;
-            });
-        }
     }
 }
