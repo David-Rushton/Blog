@@ -54,8 +54,8 @@ namespace Blog.Generator
                     .UseDropExistingSiteProcessor()
                     .UseCloneSiteFromTemplateProcessor()
                     .UseInjectMarkdownArticlesProcessor()
-                    .UseMarkdownProcessor()
                     .UseYamlProcessor()
+                    .UseMarkdownProcessor()
                     .Build()
                 ;
 
