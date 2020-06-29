@@ -18,11 +18,6 @@ namespace Blog.Generator.Contexts
         }
 
 
-        public Context Build(string path, string content)
-            => new Context(_siteContext, BuildArticleContext(path, content))
-        ;
-
-
         public SiteContext BuildSiteContext()
             => new SiteContext
             {
@@ -43,14 +38,5 @@ namespace Blog.Generator.Contexts
                 HtmlContentTemplate = htmlContentTemplate
             }
         ;
-
-
-
-
-        private ArticleContext BuildArticleContext(string path, string content)
-            => new ArticleContext(path, content, BuildImageContext());
-
-        private ImageContext BuildImageContext()
-            => new ImageContext();
     }
 }

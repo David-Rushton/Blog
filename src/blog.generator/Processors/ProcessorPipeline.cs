@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 
 namespace Blog.Generator.Processors
 {
-    public delegate Task NextDelegate(Context context);
-
-
     public class ProcessorPipeline
     {
         readonly List<ScaffoldProcessor> _scaffoldProcessors = new List<ScaffoldProcessor>();
