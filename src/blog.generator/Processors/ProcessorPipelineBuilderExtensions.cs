@@ -13,8 +13,7 @@ namespace Blog.Generator.Processors
             this ProcessorPipelineBuilder pipelineBuilder
         )
         {
-            var target = pipelineBuilder._config.BlogRoot;
-            pipelineBuilder.RegisterPipelineProcessor(new DropExistingSiteProcessor(target));
+            pipelineBuilder.RegisterPipelineProcessor(new DropExistingSiteProcessor());
 
             Console.WriteLine($"Pipline processor added: Drop Existing Site");
             return pipelineBuilder;
@@ -24,9 +23,7 @@ namespace Blog.Generator.Processors
             this ProcessorPipelineBuilder pipelineBuilder
         )
         {
-            var source = pipelineBuilder._config.TemplateRoot;
-            var target = pipelineBuilder._config.BlogRoot;
-            pipelineBuilder.RegisterPipelineProcessor(new CloneSiteFromTemplateProcessor(source, target));
+            pipelineBuilder.RegisterPipelineProcessor(new CloneSiteFromTemplateProcessor());
 
             Console.WriteLine($"Pipline processor added: Cline Site from Template");
             return pipelineBuilder;
@@ -36,9 +33,7 @@ namespace Blog.Generator.Processors
             this ProcessorPipelineBuilder pipelineBuilder
         )
         {
-            var source = pipelineBuilder._config.BlogRoot;
-            var target = Path.Join(pipelineBuilder._config.BlogRoot, "blog.articles");
-            pipelineBuilder.RegisterPipelineProcessor(new InjectMarkdownArticlesProcessor(source, target));
+            pipelineBuilder.RegisterPipelineProcessor(new InjectMarkdownArticlesProcessor());
 
             Console.WriteLine($"Pipline processor added: Inject Markdown Articles");
             return pipelineBuilder;
@@ -57,7 +52,7 @@ namespace Blog.Generator.Processors
             return pipelineBuilder;
         }
 
-        public static ProcessorPipelineBuilder UseMarkdownProcessor(this ProcessorPipelineBuilder pipelineBuilder, string articleTempate)
+        public static ProcessorPipelineBuilder UseMarkdownProcessor(this ProcessorPipelineBuilder pipelineBuilder)
         {
             var markdownPipeline = new MarkdownPipelineBuilder()
                 .UseAdvancedExtensions()
@@ -65,7 +60,7 @@ namespace Blog.Generator.Processors
                 .Build()
             ;
 
-            pipelineBuilder.RegisterPipelineProcessor(new MarkdownProcessor(markdownPipeline, articleTempate));
+            pipelineBuilder.RegisterPipelineProcessor(new MarkdownProcessor(markdownPipeline));
 
             Console.WriteLine($"Pipline processor added: Markdown Converter");
             return pipelineBuilder;

@@ -1,12 +1,13 @@
-﻿using blog.generator.contexts;
-using blog.generator.processors;
+﻿using Blog.Generator.Contexts;
+using Blog.Generator.Documents;
+using Blog.Generator.Processors;
 using System;
 using System.CommandLine.DragonFruit;
 using System.IO;
 using System.Threading.Tasks;
 
 
-namespace blog.generator
+namespace Blog.Generator
 {
     class Program
     {
@@ -19,8 +20,7 @@ namespace blog.generator
         {
             try {
                 ValidateInputArgs();
-                await (await Bootstrap()).InvokeAsync();
-                Console.WriteLine("Blog generated!");
+                await Bootstrap().InvokeAsync();
             }
             catch (Exception e)
             {
@@ -44,22 +44,22 @@ namespace blog.generator
                     throw new Exception($"Invalid path to articles: {articlesRoot}");
             }
 
-            async Task<App> Bootstrap()
+            App Bootstrap()
             {
-                var articleTemplate = File.ReadAllTextAsync(Path.Join(templateRoot, "blog.articles", "article.template.html"));
                 var config = new Config(buildNumber, buildSha, templateRoot, articlesRoot, blogRoot);
                 var contextBuilder = new ContextBuilder(config);
+                var markupDocuments = new MarkupDocuments();
 
                 var processorPipeline = new ProcessorPipelineBuilder(config)
                     .UseDropExistingSiteProcessor()
                     .UseCloneSiteFromTemplateProcessor()
                     .UseInjectMarkdownArticlesProcessor()
+                    .UseMarkdownProcessor()
                     .UseYamlProcessor()
-                    .UseMarkdownProcessor(await articleTemplate)
                     .Build()
                 ;
 
-                return new App(config, contextBuilder, processorPipeline);
+                return new App(config, markupDocuments, contextBuilder, processorPipeline);
             }
         }
     }

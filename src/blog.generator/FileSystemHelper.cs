@@ -2,7 +2,7 @@ using System;
 using System.IO;
 
 
-namespace blog.generator
+namespace Blog.Generator
 {
     public static class FileSystemHelper
     {

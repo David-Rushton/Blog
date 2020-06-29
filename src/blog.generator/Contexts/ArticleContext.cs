@@ -1,7 +1,7 @@
 using System;
 
 
-namespace blog.generator.contexts
+namespace Blog.Generator.Contexts
 {
     public class ArticleContext
     {

@@ -1,4 +1,5 @@
 using Blog.Generator.Contexts;
+using Blog.Generator.Documents;
 using Blog.Generator.Processors.Abstractions;
 using Markdig;
 using System;
@@ -11,40 +12,28 @@ namespace Blog.Generator.Processors
     public class MarkdownProcessor : MarkupProcessor
     {
         readonly MarkdownPipeline _markdownPipeline;
-        readonly string _htmlTemplate;
 
-
-        public MarkdownProcessor(MarkdownPipeline markdownPipeline, string htmlTemplate)
-            => (_markdownPipeline, _htmlTemplate) = (markdownPipeline, htmlTemplate)
+        public MarkdownProcessor(MarkdownPipeline markdownPipeline)
+            => (_markdownPipeline) = (markdownPipeline)
         ;
 
 
-        public override ProcessorType Type => ProcessorType.MarkupProcessor;
-
-
-        public async override Task InvokeAsync(Context context)
+        public override void Invoke(MarkupContext context, MarkupDocument markupDocument)
         {
-            Console.WriteLine($"Converting markdown to Html: {context.Article.Markdown.Path}");
+            Console.WriteLine($"Converting markdown to Html: {context.MarkdownPath}");
 
-            var htmlPath = Path.ChangeExtension(context.Article.Markdown.Path, "html");
-            var htmlContent = _htmlTemplate
-                .Replace("$(article-author)", context.Article.Author)
-                .Replace("$(article-posted-date)", context.Article.PostedDate.ToString("yyyy-mm-dd"))
-                .Replace("$(article-title)", context.Article.Title)
-                .Replace("$(article-slug)", context.Article.Slug)
-                .Replace("$(article-image)", context.Article.Image.Path)
-                .Replace("$(article-image-credit)", context.Article.Image.CreditHtml)
-                .Replace("$(article-content)", Markdown.ToHtml(context.Article.Markdown.Content))
+            var htmlContent = context.HtmlContentTemplate
+                .Replace("$(article-author)",       markupDocument.Author)
+                .Replace("$(article-posted-date)",  markupDocument.PostedDate.ToString("yyyy-MM-dd"))
+                .Replace("$(article-title)",        markupDocument.Title)
+                .Replace("$(article-slug)",         markupDocument.Slug)
+                .Replace("$(article-image)",        markupDocument.Image.Path)
+                .Replace("$(article-image-credit)", markupDocument.Image.Credit)
+                .Replace("$(article-content)",      context.MarkdownContent)
             ;
 
-            Console.WriteLine($"Save content: {htmlPath}");
-            var htmlWriter = File.WriteAllTextAsync(htmlPath, htmlContent);
-
-            context.Article.Html.Content = htmlContent;
-            context.Article.Html.Path = htmlPath;
-            context.Article.PlainText = Markdown.ToPlainText(context.Article.Markdown.Content);
-
-            await htmlWriter;
+            Console.WriteLine($"Saving content: {context.HtmlPath}");
+            File.WriteAllText(context.HtmlPath, htmlContent);
         }
     }
 }

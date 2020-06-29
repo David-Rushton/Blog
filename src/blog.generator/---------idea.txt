@@ -1,0 +1,47 @@
+
+
+
+
+    processors
+
+
+        site-builders
+        page-builders
+
+
+
+
+    clear existing              pre        scaffolding     target-dir
+    copy template               pre        scaffolding     target-dir
+    copy articles           *   pre        scaffolding     target-dir
+    process md pages        *   per page   markdown        md-pages-per-page
+        yaml                *   per page   markdown        md-pages-per-page
+        md                  *   per page   markdown        md-pages-per-page
+        fix md links        *   per page   markdown        md-pages-per-page
+    generate index page     *   post       dynamic-pages   list-all-pages
+    generate site map       *   post       dynamic-pages   list-all-pages
+    generate blog archive   *   post       dynamic-pages   list-all-pages
+
+
+    scaffold-pipe > site-context
+    markdown-pipe > article-context
+    finalise-pipe > pages-context
+
+
+    pipeline-builder -> pipeline ------+
+                                       +----> site.build(pipeline)
+                        site-builder --+
+
+
+
+     +----+
+     |    |
+ |---+----+----->
+     |    |
+     +----+
+
+
+
+
+    scaffold-context
+    mark

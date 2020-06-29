@@ -8,25 +8,12 @@ namespace Blog.Generator.Processors
 {
     public class DropExistingSiteProcessor : ScaffoldProcessor
     {
-        readonly string _target;
-
-
-        public DropExistingSiteProcessor(string target)
-            => (_target) = (target)
-        ;
-
-
-        public override ProcessorType Type
-            => ProcessorType.ScaffoldProcessor
-        ;
-
-
-        public override Task InvokeAsync(Context context)
+        public override void Invoke(SiteContext context)
         {
-            if(Directory.Exists(_target))
+            if(Directory.Exists(context.SiteRoot))
             {
                 Console.WriteLine("Dropping existing site");
-                Directory.Delete(_target, true);
+                Directory.Delete(context.SiteRoot, true);
             }
         }
     }

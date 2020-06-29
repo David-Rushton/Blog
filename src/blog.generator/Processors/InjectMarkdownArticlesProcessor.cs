@@ -8,23 +8,10 @@ namespace Blog.Generator.Processors
 {
     public class InjectMarkdownArticlesProcessor : ScaffoldProcessor
     {
-        readonly string _source;
-        readonly string _target;
-
-
-        public InjectMarkdownArticlesProcessor(string source, string target)
-            => (_source, _target) = (source, target)
-        ;
-
-
-        public override ProcessorType Type
-            => ProcessorType.ScaffoldProcessor
-        ;
-
-
-        public override Task InvokeAsync(Context context)
+        public override void Invoke(SiteContext context)
         {
-            FileSystemHelper.DeepCopyDirectory(source, target)
+            Console.WriteLine("Copying raw articles...");
+            FileSystemHelper.DeepCopyDirectory(context.ArticleSource, context.ArticleTarget);
         }
     }
 }

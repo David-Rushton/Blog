@@ -1,3 +1,4 @@
+using Blog.Generator.Documents;
 using Blog.Generator.Processors.Abstractions;
 using System;
 using System.Collections.Generic;

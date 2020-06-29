@@ -1,5 +1,6 @@
-using blog.generator.contexts;
-using blog.generator.processors;
+using Blog.Generator.Contexts;
+using Blog.Generator.Documents;
+using Blog.Generator.Processors;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,70 +8,56 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace blog.generator
+namespace Blog.Generator
 {
     public class App
     {
         readonly Config _config;
+        readonly MarkupDocuments _markupDocuments;
         readonly ContextBuilder _contextBuilder;
         readonly ProcessorPipeline _processorPipeline;
-        readonly string _blogArticlePath;
 
 
-        public App(Config config, ContextBuilder contextBuilder, ProcessorPipeline processorPipeline)
+        public App(Config config, MarkupDocuments markupDocuments, ContextBuilder contextBuilder, ProcessorPipeline processorPipeline)
         {
             _config = config;
+            _markupDocuments = markupDocuments;
             _contextBuilder = contextBuilder;
             _processorPipeline = processorPipeline;
-            _blogArticlePath = Path.Join(_config.BlogRoot, "blog.articles");
         }
 
 
         public async Task InvokeAsync()
         {
+            Console.WriteLine("Generating blog...");
             Console.WriteLine($"Config:\n{_config}");
 
-            // Rebuild the site from the template and raw content
-            DeleteBlogSiteIfExists();
-            CloneBlogSiteFromTemplate();
-            InjectMarkdownArticlesIntoBlogSite();
+
+            // scaffolding
+            var siteContext = _contextBuilder.BuildSiteContext();
+            _processorPipeline.InvokeScaffoldPipeline(siteContext);
 
 
-            // The processor pipeline converts the raw content into the finished article
-            List<Task> contextTasks = new List<Task>
-            (
-                Directory
-                    .GetFiles(_blogArticlePath, "*.md")
-                    .Select(async path =>
-                        {
-                            var content = File.ReadAllTextAsync(path);
-                            var context = _contextBuilder.Build(path, await content);
-                            return _processorPipeline.InvokePipelineAsync(context);
-                        })
-                    .ToList()
-            );
+            // marking
+            var templateHtml = await File.ReadAllTextAsync(Path.Join(_config.ArticlesBlogRoot, "article.template.html"));
+            Parallel.ForEach(Directory.GetFiles(_config.ArticlesBlogRoot), path =>
+                {
+                    var content = File.ReadAllText(path);
+                    var markupContext = _contextBuilder.BuildMarkupContext(path, content, templateHtml);
+                    var markupDocument = _markupDocuments.New(path);
 
-            Task t = Task.WhenAll(contextTasks);
-            await t;
+                    _processorPipeline.InvokeMarkupPipeline(markupContext, markupDocument);
+                })
+            ;
+
+
+
+            // finalising
+
+
+
+            Console.WriteLine("Blog generated!");
             return;
         }
-
-
-        private void DeleteBlogSiteIfExists()
-        {
-            if (Directory.Exists(_config.BlogRoot))
-            {
-                Console.Write("Deleting existing blog site");
-                Directory.Delete(_config.BlogRoot, true);
-            }
-        }
-
-        private void CloneBlogSiteFromTemplate()
-            => FileSystemHelper.DeepCopyDirectory(_config.TemplateRoot, _config.BlogRoot)
-        ;
-
-        private void InjectMarkdownArticlesIntoBlogSite()
-            => FileSystemHelper.DeepCopyDirectory(_config.ArticlesRoot, _blogArticlePath)
-        ;
     }
 }

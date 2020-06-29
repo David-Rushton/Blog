@@ -1,8 +1,9 @@
-using blog.generator;
+using Blog.Generator;
 using System;
+using System.IO;
 
 
-namespace blog.generator.contexts
+namespace Blog.Generator.Contexts
 {
     public class ContextBuilder
     {
@@ -22,13 +23,29 @@ namespace blog.generator.contexts
         ;
 
 
-        private SiteContext BuildSiteContext()
+        public SiteContext BuildSiteContext()
             => new SiteContext
             {
+                SiteRoot = _config.BlogRoot,
+                TemplateSiteRoot = _config.TemplateRoot,
+                ArticleSource = _config.ArticlesSourceRoot,
+                ArticleTarget = _config.ArticlesBlogRoot,
                 BuildNumber = _config.BuildNumber,
                 BuildSha = _config.BuildSha
             }
         ;
+
+        public MarkupContext BuildMarkupContext(string markdownPath, string markdownContent, string htmlContentTemplate)
+            => new MarkupContext
+            {
+                MarkdownPath = markdownPath,
+                MarkdownContent = markdownContent,
+                HtmlContentTemplate = htmlContentTemplate
+            }
+        ;
+
+
+
 
         private ArticleContext BuildArticleContext(string path, string content)
             => new ArticleContext(path, content, BuildImageContext());

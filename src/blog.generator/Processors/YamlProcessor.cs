@@ -1,4 +1,5 @@
 using Blog.Generator.Contexts;
+using Blog.Generator.Documents;
 using Blog.Generator.Processors.Abstractions;
 using Blog.Generator.Processors.Models;
 using System;
@@ -21,36 +22,29 @@ namespace Blog.Generator.Processors
         ;
 
 
-        public override ProcessorType Type => ProcessorType.MarkupProcessor;
-
-
-        public async override Task InvokeAsync(Context context, NextDelegate next)
+        public override void Invoke(MarkupContext context, MarkupDocument markupDocument)
         {
-            var task = Task.Run(() =>
+            Console.WriteLine($"Reading front matter form: {markupDocument.MarkdownPath}");
+
+            var frontMatter = GetArticleFrontMatter(context.MarkdownContent);
+
+            markupDocument.Title = frontMatter.Title;
+            markupDocument.Slug = frontMatter.Slug;
+            markupDocument.Tags = frontMatter.Tags;
+            markupDocument.PostedDate = frontMatter.PostedDate;
+            markupDocument.Image.Credit = frontMatter.ImageCredit;
+            markupDocument.Image.Path = frontMatter.Image;
+
+
+            FrontMatterModel GetArticleFrontMatter(string article)
             {
-                Console.WriteLine($"Reading front matter from: {context.Article.Markdown.Path}");
-                var frontMatter = GetArticleFrontMatter(context.Article.Markdown.Content);
+                using var contentIncludingYaml = new StringReader(article);
+                var yamlParser = new Parser(contentIncludingYaml);
 
-                context.Article.Title = frontMatter.Title;
-                context.Article.Slug = frontMatter.Slug;
-                context.Article.Tags = frontMatter.Tags;
-                context.Article.PostedDate = frontMatter.PostedDate;
-                context.Article.Image.Owner = frontMatter.ImageCredit;
-                context.Article.Image.Path =  frontMatter.Image;
-
-
-                FrontMatterModel GetArticleFrontMatter(string article)
-                {
-                    using var contentIncludingYaml = new StringReader(article);
-                    var yamlParser = new Parser(contentIncludingYaml);
-
-                    yamlParser.Consume<StreamStart>();
-                    yamlParser.Consume<DocumentStart>();
-                    return _yamlPipeline.Deserialize<FrontMatterModel>(yamlParser);
-                }
-            });
-
-            await task;
+                yamlParser.Consume<StreamStart>();
+                yamlParser.Consume<DocumentStart>();
+                return _yamlPipeline.Deserialize<FrontMatterModel>(yamlParser);
+            }
         }
     }
 }

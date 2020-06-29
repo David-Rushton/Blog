@@ -1,4 +1,5 @@
 using Blog.Generator.Contexts;
+using Blog.Generator.Documents;
 using Blog.Generator.Processors.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -28,9 +29,25 @@ namespace Blog.Generator.Processors
         ;
 
 
-        public List<ScaffoldProcessor> ScaffoldProcessors => _scaffoldProcessors;
-        public List<MarkupProcessor> MarkupProcessors => _markupProcessors;
-        public List<FinaliseProcessor> FinaliseProcessors => _finaliseProcessors;
+        public void InvokeScaffoldPipeline(SiteContext context)
+        {
+            foreach(var processor in _scaffoldProcessors)
+            {
+                processor.Invoke(context);
+            }
+        }
 
+        public void InvokeMarkupPipeline(MarkupContext context, MarkupDocument document)
+        {
+            foreach(var processor in _markupProcessors)
+            {
+                processor.Invoke(context, document);
+            }
+        }
+
+        public void InvokeFinalisePipeline()
+        {
+
+        }
     }
 }
