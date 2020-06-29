@@ -3,13 +3,13 @@ using System;
 
 namespace Blog.Generator.Contexts
 {
-    public class SiteContext
+    public class ScaffoldContext
     {
-        public SiteContext()
+        public ScaffoldContext()
             : this("", "", "", "", "", "")
         { }
 
-        public SiteContext(string siteRoot, string templateSiteRoot, string articleSource, string articleTarget, string buildNumber, string buildSha)
+        public ScaffoldContext(string siteRoot, string templateSiteRoot, string articleSource, string articleTarget, string buildNumber, string buildSha)
             => (SiteRoot, TemplateSiteRoot, ArticleSource, ArticleTarget, BuildNumber, BuildSha)
             =  (siteRoot, templateSiteRoot, ArticleSource, ArticleTarget, buildNumber, buildSha)
         ;
