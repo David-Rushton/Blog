@@ -40,16 +40,14 @@ namespace Blog.Generator
 
             // marking
             var templateHtml = await File.ReadAllTextAsync(Path.Join(_config.ArticlesBlogRoot, "article.template.html"));
-            Parallel.ForEach(Directory.GetFiles(_config.ArticlesBlogRoot), path =>
-                {
-                    var content = File.ReadAllText(path);
-                    var markupContext = _contextBuilder.BuildMarkupContext(path, content, templateHtml);
-                    var markupDocument = _markupDocuments.New(path);
+            foreach(var path in Directory.GetFiles(_config.ArticlesBlogRoot, "*.md"))
+            {
+                var content = File.ReadAllText(path);
+                var markupContext = _contextBuilder.BuildMarkupContext(path, content, templateHtml);
+                var markupDocument = _markupDocuments.New(path);
 
-                    _processorPipeline.InvokeMarkupPipeline(markupContext, markupDocument);
-                })
-            ;
-
+                _processorPipeline.InvokeMarkupPipeline(markupContext, markupDocument);
+            }
 
 
             // finalising
