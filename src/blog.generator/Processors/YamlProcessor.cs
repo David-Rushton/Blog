@@ -46,5 +46,9 @@ namespace Blog.Generator.Processors
                 return _yamlPipeline.Deserialize<FrontMatterModel>(yamlParser);
             }
         }
+
+        public override string ToString()
+            => "Yaml Processor"
+        ;
     }
 }

@@ -12,5 +12,9 @@ namespace Blog.Generator.Processors
             Console.WriteLine("Coping template site...");
             FileSystemHelper.DeepCopyDirectory(context.TemplateSiteRoot, context.SiteRoot);
         }
+
+        public override string ToString()
+            => "Clone Site From Template Processor"
+        ;
     }
 }

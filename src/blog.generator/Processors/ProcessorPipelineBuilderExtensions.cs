@@ -1,6 +1,4 @@
 using Markdig;
-using System;
-using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -14,8 +12,6 @@ namespace Blog.Generator.Processors
         )
         {
             pipelineBuilder.RegisterPipelineProcessor(new DropExistingSiteProcessor());
-
-            Console.WriteLine($"Pipline processor added: Drop Existing Site");
             return pipelineBuilder;
         }
 
@@ -24,8 +20,6 @@ namespace Blog.Generator.Processors
         )
         {
             pipelineBuilder.RegisterPipelineProcessor(new CloneSiteFromTemplateProcessor());
-
-            Console.WriteLine($"Pipline processor added: Cline Site from Template");
             return pipelineBuilder;
         }
 
@@ -34,8 +28,6 @@ namespace Blog.Generator.Processors
         )
         {
             pipelineBuilder.RegisterPipelineProcessor(new InjectMarkdownArticlesProcessor());
-
-            Console.WriteLine($"Pipline processor added: Inject Markdown Articles");
             return pipelineBuilder;
         }
 
@@ -47,8 +39,6 @@ namespace Blog.Generator.Processors
             ;
 
             pipelineBuilder.RegisterPipelineProcessor(new YamlProcessor(yamlPipeline));
-
-            Console.WriteLine($"Pipline processor added: Yaml Front Matter Reader");
             return pipelineBuilder;
         }
 
@@ -61,8 +51,6 @@ namespace Blog.Generator.Processors
             ;
 
             pipelineBuilder.RegisterPipelineProcessor(new MarkdownProcessor(markdownPipeline));
-
-            Console.WriteLine($"Pipline processor added: Markdown Converter");
             return pipelineBuilder;
         }
     }

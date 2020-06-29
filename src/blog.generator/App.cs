@@ -30,7 +30,8 @@ namespace Blog.Generator
         public async Task InvokeAsync()
         {
             Console.WriteLine("Generating blog...");
-            Console.WriteLine($"Config:\n{_config}");
+            Console.WriteLine(_config);
+            Console.WriteLine(_processorPipeline);
 
 
             // scaffolding

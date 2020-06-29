@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text;
 
 
 namespace Blog.Generator.Processors
@@ -45,6 +46,22 @@ namespace Blog.Generator.Processors
         public void InvokeFinalisePipeline()
         {
 
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.Append("Scaffold processors enabled:\n\t");
+            sb.Append(String.Join("\n\t", _scaffoldProcessors));
+
+            sb.Append("\nMarkup processors enabled:\n\t");
+            sb.Append(String.Join("\n\t", _markupProcessors));
+
+            sb.Append("\nFinalise processors enabled:\n\t");
+            sb.Append(String.Join("\n\t", _finaliseProcessors));
+
+            return sb.ToString();
         }
     }
 }

@@ -35,5 +35,9 @@ namespace Blog.Generator.Processors
             Console.WriteLine($"Saving content: {context.HtmlPath}");
             File.WriteAllText(context.HtmlPath, htmlContent);
         }
+
+        public override string ToString()
+            => "Markdown Processor"
+        ;
     }
 }

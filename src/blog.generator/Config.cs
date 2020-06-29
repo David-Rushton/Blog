@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 
@@ -20,7 +21,16 @@ namespace Blog.Generator
 
 
         public override string ToString()
-            => $"Build Number: {BuildNumber} Build SHA: {BuildSha} Template Root: {TemplateRoot}\nArticles Sources Root: {ArticlesSourceRoot}\nBlog Root: {BlogRoot}\nArticles Blog Root: {ArticlesBlogRoot}"
+            => String.Format
+            (
+                "Config:\n\tBuild Number: {0}\n\tBuild SHA: {1}\n\tTemplate Root: {2}\n\tArticles Sources Root: {3}\n\tBlog Root: {4}\n\tArticles Blog Root: {5}",
+                BuildNumber,
+                BuildSha,
+                TemplateRoot,
+                ArticlesSourceRoot,
+                BlogRoot,
+                ArticlesBlogRoot
+            )
         ;
     }
 }

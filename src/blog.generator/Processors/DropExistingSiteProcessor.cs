@@ -16,5 +16,9 @@ namespace Blog.Generator.Processors
                 Directory.Delete(context.SiteRoot, true);
             }
         }
+
+        public override string ToString()
+            => "Drop Existing Site Processor"
+        ;
     }
 }

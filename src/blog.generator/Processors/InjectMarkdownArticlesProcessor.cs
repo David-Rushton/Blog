@@ -13,5 +13,9 @@ namespace Blog.Generator.Processors
             Console.WriteLine("Copying raw articles...");
             FileSystemHelper.DeepCopyDirectory(context.ArticleSource, context.ArticleTarget);
         }
+
+        public override string ToString()
+            => "Inject Markdown Articles Processor"
+        ;
     }
 }
