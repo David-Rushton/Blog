@@ -53,5 +53,17 @@ namespace Blog.Generator.Processors
             pipelineBuilder.RegisterPipelineProcessor(new MarkdownProcessor(markdownPipeline));
             return pipelineBuilder;
         }
+
+        public static ProcessorPipelineBuilder UseSitemapsProcessor(this ProcessorPipelineBuilder pipelineBuilder)
+        {
+            pipelineBuilder.RegisterPipelineProcessor(new SitemapsProcessor());
+            return pipelineBuilder;
+        }
+
+        public static ProcessorPipelineBuilder UseIndexPageProcessor(this ProcessorPipelineBuilder pipelineBuilder)
+        {
+            pipelineBuilder.RegisterPipelineProcessor(new IndexPageProcessor());
+            return pipelineBuilder;
+        }
     }
 }
