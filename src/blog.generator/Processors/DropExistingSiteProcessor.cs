@@ -8,7 +8,7 @@ namespace Blog.Generator.Processors
 {
     public class DropExistingSiteProcessor : ScaffoldProcessor
     {
-        public override void Invoke(SiteContext context)
+        public override void Invoke(ScaffoldContext context)
         {
             if(Directory.Exists(context.SiteRoot))
             {

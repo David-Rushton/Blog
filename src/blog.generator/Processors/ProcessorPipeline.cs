@@ -26,7 +26,7 @@ namespace Blog.Generator.Processors
         ;
 
 
-        public void InvokeScaffoldPipeline(SiteContext context)
+        public void InvokeScaffoldPipeline(ScaffoldContext context)
         {
             foreach(var processor in _scaffoldProcessors)
             {
@@ -42,9 +42,12 @@ namespace Blog.Generator.Processors
             }
         }
 
-        public void InvokeFinalisePipeline()
+        public void InvokeFinalisePipeline(FinaliseContext context)
         {
-
+            foreach(var processor in _finaliseProcessors)
+            {
+                processor.Invoke(context);
+            }
         }
 
         public override string ToString()

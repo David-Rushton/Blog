@@ -8,7 +8,7 @@ namespace Blog.Generator.Processors
 {
     public class InjectMarkdownArticlesProcessor : ScaffoldProcessor
     {
-        public override void Invoke(SiteContext context)
+        public override void Invoke(ScaffoldContext context)
         {
             Console.WriteLine("Copying raw articles...");
             FileSystemHelper.DeepCopyDirectory(context.ArticleSource, context.ArticleTarget);
