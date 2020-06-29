@@ -1,5 +1,4 @@
 using Blog.Generator.Contexts;
-using Blog.Generator.Documents;
 using Blog.Generator.Processors.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -35,11 +34,11 @@ namespace Blog.Generator.Processors
             }
         }
 
-        public void InvokeMarkupPipeline(MarkupContext context, MarkupDocument document)
+        public void InvokeMarkupPipeline(MarkupContext context)
         {
             foreach(var processor in _markupProcessors)
             {
-                processor.Invoke(context, document);
+                processor.Invoke(context);
             }
         }
 

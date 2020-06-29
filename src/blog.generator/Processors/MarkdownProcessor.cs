@@ -1,5 +1,4 @@
 using Blog.Generator.Contexts;
-using Blog.Generator.Documents;
 using Blog.Generator.Processors.Abstractions;
 using Markdig;
 using System;
@@ -18,22 +17,22 @@ namespace Blog.Generator.Processors
         ;
 
 
-        public override void Invoke(MarkupContext context, MarkupDocument markupDocument)
+        public override void Invoke(MarkupContext context)
         {
-            Console.WriteLine($"Converting markdown to Html: {context.MarkdownPath}");
+            Console.WriteLine($"Converting markdown to Html: {context.Markdown.Path}");
 
-            var htmlContent = context.HtmlContentTemplate
-                .Replace("$(article-content)",      Markdown.ToHtml(context.MarkdownContent, _markdownPipeline))
-                .Replace("$(article-author)",       markupDocument.Author)
-                .Replace("$(article-posted-date)",  markupDocument.PostedDate.ToString("yyyy-MM-dd"))
-                .Replace("$(article-title)",        markupDocument.Title)
-                .Replace("$(article-slug)",         markupDocument.Slug)
-                .Replace("$(article-image)",        markupDocument.Image.Path)
-                .Replace("$(article-image-credit)", markupDocument.Image.Credit)
+            var htmlContent = context.Html.ContentTemplate
+                .Replace("$(article-content)",      Markdown.ToHtml(context.Markdown.Content, _markdownPipeline))
+                .Replace("$(article-author)",       context.Author)
+                .Replace("$(article-posted-date)",  context.PostedDate.ToString("yyyy-MM-dd"))
+                .Replace("$(article-title)",        context.Title)
+                .Replace("$(article-slug)",         context.Slug)
+                .Replace("$(article-image)",        context.Image.Path)
+                .Replace("$(article-image-credit)", context.Image.Credit)
             ;
 
-            Console.WriteLine($"Saving content: {context.HtmlPath}");
-            File.WriteAllText(context.HtmlPath, htmlContent);
+            Console.WriteLine($"Saving content: {context.Html.Path}");
+            File.WriteAllText(context.Html.Path, htmlContent);
         }
 
         public override string ToString()

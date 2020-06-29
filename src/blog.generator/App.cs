@@ -1,5 +1,4 @@
 using Blog.Generator.Contexts;
-using Blog.Generator.Documents;
 using Blog.Generator.Processors;
 using System;
 using System.Collections.Generic;
@@ -13,15 +12,13 @@ namespace Blog.Generator
     public class App
     {
         readonly Config _config;
-        readonly MarkupDocuments _markupDocuments;
         readonly ContextBuilder _contextBuilder;
         readonly ProcessorPipeline _processorPipeline;
 
 
-        public App(Config config, MarkupDocuments markupDocuments, ContextBuilder contextBuilder, ProcessorPipeline processorPipeline)
+        public App(Config config, ContextBuilder contextBuilder, ProcessorPipeline processorPipeline)
         {
             _config = config;
-            _markupDocuments = markupDocuments;
             _contextBuilder = contextBuilder;
             _processorPipeline = processorPipeline;
         }
@@ -45,9 +42,8 @@ namespace Blog.Generator
             {
                 var content = File.ReadAllText(path);
                 var markupContext = _contextBuilder.BuildMarkupContext(path, content, templateHtml);
-                var markupDocument = _markupDocuments.New(path);
 
-                _processorPipeline.InvokeMarkupPipeline(markupContext, markupDocument);
+                _processorPipeline.InvokeMarkupPipeline(markupContext);
             }
 
 

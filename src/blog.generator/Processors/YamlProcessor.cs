@@ -1,10 +1,8 @@
 using Blog.Generator.Contexts;
-using Blog.Generator.Documents;
 using Blog.Generator.Processors.Abstractions;
 using Blog.Generator.Processors.Models;
 using System;
 using System.IO;
-using System.Threading.Tasks;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
@@ -22,18 +20,18 @@ namespace Blog.Generator.Processors
         ;
 
 
-        public override void Invoke(MarkupContext context, MarkupDocument markupDocument)
+        public override void Invoke(MarkupContext context)
         {
-            Console.WriteLine($"Reading front matter form: {markupDocument.MarkdownPath}");
+            Console.WriteLine($"Reading front matter form: {context.Markdown.Path}");
 
-            var frontMatter = GetArticleFrontMatter(context.MarkdownContent);
+            var frontMatter = GetArticleFrontMatter(context.Markdown.Content);
 
-            markupDocument.Title = frontMatter.Title;
-            markupDocument.Slug = frontMatter.Slug;
-            markupDocument.Tags = frontMatter.Tags;
-            markupDocument.PostedDate = frontMatter.PostedDate;
-            markupDocument.Image.Credit = frontMatter.ImageCredit;
-            markupDocument.Image.Path = frontMatter.Image;
+            context.Title = frontMatter.Title;
+            context.Slug = frontMatter.Slug;
+            context.Tags = frontMatter.Tags;
+            context.PostedDate = frontMatter.PostedDate;
+            context.Image.Credit = frontMatter.ImageCredit;
+            context.Image.Path = frontMatter.Image;
 
 
             FrontMatterModel GetArticleFrontMatter(string article)

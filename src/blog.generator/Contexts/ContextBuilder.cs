@@ -32,11 +32,11 @@ namespace Blog.Generator.Contexts
 
         public MarkupContext BuildMarkupContext(string markdownPath, string markdownContent, string htmlContentTemplate)
             => new MarkupContext
-            {
-                MarkdownPath = markdownPath,
-                MarkdownContent = markdownContent,
-                HtmlContentTemplate = htmlContentTemplate
-            }
+            (
+                markdownPath,
+                markdownContent,
+                htmlContentTemplate
+            )
         ;
     }
 }

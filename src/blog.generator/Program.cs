@@ -1,5 +1,4 @@
 ﻿using Blog.Generator.Contexts;
-using Blog.Generator.Documents;
 using Blog.Generator.Processors;
 using System;
 using System.CommandLine.DragonFruit;
@@ -48,7 +47,6 @@ namespace Blog.Generator
             {
                 var config = new Config(buildNumber, buildSha, templateRoot, articlesRoot, blogRoot);
                 var contextBuilder = new ContextBuilder(config);
-                var markupDocuments = new MarkupDocuments();
 
                 var processorPipeline = new ProcessorPipelineBuilder(config)
                     .UseDropExistingSiteProcessor()
@@ -59,7 +57,7 @@ namespace Blog.Generator
                     .Build()
                 ;
 
-                return new App(config, markupDocuments, contextBuilder, processorPipeline);
+                return new App(config, contextBuilder, processorPipeline);
             }
         }
     }
