@@ -21,14 +21,23 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.x'
 
       - name: Get Short SHA
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Generate Site
-        run: src/blog.site-generator/build.ps1 -Verbose -BuildNumber $env:GITHUB_RUN_ID -BuildSHA ${{ steps.vars.outputs.sha_short }}
-        shell: pwsh
+        run: |
+          dotnet run --project src/blog.generator/blog.generator.csproj
+          --
+          --build-number $env:GITHUB_RUN_ID
+          --build-sha ${{ steps.vars.outputs.sha_short }}
+          --template-root  src/blog.template
+          --articles-root  src/blog.articles
+          --blog-root src/blog
 
       - name: Build And Deploy
         id: builddeploy
