@@ -32,8 +32,8 @@ namespace Blog.Generator
 
 
             // scaffolding
-            var siteContext = _contextBuilder.BuildSiteContext();
-            _processorPipeline.InvokeScaffoldPipeline(siteContext);
+            var scaffoldContext = _contextBuilder.GetScaffoldContext();
+            _processorPipeline.InvokeScaffoldPipeline(scaffoldContext);
 
 
             // marking
@@ -48,11 +48,33 @@ namespace Blog.Generator
 
 
             // finalising
+            var htmlFilePaths = Directory.GetFiles
+                (
+                    _config.BlogRoot, "*.html",
+                    new EnumerationOptions
+                    {
+                        RecurseSubdirectories = true
+                    }
+                ).ToList()
+            ;
+            var finalisingContext = _contextBuilder.BuildFinaliseContext(htmlFilePaths);
+            _processorPipeline.InvokeFinalisePipeline(finalisingContext);
 
 
 
-            Console.WriteLine("Blog generated!");
-            return;
+
+            OutputSuccessMessage();
+        }
+
+
+        private void OutputSuccessMessage()
+        {
+            var original = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+
+            Console.WriteLine("🏁 ✔ 👍 Blog generated 👍 ✔ 🏁");
+
+            Console.ForegroundColor = original;
         }
     }
 }
