@@ -23,13 +23,13 @@ namespace Blog.Generator.Processors
             Console.WriteLine($"Converting markdown to Html: {context.MarkdownPath}");
 
             var htmlContent = context.HtmlContentTemplate
+                .Replace("$(article-content)",      Markdown.ToHtml(context.MarkdownContent, _markdownPipeline))
                 .Replace("$(article-author)",       markupDocument.Author)
                 .Replace("$(article-posted-date)",  markupDocument.PostedDate.ToString("yyyy-MM-dd"))
                 .Replace("$(article-title)",        markupDocument.Title)
                 .Replace("$(article-slug)",         markupDocument.Slug)
                 .Replace("$(article-image)",        markupDocument.Image.Path)
                 .Replace("$(article-image-credit)", markupDocument.Image.Credit)
-                .Replace("$(article-content)",      context.MarkdownContent)
             ;
 
             Console.WriteLine($"Saving content: {context.HtmlPath}");
