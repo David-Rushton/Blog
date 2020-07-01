@@ -5,6 +5,7 @@ namespace Blog.Generator.Contexts
 {
     public class ScaffoldContext
     {
+        // Used to suppress nullable warnings
         public ScaffoldContext()
             : this("", "", "", "", "")
         { }

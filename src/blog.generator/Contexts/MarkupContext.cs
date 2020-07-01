@@ -6,11 +6,21 @@ namespace Blog.Generator.Contexts
 {
     public class MarkupContext
     {
+        // Used to suppress nullable warnings
+        public MarkupContext()
+            : this("", "", "")
+        { }
+
         public MarkupContext(string markdownPath, string markdownContent, string htmlContentTemplate)
         {
             Markdown = new MarkdownProperties();
             Html = new HtmlProperties();
             Image = new ImageProperties();
+
+            Title = "";
+            Slug = "";
+            Tags = new string[] { "" };
+            PostedDate = DateTime.MinValue;
 
             Markdown.Path = markdownPath;
             Markdown.Content = markdownContent;
@@ -45,18 +55,27 @@ namespace Blog.Generator.Contexts
 
         public class MarkdownProperties
         {
+            public MarkdownProperties() => (Path, Content) = ("", "");
+
+
             public string Path { get; internal set; }
             public string Content { get; internal set; }
         }
 
         public class HtmlProperties
         {
+            public HtmlProperties() => (Path, ContentTemplate) = ("", "");
+
+
             public string Path { get; internal set; }
             public string ContentTemplate { get; internal set; }
         }
 
         public class ImageProperties
         {
+            public ImageProperties() => (Credit, Path) = ("", "");
+
+
             public string Credit { get; set; }
             public string Path { get; set; }
         }
