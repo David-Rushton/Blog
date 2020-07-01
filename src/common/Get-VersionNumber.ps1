@@ -8,4 +8,4 @@ $minor = $versionXml.Node.minor
 $buildNumber = $env:GITHUB_RUN_ID
 $shortSha = git rev-parse --short HEAD
 
-return "$major.$minor.$buildNumber.$shortSha"
+return "$major.$minor.$($buildNumber):$shortSha"
