@@ -27,7 +27,7 @@ jobs:
 
       - name: Generate Site
         run: |
-          $versionNumber = src/common/Get-VersionNumber.ps1
+          $versionNumber = src/common/Get-VersionNumber.ps1 \
           dotnet run --project src/blog.generator/blog.generator.csproj \
           -- \
           --version-number $versionNumber \
