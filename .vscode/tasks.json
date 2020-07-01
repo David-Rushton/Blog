@@ -5,18 +5,64 @@
     "tasks": [
         {
             "label": "local-build",
-            "detail": "build an drun locally in a Docker container",
+            "detail": "rebuilds the site on local dev machine",
             "type": "shell",
-            "command": "${workspaceFolder}/src/blog.site-generator/build.ps1",
+            "options": {
+                "cwd": "${workspaceFolder}/src/blog.generator/"
+            },
+            "command": "dotnet",
             "args": [
-                "-Verbose",
-                "-Debug"
+                "run",
+                "--",
+                "--version-number", "0.0.0-dev:abcdefg",
+                "--blog-root", "${workspaceFolder}/src/blog",
+                "--template-root", "${workspaceFolder}/src/blog.template",
+                "--articles-source-root", "${workspaceFolder}/src/blog.articles",
+                "--articles-target-root", "${workspaceFolder}/src/blog/blog.articles"
             ],
             "promptOnClose": false,
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/blog.generator/blog.generator.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/src/blog.generator/blog.generator.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/src/blog.generator/blog.generator.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
         },
         {
             "type": "func",

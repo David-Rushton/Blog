@@ -1,7 +1,7 @@
 ---
 title: Simple Design
 slug: It is strangely satisfying to see complimentary colour combinations
-tags: inspiration, design, colour
+tags: [inspiration, design, colour]
 date: 2020-06-11
 image: /blog.articles/media/colours-palette-5933.jpg
 image-credit: Photo by Kaboompics .com from Pexels
