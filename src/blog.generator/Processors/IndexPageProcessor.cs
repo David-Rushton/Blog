@@ -20,7 +20,7 @@ namespace Blog.Generator.Processors
                         a.PostedDate,
                         a.Slug,
                         ImagePath = a.Image.Path,
-                        HtmlPath = a.Html.Path,
+                        HtmlUrl = a.Html.Url,
                         Index = i.ToString()
                     })
                 .ToList()
@@ -42,7 +42,7 @@ namespace Blog.Generator.Processors
                     .Replace($"$(article-title-{article.Index})", article.Author)
                     .Replace($"$(article-slug-{article.Index})",  article.Slug)
                     .Replace($"$(article-image-{article.Index})", article.ImagePath)
-                    .Replace($"$(article-path-{article.Index})",  article.HtmlPath)
+                    .Replace($"$(article-path-{article.Index})",  article.HtmlUrl)
                 ;
             }
 

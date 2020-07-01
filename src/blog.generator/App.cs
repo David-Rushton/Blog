@@ -36,12 +36,13 @@ namespace Blog.Generator
             _processorPipeline.InvokeScaffoldPipeline(scaffoldContext);
 
 
-            // marking
+            // markup to html
             var templateHtml = await File.ReadAllTextAsync(Path.Join(_config.ArticlesTargetRoot, "article.template.html"));
             foreach(var path in Directory.GetFiles(_config.ArticlesTargetRoot, "*.md"))
             {
                 var content = File.ReadAllText(path);
-                var markupContext = _contextBuilder.BuildMarkupContext(path, content, templateHtml);
+                var url = ConvertPathToUrl(path);
+                var markupContext = _contextBuilder.BuildMarkupContext(path, content, url, templateHtml);
 
                 _processorPipeline.InvokeMarkupPipeline(markupContext);
             }
@@ -55,17 +56,28 @@ namespace Blog.Generator
                     {
                         RecurseSubdirectories = true
                     }
-                ).ToList()
+                )
+                .Select(p => new HtmlPathUrl(p, ConvertPathToUrl(p)))
+                .ToList()
             ;
             var finalisingContext = _contextBuilder.BuildFinaliseContext(htmlFilePaths);
             _processorPipeline.InvokeFinalisePipeline(finalisingContext);
 
 
-
-
             OutputSuccessMessage();
         }
 
+
+        private string ConvertPathToUrl(string path)
+        {
+            // Every part of the path that appears in the blog root can be stripped away
+            // The blog root path is the html url root
+            var subDirectory = path.Replace(_config.BlogRoot, "");
+            var lastDirectory = new DirectoryInfo(Path.GetDirectoryName(subDirectory)).Name;
+            var fileName = Path.GetFileName(path);
+            fileName = Path.ChangeExtension(fileName, "html");
+            return $"/{lastDirectory}/{fileName}";
+        }
 
         private void OutputSuccessMessage()
         {

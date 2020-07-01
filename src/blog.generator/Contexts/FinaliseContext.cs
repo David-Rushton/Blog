@@ -9,17 +9,17 @@ namespace Blog.Generator.Contexts
         public FinaliseContext(
             ScaffoldContext scaffoldContext,
             List<MarkupContext> markupContexts,
-            List<String> htmlFilePaths
+            List<HtmlPathUrl> html
         )
         {
             ScaffoldContext = scaffoldContext;
             MarkupContexts = markupContexts;
-            HtmlFilePaths = htmlFilePaths;
+            Html = html;
         }
 
 
         public ScaffoldContext ScaffoldContext { get; internal set; }
         public List<MarkupContext> MarkupContexts { get; internal set; }
-        public List<String> HtmlFilePaths { get; internal set; }
+        public List<HtmlPathUrl> Html { get; internal set; }
     }
 }

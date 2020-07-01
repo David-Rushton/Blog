@@ -29,12 +29,18 @@ namespace Blog.Generator.Contexts
             => _scaffoldContext
         ;
 
-        public MarkupContext BuildMarkupContext(string markdownPath, string markdownContent, string htmlContentTemplate)
+        public MarkupContext BuildMarkupContext(
+            string markdownPath,
+            string markdownContent,
+            string htmlUrl,
+            string htmlContentTemplate
+        )
         {
             var returnContext = new MarkupContext
             (
                 markdownPath,
                 markdownContent,
+                htmlUrl,
                 htmlContentTemplate
             );
 
@@ -44,8 +50,8 @@ namespace Blog.Generator.Contexts
         }
 
 
-        public FinaliseContext BuildFinaliseContext(List<string> htmlFilePaths)
-            => new FinaliseContext(_scaffoldContext, _markupContexts, htmlFilePaths)
+        public FinaliseContext BuildFinaliseContext(List<HtmlPathUrl> html)
+            => new FinaliseContext(_scaffoldContext, _markupContexts, html)
         ;
     }
 }
