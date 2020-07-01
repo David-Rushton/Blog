@@ -27,17 +27,14 @@ jobs:
 
       - name: Generate Site
         run: |
-          dotnet run --project src/blog.generator/blog.generator.csproj \
-          -- \
-          --version-number "$(src/common/Get-VersionNumber.ps1)" \
-          --blog-root src/blog \
-          --template-root src/blog.template \
-          --articles-source-root src/blog.articles \
+          dotnet run --project src/blog.generator/blog.generator.csproj `
+          -- `
+          --version-number "$(src/common/Get-VersionNumber.ps1)" `
+          --blog-root src/blog `
+          --template-root src/blog.template `
+          --articles-source-root src/blog.articles `
           --articles-target-root src/blog/blog.articles
         shell: "pwsh"
-
-
-
 
       - name: Build And Deploy
         id: builddeploy
