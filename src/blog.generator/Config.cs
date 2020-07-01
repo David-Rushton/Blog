@@ -13,8 +13,8 @@ namespace Blog.Generator
             string articlesSourceRoot,
             string articlesTargetRoot
         )
-            =>  (versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot)
-            =   (VersionNumber, BlogRoot, TemplateRoot, ArticlesSourceRoot, ArticlesTargetRoot)
+            =>  (VersionNumber, BlogRoot, TemplateRoot, ArticlesSourceRoot, ArticlesTargetRoot)
+            =   (versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot)
         ;
 
 
@@ -28,7 +28,7 @@ namespace Blog.Generator
         public override string ToString()
             => String.Format
             (
-                "Config:\n\tVersionNumber{0}\n\tBlogRoot{1}\n\tTemplateRoot{2}\n\tArticlesSourceRoot{3}\n\tArticlesTargetRoot{4}",
+                "Config:\n\tVersion Number: {0}\n\tBlog Root: {1}\n\tTemplate Root: {2}\n\tArticles Source Root: {3}\n\tArticles Target Root: {4}",
                 VersionNumber,
                 BlogRoot,
                 TemplateRoot,
