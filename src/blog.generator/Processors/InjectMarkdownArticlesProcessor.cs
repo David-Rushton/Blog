@@ -11,7 +11,7 @@ namespace Blog.Generator.Processors
         public override void Invoke(ScaffoldContext context)
         {
             Console.WriteLine("Copying raw articles...");
-            FileSystemHelper.DeepCopyDirectory(context.ArticleSource, context.ArticleTarget);
+            FileSystemHelper.DeepCopyDirectory(context.ArticlesSourceRoot, context.ArticlesTargetRoot);
         }
 
         public override string ToString()

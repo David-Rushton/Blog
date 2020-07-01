@@ -18,10 +18,9 @@ namespace Blog.Generator.Contexts
             {
                 SiteRoot = _config.BlogRoot,
                 TemplateSiteRoot = _config.TemplateRoot,
-                ArticleSource = _config.ArticlesSourceRoot,
-                ArticleTarget = _config.ArticlesBlogRoot,
-                BuildNumber = _config.BuildNumber,
-                BuildSha = _config.BuildSha
+                ArticlesSourceRoot = _config.ArticlesSourceRoot,
+                ArticlesTargetRoot = _config.ArticlesTargetRoot,
+                VersionNumber = _config.VersionNumber
             };
         }
 

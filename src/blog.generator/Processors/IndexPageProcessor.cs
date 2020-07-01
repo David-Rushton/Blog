@@ -32,8 +32,7 @@ namespace Blog.Generator.Processors
             Console.WriteLine($"Generating index page: {indexPath}");
             indexContent = indexContent
                 .Replace("$(last-updated)", DateTime.Now.ToString("yyyy-MM-dd"))
-                .Replace("$(build-number)", context.ScaffoldContext.BuildNumber)
-                .Replace("$(build-sha)",    context.ScaffoldContext.BuildSha)
+                .Replace("$(version-number)", context.ScaffoldContext.VersionNumber)
             ;
 
             foreach(var article in articles)

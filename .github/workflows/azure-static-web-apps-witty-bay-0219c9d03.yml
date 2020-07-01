@@ -39,6 +39,15 @@ jobs:
           --articles-root  src/blog.articles \
           --blog-root src/blog
 
+          --version-number
+          --blog-root
+          --template-root
+          --articles-source-root
+          --articles-target-root
+
+
+
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview

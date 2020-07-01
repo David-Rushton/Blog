@@ -3,7 +3,9 @@
         "Pexels",
         "featurette",
         "pwsh",
-        "unstyled"
+        "setup",
+        "unstyled",
+        "vars"
     ],
     "azureFunctions.deploySubpath": "src\\api",
     "azureFunctions.postDeployTask": "npm install",

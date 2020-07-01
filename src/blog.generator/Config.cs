@@ -6,30 +6,34 @@ namespace Blog.Generator
 {
     public class Config
     {
-        public Config(string buildNumber, string buildSha, string templateRoot, string articlesSourceRoot, string blogRoot)
-            =>  (BuildNumber, BuildSha, TemplateRoot, ArticlesSourceRoot, BlogRoot)
-            =   (buildNumber, buildSha, templateRoot, articlesSourceRoot, blogRoot)
+        public Config(
+            string versionNumber,
+            string blogRoot,
+            string templateRoot,
+            string articlesSourceRoot,
+            string articlesTargetRoot
+        )
+            =>  (versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot)
+            =   (VersionNumber, BlogRoot, TemplateRoot, ArticlesSourceRoot, ArticlesTargetRoot)
         ;
 
 
-        public string BuildNumber { get; set; }
-        public string BuildSha { get; set; }
-        public string TemplateRoot { get; set; }
-        public string ArticlesSourceRoot { get; set; }
-        public string ArticlesBlogRoot => Path.Join(BlogRoot, "blog.articles");
-        public string BlogRoot  { get; set; }
+        public string VersionNumber { get; internal set; }
+        public string BlogRoot { get; internal set; }
+        public string TemplateRoot { get; internal set; }
+        public string ArticlesSourceRoot { get; internal set; }
+        public string ArticlesTargetRoot { get; internal set; }
 
 
         public override string ToString()
             => String.Format
             (
-                "Config:\n\tBuild Number: {0}\n\tBuild SHA: {1}\n\tTemplate Root: {2}\n\tArticles Sources Root: {3}\n\tBlog Root: {4}\n\tArticles Blog Root: {5}",
-                BuildNumber,
-                BuildSha,
+                "Config:\n\tVersionNumber{0}\n\tBlogRoot{1}\n\tTemplateRoot{2}\n\tArticlesSourceRoot{3}\n\tArticlesTargetRoot{4}",
+                VersionNumber,
+                BlogRoot,
                 TemplateRoot,
                 ArticlesSourceRoot,
-                BlogRoot,
-                ArticlesBlogRoot
+                ArticlesTargetRoot
             )
         ;
     }

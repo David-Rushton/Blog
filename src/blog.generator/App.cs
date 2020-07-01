@@ -37,8 +37,8 @@ namespace Blog.Generator
 
 
             // marking
-            var templateHtml = await File.ReadAllTextAsync(Path.Join(_config.ArticlesBlogRoot, "article.template.html"));
-            foreach(var path in Directory.GetFiles(_config.ArticlesBlogRoot, "*.md"))
+            var templateHtml = await File.ReadAllTextAsync(Path.Join(_config.ArticlesTargetRoot, "article.template.html"));
+            foreach(var path in Directory.GetFiles(_config.ArticlesTargetRoot, "*.md"))
             {
                 var content = File.ReadAllText(path);
                 var markupContext = _contextBuilder.BuildMarkupContext(path, content, templateHtml);

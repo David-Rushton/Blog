@@ -14,11 +14,11 @@
             "args": [
                 "run",
                 "--",
-                "--build-number",  "0.0.0.0-dev",
-                "--build-sha",     "abcdefg",
+                "--version-number", "0.0.0-dev",
+                "--blog-root", "${workspaceFolder}/src/blog",
                 "--template-root", "${workspaceFolder}/src/blog.template",
-                "--articles-root", "${workspaceFolder}/src/blog.articles",
-                "--blog-root",     "${workspaceFolder}/src/blog"
+                "--articles-source-root", "${workspaceFolder}/src/blog.articles",
+                "--articles-target-root", "${workspaceFolder}/src/blog/blog.articles"
             ],
             "promptOnClose": false,
             "group": {

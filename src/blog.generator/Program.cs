@@ -10,12 +10,14 @@ namespace Blog.Generator
 {
     class Program
     {
-        /// <param name="buildNumber">The current build number</param>
-        /// <param name="buildSha">The short git SHA, for the committing build</param>
-        /// <param name="templateRoot">The site template root folder</param>
-        /// <param name="articlesRoot">The articles root folder</param>
-        /// <param name="blogRoot">Location to create the blog site</param>
-        static async Task Main(string buildNumber, string buildSha, string templateRoot, string articlesRoot, string blogRoot)
+        //static async Task Main(string buildNumber, string buildSha, string templateRoot, string articlesRoot, string blogRoot)
+        static async Task Main(
+            string versionNumber,
+            string blogRoot,
+            string templateRoot,
+            string articlesSourceRoot,
+            string articlesTargetRoot
+        )
         {
             try {
                 ValidateInputArgs();
@@ -30,22 +32,19 @@ namespace Blog.Generator
 
             void ValidateInputArgs()
             {
-                if (String.IsNullOrEmpty(buildNumber))
-                    throw new Exception("--build-number is a required arg");
-
-                if (String.IsNullOrEmpty(buildSha))
-                    throw new Exception("--build-sha is a required arg");
+                if (String.IsNullOrEmpty(versionNumber))
+                    throw new Exception("--version-number is a required arg");
 
                 if ( ! Directory.Exists(templateRoot) )
                     throw new Exception($"Invalid path to site template: {templateRoot}");
 
-                if (! Directory.Exists(articlesRoot) )
-                    throw new Exception($"Invalid path to articles: {articlesRoot}");
+                if (! Directory.Exists(articlesSourceRoot) )
+                    throw new Exception($"Invalid path to articles: {articlesSourceRoot}");
             }
 
             App Bootstrap()
             {
-                var config = new Config(buildNumber, buildSha, templateRoot, articlesRoot, blogRoot);
+                var config = new Config(versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot);
                 var contextBuilder = new ContextBuilder(config);
 
                 var processorPipeline = new ProcessorPipelineBuilder(config)
