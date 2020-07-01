@@ -10,6 +10,11 @@ namespace Blog.Generator
 {
     class Program
     {
+        /// <param name="versionNumber">Version number assigned to this build</param>
+        /// <param name="blogRoot">Blog will be generated hee</param>
+        /// <param name="templateRoot">Template blog site to copy</param>
+        /// <param name="articlesSourceRoot">Location of markdown articles</param>
+        /// <param name="articlesTargetRoot">Location to inject articles</param>
         static async Task Main(
             string versionNumber,
             string blogRoot,
