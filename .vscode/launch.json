@@ -11,11 +11,11 @@
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/blog.generator/bin/Debug/netcoreapp3.1/blog.generator.dll",
             "args": [
-                "--build-number",  "0.0.0.0-dev",
-                "--build-sha",     "abcdefg",
+                "--version-number", "0.0.0-dev:abcdefg",
+                "--blog-root", "${workspaceFolder}/src/blog",
                 "--template-root", "${workspaceFolder}/src/blog.template",
-                "--articles-root", "${workspaceFolder}/src/blog.articles",
-                "--blog-root",     "${workspaceFolder}/src/blog"
+                "--articles-source-root", "${workspaceFolder}/src/blog.articles",
+                "--articles-target-root", "${workspaceFolder}/src/blog/blog.articles"
             ],
             "cwd": "${workspaceFolder}/src/blog.generator",
             "stopAtEntry": false,

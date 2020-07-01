@@ -14,7 +14,7 @@
             "args": [
                 "run",
                 "--",
-                "--version-number", "0.0.0-dev",
+                "--version-number", "0.0.0-dev:abcdefg",
                 "--blog-root", "${workspaceFolder}/src/blog",
                 "--template-root", "${workspaceFolder}/src/blog.template",
                 "--articles-source-root", "${workspaceFolder}/src/blog.articles",
