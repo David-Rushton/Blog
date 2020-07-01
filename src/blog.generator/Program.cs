@@ -10,7 +10,6 @@ namespace Blog.Generator
 {
     class Program
     {
-        //static async Task Main(string buildNumber, string buildSha, string templateRoot, string articlesRoot, string blogRoot)
         static async Task Main(
             string versionNumber,
             string blogRoot,
