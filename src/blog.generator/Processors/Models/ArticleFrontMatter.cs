@@ -6,6 +6,13 @@ namespace Blog.Generator.Processors.Models
 {
     public class FrontMatterModel
     {
+        // Used to suppress nullable warnings
+        public FrontMatterModel()
+            => (Title, Slug, Tags,                PostedDate,        Image, ImageCredit)
+            =  ("",    "",   new string[] { "" }, DateTime.MinValue, "",    "")
+        ;
+
+
         [YamlMember(Alias = "title")]
         public string Title { get; set; }
 
