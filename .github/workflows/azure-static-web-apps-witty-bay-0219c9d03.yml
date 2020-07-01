@@ -33,7 +33,7 @@ jobs:
         run: |
           dotnet run --project src/blog.generator/blog.generator.csproj \
           -- \
-          --build-number ${{ GITHUB_RUN_ID }} \
+          --build-number $env:GITHUB_RUN_ID \
           --build-sha ${{ steps.vars.outputs.sha_short }} \
           --template-root  src/blog.template \
           --articles-root  src/blog.articles \
