@@ -37,7 +37,7 @@ namespace Blog.Generator
 
 
             // markup to html
-            var templateHtml = await File.ReadAllTextAsync(Path.Join(_config.ArticlesTargetRoot, "article.template.html"));
+            var templateHtml = await File.ReadAllTextAsync(Path.Join(_config.ArticlesTargetRoot, ".template.html"));
             foreach(var path in Directory.GetFiles(_config.ArticlesTargetRoot, "*.md"))
             {
                 var content = File.ReadAllText(path);
@@ -74,8 +74,14 @@ namespace Blog.Generator
             // The blog root path is the html url root
             var subDirectory = path.Replace(_config.BlogRoot, "");
             var lastDirectory = new DirectoryInfo(Path.GetDirectoryName(subDirectory)).Name;
-            var fileName = Path.GetFileName(path);
-            fileName = Path.ChangeExtension(fileName, "html");
+            var fileName = Path.ChangeExtension(Path.GetFileName(path), "html");
+
+            // Above logic fails for files in the blog root
+            // because the drive is return rather than a folder
+            if(lastDirectory.Contains(':'))
+                return $"/{fileName}";
+
+
             return $"/{lastDirectory}/{fileName}";
         }
 
