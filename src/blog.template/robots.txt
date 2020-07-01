@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /articles/*.md
-Disallow: /articles/_article.template.html
+Disallow: /blog.articles/*.md
+Disallow: /blog.articles/.template.html
 Sitemap: /sitemaps.xml
