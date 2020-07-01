@@ -25,25 +25,17 @@ jobs:
         with:
           dotnet-version: '3.1.x'
 
-      - name: Get Short SHA
-        id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-
       - name: Generate Site
         run: |
+          $versionNumber = src/common/Get-VersionNumber.ps1
           dotnet run --project src/blog.generator/blog.generator.csproj \
           -- \
-          --build-number $GITHUB_RUN_ID \
-          --build-sha ${{ steps.vars.outputs.sha_short }} \
-          --template-root  src/blog.template \
-          --articles-root  src/blog.articles \
-          --blog-root src/blog
-
-          --version-number
-          --blog-root
-          --template-root
-          --articles-source-root
-          --articles-target-root
+          --version-number $versionNumber \
+          --blog-root src/blog \
+          --template-root src/blog.template \
+          --articles-source-root src/blog.articles \
+          --articles-target-root src/blog/blog.articles
+        shell: "pwsh"
 
 
 
