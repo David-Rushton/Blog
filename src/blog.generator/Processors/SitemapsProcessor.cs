@@ -17,27 +17,44 @@ namespace Blog.Generator.Processors
             // Every .html page is added to the sitemaps file.
             foreach(var html in context.Html)
             {
-                var htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(File.ReadAllText(html.Path));
+                if(html.Path.EndsWith(".template.html"))
+                    continue;
 
                 var location = $"https://david-rushton.dev{html.Url}";
-                var lastModified = htmlDoc.DocumentNode
-                    .SelectSingleNode("/html/head/meta[@name = \"date\"]")
-                    .Attributes["content"].Value ?? DateTime.Now.ToString("yyy-MM-dd")
-                ;
+                var lastModified = ExtractLastModified(html.Path);
 
                 sb.AppendLine(GetPageEntry(location, lastModified));
             }
 
-            var content = GetSitemapsTemplate(sb.ToString());
-            var sitemapsPath = Path.Join(context.ScaffoldContext.SiteRoot, "sitemaps.xml");
-            File.WriteAllText(sitemapsPath, content);
+
+            // Write sitemaps to file system
+            WriteSitemaps(context.ScaffoldContext.SiteRoot, sb.ToString());
+
+
+            string ExtractLastModified(string htmlPath)
+            {
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(File.ReadAllText(htmlPath));
+
+                return htmlDoc.DocumentNode
+                    .SelectSingleNode("/html/head/meta[@name = \"date\"]")
+                    .Attributes["content"].Value
+                    ?? DateTime.Now.ToString("yyy-MM-dd")
+                ;
+            }
+
+            void WriteSitemaps(string path, string urls)
+            {
+                var content = GetSitemapsTemplate(urls);
+                var sitemapsPath = Path.Join(path, "sitemaps.xml");
+                File.WriteAllText(sitemapsPath, content);
+                Console.WriteLine("Sitemaps.xml created");
+            }
         }
 
         public override string ToString()
             => "Sitemaps Processor"
         ;
-
 
         private string GetSitemapsTemplate(string urls)
             => $@"<?xml version=""1.0"" encoding=""utf-8""?>
