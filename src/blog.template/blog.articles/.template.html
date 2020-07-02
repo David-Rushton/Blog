@@ -14,10 +14,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/default.min.css">
 
-    <title>david-rushton.dev | $(article-title)</title>
+    <title>david-rushton.dev<br>$(article-title)</title>
 </head>
 <body style="padding-top: 56px;">
 
+    <!-- Navigation bar -->
     <header>
         <div class="bg-dark collapse" id="navbarHeader">
             <div class="container">
@@ -60,17 +61,31 @@
     </header>
 
 
-    <div class="jumbotron text-center" style=" background-image: url('$(article-image)'); background-size: cover; ">
-        <div style=" backdrop-filter: opacity(80%); border-radius: 25px; text-shadow: 0 2px 0 black; border-width: 10px 0px; ">
-            <h2 class="text-white">$(article-title)</h4>
-            <h3 class="text-white">$(article-slug)</h5>
-            <h6 class="text-white">author: $(article-author) | posted: $(article-posted-date) | image by: $(article-image-credit)</h6>
+    <!-- Article title bar -->
+    <div class="jumbotron text-center" style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('$(article-image)'); background-size: cover;">
+        <div>
+            <h1 class="text-white">$(article-title)</h1>
+            <h2 class="text-white">$(article-slug)</h2>
         </div>
     </div>
 
 
+    <!-- Main content -->
     <div class="container marketing">
+        <hr>
+        <div class="text-muted"><strong class="text-primary">></strong> author <strong>$(article-author)</strong> | posted <strong>$(article-posted-date)</strong> | photo by <strong>$(article-image-credit)</strong> from <strong>$(article-image-provider)</strong></div>
+        <hr>
+
         $(article-content)
+
+
+        <hr>
+        <nav aria-label="Article navigation">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link $(disable-previous-article-navigation)" href="$(previous-article-path)">previous</a></li>
+                <li class="page-item"><a class="page-link $(disable-next-article-navigation)" href="$(next-article-path)">next</a></li>
+            </ul>
+        </nav>
     </div>
 
 
