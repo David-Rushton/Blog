@@ -1,0 +1,37 @@
+using Blog.Generator.Contexts;
+using Blog.Generator.Processors.Abstractions;
+using System;
+using System.Linq;
+
+
+namespace Blog.Generator.Processors
+{
+    public class ArticleNavigationProcessor : FinaliseProcessor
+    {
+        public override void Invoke(FinaliseContext context)
+        {
+            Console.WriteLine($"Building article navigations buttons");
+
+            var articleMax = context.MarkupContexts.Count - 1;
+            for(var i = 0; i < articleMax; i++)
+            {
+                var previousDisabled = i == 0 ? "disabled" : "";
+                var previousPath = i == 0 ? "#" : context.MarkupContexts[i - 1].Html.Url;
+                var nextDisabled = i == articleMax ? "disabled" : "";
+                var nextPath = i == articleMax ? "#" : context.MarkupContexts[i + 1].Html.Url;
+
+                // TODO: why are we sorting here?
+                context.MarkupContexts.OrderBy(a => a.PostedDate).ToList()[i].Html.Content = context.MarkupContexts[i].Html.Content
+                    .Replace("$(disable-previous-article-navigation)", previousDisabled)
+                    .Replace("$(previous-article-path)", previousPath)
+                    .Replace("$(disable-next-article-navigation)", nextDisabled)
+                    .Replace("$(next-article-path)", nextPath)
+                ;
+            }
+        }
+
+        public override string ToString()
+            => "Article Navigation Processor"
+        ;
+    }
+}
