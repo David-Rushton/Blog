@@ -39,7 +39,7 @@ namespace Blog.Generator.Processors
             {
                 Console.WriteLine($"\tInserting article preview #{article.Index}");
                 indexContent = indexContent
-                    .Replace($"$(article-title-{article.Index})", article.Author)
+                    .Replace($"$(article-title-{article.Index})", article.Title)
                     .Replace($"$(article-slug-{article.Index})",  article.Slug)
                     .Replace($"$(article-image-{article.Index})", article.ImagePath)
                     .Replace($"$(article-path-{article.Index})",  article.HtmlUrl)
