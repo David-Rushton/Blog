@@ -64,6 +64,16 @@ namespace Blog.Generator
             _processorPipeline.InvokeFinalisePipeline(finalisingContext);
 
 
+            // Save
+            var markupFiles = finalisingContext.MarkupContexts
+                .Select(a => File.WriteAllTextAsync(a.Html.Path, a.Html.Content))
+                .ToList()
+            ;
+
+
+            await Task.WhenAll(markupFiles);
+
+
             OutputSuccessMessage();
         }
 

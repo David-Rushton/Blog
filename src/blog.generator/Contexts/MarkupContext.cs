@@ -66,20 +66,22 @@ namespace Blog.Generator.Contexts
 
         public class HtmlProperties
         {
-            public HtmlProperties() => (Url, Path, ContentTemplate) = ("", "", "");
+            public HtmlProperties() => (Url, Path, ContentTemplate, Content) = ("", "", "", "");
 
 
             public string Url { get; internal set; }
             public string Path { get; internal set; }
             public string ContentTemplate { get; internal set; }
+            public string Content { get; set; }
         }
 
         public class ImageProperties
         {
-            public ImageProperties() => (Credit, Path) = ("", "");
+            public ImageProperties() => (Credit, Provider, Path) = ("", "", "");
 
 
             public string Credit { get; set; }
+            public string Provider { get; set; }
             public string Path { get; set; }
         }
     }
