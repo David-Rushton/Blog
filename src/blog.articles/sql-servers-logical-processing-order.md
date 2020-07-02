@@ -4,7 +4,8 @@ slug: Why column aliases are available to the order by clause but not the group 
 tags: [sql-server]
 date: 2020-06-19
 image: /blog.articles/media/person-writing-on-notebook-669615.jpg
-image-credit: Photo by Lukas from Pexels
+image-credit: Lukas
+image-provider: Pexels
 ---
 
 Have you ever wondered why you can use a column alias in the `ORDER BY` clause but not the `GROUP BY`?  This is a
