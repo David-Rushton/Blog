@@ -57,6 +57,7 @@ namespace Blog.Generator.Processors
         ;
 
 
+        // TODO: Switch to NewBadgeProcessor.
         private string GetTitle(int index, string title, double ageInDays)
         {
             // No need to tag the lead article as new
