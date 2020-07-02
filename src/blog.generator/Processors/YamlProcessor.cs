@@ -31,6 +31,7 @@ namespace Blog.Generator.Processors
             context.Tags = frontMatter.Tags;
             context.PostedDate = frontMatter.PostedDate;
             context.Image.Credit = frontMatter.ImageCredit;
+            context.Image.Provider = frontMatter.ImageProvider;
             context.Image.Path = frontMatter.Image;
 
 
