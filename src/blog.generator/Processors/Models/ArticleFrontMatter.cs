@@ -8,8 +8,8 @@ namespace Blog.Generator.Processors.Models
     {
         // Used to suppress nullable warnings
         public FrontMatterModel()
-            => (Title, Slug, Tags,                PostedDate,        Image, ImageCredit)
-            =  ("",    "",   new string[] { "" }, DateTime.MinValue, "",    "")
+            => (Title, Slug, Tags,                PostedDate,        Image, ImageCredit, ImageProvider)
+            =  ("",    "",   new string[] { "" }, DateTime.MinValue, "",    "",          "")
         ;
 
 
@@ -30,5 +30,8 @@ namespace Blog.Generator.Processors.Models
 
         [YamlMember(Alias = "image-credit")]
         public string ImageCredit { get; set; }
+
+        [YamlMember(Alias="image-provider")]
+        public string ImageProvider { get; set; }
     }
 }
