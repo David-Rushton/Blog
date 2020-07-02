@@ -35,6 +35,7 @@ namespace Blog.Generator.Contexts
         public string[] Tags { get; set; }
         public string Author => "David Rushton";
         public DateTime PostedDate { get; set; }
+        public Double AgeInDays => (DateTime.Now - PostedDate).TotalDays;
         public ImageProperties Image { get; set; }
         public MarkdownProperties Markdown { get; internal set; }
         public HtmlProperties Html { get; internal set; }

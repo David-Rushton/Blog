@@ -24,7 +24,7 @@ namespace Blog.Generator.Processors
             var htmlContent = context.Html.ContentTemplate
                 .Replace("$(article-content)",      Markdown.ToHtml(context.Markdown.Content, _markdownPipeline))
                 .Replace("$(article-author)",       context.Author)
-                .Replace("$(article-posted-date)",  context.PostedDate.ToString("yyyy-MM-dd"))
+                .Replace("$(article-posted-date)",  GetPostedDate(context))
                 .Replace("$(article-title)",        context.Title)
                 .Replace("$(article-slug)",         context.Slug)
                 .Replace("$(article-image)",        context.Image.Path)
@@ -38,5 +38,16 @@ namespace Blog.Generator.Processors
         public override string ToString()
             => "Markdown Processor"
         ;
+
+
+        private string GetPostedDate(MarkupContext context)
+        {
+            var postedDate = context.PostedDate.ToString("yyyy-MM-dd");
+
+            if(context.AgeInDays < 10)
+                postedDate += " <span class=\"badge badge-primary\">new</span>";
+
+            return postedDate;
+        }
     }
 }

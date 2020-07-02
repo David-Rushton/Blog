@@ -19,9 +19,11 @@ namespace Blog.Generator.Processors
                         a.Author,
                         a.PostedDate,
                         a.Slug,
+                        a.AgeInDays,
                         ImagePath = a.Image.Path,
                         HtmlUrl = a.Html.Url,
-                        Index = i.ToString()
+                        IndexStr = i.ToString(),
+                        IndexInt = i
                     })
                 .ToList()
             ;
@@ -37,12 +39,12 @@ namespace Blog.Generator.Processors
 
             foreach(var article in articles)
             {
-                Console.WriteLine($"\tInserting article preview #{article.Index}");
+                Console.WriteLine($"\tInserting article preview #{article.IndexStr}");
                 indexContent = indexContent
-                    .Replace($"$(article-title-{article.Index})", article.Title)
-                    .Replace($"$(article-slug-{article.Index})",  article.Slug)
-                    .Replace($"$(article-image-{article.Index})", article.ImagePath)
-                    .Replace($"$(article-path-{article.Index})",  article.HtmlUrl)
+                    .Replace($"$(article-title-{article.IndexStr})", GetTitle(article.IndexInt, article.Title, article.AgeInDays))
+                    .Replace($"$(article-slug-{article.IndexStr})",  article.Slug)
+                    .Replace($"$(article-image-{article.IndexStr})", article.ImagePath)
+                    .Replace($"$(article-path-{article.IndexStr})",  article.HtmlUrl)
                 ;
             }
 
@@ -53,5 +55,15 @@ namespace Blog.Generator.Processors
         public override string ToString()
             => "Index Page Processor"
         ;
+
+
+        private string GetTitle(int index, string title, double ageInDays)
+        {
+            // No need to tag the lead article as new
+            if(ageInDays < 10 && index > 0)
+                title += " <span class=\"badge badge-primary\">new</span>";
+
+            return title;
+        }
     }
 }
