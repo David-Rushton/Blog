@@ -15,12 +15,14 @@ namespace Blog.Generator
         /// <param name="templateRoot">Template blog site to copy</param>
         /// <param name="articlesSourceRoot">Location of markdown articles</param>
         /// <param name="articlesTargetRoot">Location to inject articles</param>
+        /// <param name="newBadgeCutoffInDays">The maximum age for articles to be badged as new</param>
         static async Task Main(
             string versionNumber,
             string blogRoot,
             string templateRoot,
             string articlesSourceRoot,
-            string articlesTargetRoot
+            string articlesTargetRoot,
+            int newBadgeCutoffInDays = 10
         )
         {
             try {
@@ -48,7 +50,7 @@ namespace Blog.Generator
 
             App Bootstrap()
             {
-                var config = new Config(versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot);
+                var config = new Config(versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot, newBadgeCutoffInDays);
                 var contextBuilder = new ContextBuilder(config);
 
                 var processorPipeline = new ProcessorPipelineBuilder(config)
