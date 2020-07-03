@@ -33,7 +33,8 @@ jobs:
           --blog-root src/blog `
           --template-root src/blog.template `
           --articles-source-root src/blog.articles `
-          --articles-target-root src/blog/blog.articles
+          --articles-target-root src/blog/blog.articles `
+          --new-badge-cutoff-in-days 10
         shell: "pwsh"
 
       - name: Build And Deploy

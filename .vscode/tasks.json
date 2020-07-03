@@ -18,7 +18,8 @@
                 "--blog-root", "${workspaceFolder}/src/blog",
                 "--template-root", "${workspaceFolder}/src/blog.template",
                 "--articles-source-root", "${workspaceFolder}/src/blog.articles",
-                "--articles-target-root", "${workspaceFolder}/src/blog/blog.articles"
+                "--articles-target-root", "${workspaceFolder}/src/blog/blog.articles",
+                "--new-badge-cutoff-in-days", "10"
             ],
             "promptOnClose": false,
             "group": {
