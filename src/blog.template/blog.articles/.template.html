@@ -73,7 +73,7 @@
     <!-- Main content -->
     <div class="container marketing">
         <hr>
-        <div class="text-muted"><strong class="text-primary">></strong> author <strong>$(article-author)</strong> | posted <strong>$(article-posted-date)</strong> | photo by <strong>$(article-image-credit)</strong> from <strong>$(article-image-provider)</strong></div>
+        <div class="text-muted"><strong class="text-primary">&gt</strong> author <strong>$(article-author)</strong> | posted <strong>$(article-posted-date)</strong> | photo by <strong>$(article-image-credit)</strong> from <strong>$(article-image-provider)</strong></div>
         <hr>
 
         $(article-content)
@@ -82,8 +82,8 @@
         <hr>
         <nav aria-label="Article navigation">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link $(disable-previous-article-navigation)" href="$(previous-article-path)">previous</a></li>
-                <li class="page-item"><a class="page-link $(disable-next-article-navigation)" href="$(next-article-path)">next</a></li>
+                <li class="page-item $(disable-previous-article-navigation)"><a class="page-link" href="$(previous-article-path)">previous</a></li>
+                <li class="page-item $(disable-next-article-navigation)"><a class="page-link" href="$(next-article-path)">next</a></li>
             </ul>
         </nav>
     </div>
