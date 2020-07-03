@@ -13,15 +13,15 @@ namespace Blog.Generator.Processors
             Console.WriteLine($"Building article navigations buttons");
 
             var articleMax = context.MarkupContexts.Count - 1;
-            for(var i = 0; i < articleMax; i++)
+            var markups = context.MarkupContexts.OrderBy(a => a.PostedDate).ToList();
+            for(var i = 0; i <= articleMax; i++)
             {
                 var previousDisabled = i == 0 ? "disabled" : "";
-                var previousPath = i == 0 ? "#" : context.MarkupContexts[i - 1].Html.Url;
+                var previousPath = i == 0 ? "#" : markups[i - 1].Html.Url;
                 var nextDisabled = i == articleMax ? "disabled" : "";
-                var nextPath = i == articleMax ? "#" : context.MarkupContexts[i + 1].Html.Url;
+                var nextPath = i == articleMax ? "#" : markups[i + 1].Html.Url;
 
-                // TODO: why are we sorting here?
-                context.MarkupContexts.OrderBy(a => a.PostedDate).ToList()[i].Html.Content = context.MarkupContexts[i].Html.Content
+                markups[i].Html.Content = markups[i].Html.Content
                     .Replace("$(disable-previous-article-navigation)", previousDisabled)
                     .Replace("$(previous-article-path)", previousPath)
                     .Replace("$(disable-next-article-navigation)", nextDisabled)
