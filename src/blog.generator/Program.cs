@@ -58,6 +58,7 @@ namespace Blog.Generator
                     .UseYamlProcessor()
                     .UseMarkdownProcessor()
                     .UseArticleNavigationProcessor()
+                    .UseArticleSearchProcessor()
                     .UseIndexPageProcessor()
                     .UseSitemapsProcessor()
                     .Build()
