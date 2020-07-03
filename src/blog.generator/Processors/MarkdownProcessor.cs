@@ -21,7 +21,7 @@ namespace Blog.Generator.Processors
         {
             Console.WriteLine($"Converting markdown to Html: {context.Markdown.Path}");
 
-            var htmlContent = context.Html.ContentTemplate
+            var htmlContent = context.Html.Content
                 .Replace("$(article-content)",          Markdown.ToHtml(context.Markdown.Content, _markdownPipeline))
                 .Replace("$(article-author)",           context.Author)
                 .Replace("$(article-posted-date)",      context.PostedDate.ToString("yyyy-MM-dd"))
@@ -32,7 +32,6 @@ namespace Blog.Generator.Processors
                 .Replace("$(article-image-provider)",   context.Image.Provider)
             ;
 
-            Console.WriteLine($"Saving content: {context.Html.Path}");
             context.Html.Content = htmlContent;
         }
 

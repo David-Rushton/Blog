@@ -24,7 +24,7 @@ namespace Blog.Generator
         public string TemplateRoot { get; internal set; }
         public string ArticlesSourceRoot { get; internal set; }
         public string ArticlesTargetRoot { get; internal set; }
-        int NewBadgeCutoffInDays { get; internal set; }
+        public int NewBadgeCutoffInDays { get; internal set; }
 
 
         public override string ToString()

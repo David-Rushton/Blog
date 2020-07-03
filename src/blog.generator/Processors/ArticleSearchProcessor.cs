@@ -8,10 +8,12 @@ namespace Blog.Generator.Processors
 {
     public class ArticleSearchProcessor : FinaliseProcessor
     {
+        const string _searchUrl = "/blog.articles/search.html";
+
+
         public override void Invoke(FinaliseContext context)
         {
-            var searchPagePath = context.ScaffoldContext.SiteRoot;
-            var searchContent = File.ReadAllText(searchPagePath);
+            var searchPage = context.HtmlContexts[_searchUrl];
         }
 
         public override string ToString()

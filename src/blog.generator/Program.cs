@@ -51,8 +51,7 @@ namespace Blog.Generator
             App Bootstrap()
             {
                 var config = new Config(versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot, newBadgeCutoffInDays);
-                var contextBuilder = new ContextBuilder(config);
-
+                var contextFactory = new ContextFactory(config);
                 var processorPipeline = new ProcessorPipelineBuilder(config)
                     .UseDropExistingSiteProcessor()
                     .UseCloneSiteFromTemplateProcessor()
@@ -66,7 +65,7 @@ namespace Blog.Generator
                     .Build()
                 ;
 
-                return new App(config, contextBuilder, processorPipeline);
+                return new App(config, contextFactory, processorPipeline);
             }
         }
     }

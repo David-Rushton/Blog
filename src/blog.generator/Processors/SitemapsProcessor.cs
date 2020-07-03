@@ -12,16 +12,18 @@ namespace Blog.Generator.Processors
     {
         public override void Invoke(FinaliseContext context)
         {
+            Console.WriteLine("Generating sitemaps page:");
             var sb = new StringBuilder();
 
             // Every .html page is added to the sitemaps file.
-            foreach(var html in context.Html)
+            foreach(var html in context.HtmlContexts.Values)
             {
                 if(html.Path.EndsWith(".template.html"))
                     continue;
 
                 var location = $"https://david-rushton.dev{html.Url}";
-                var lastModified = ExtractLastModified(html.Path);
+                var lastModified = ExtractLastModified(html.Content);
+                Console.WriteLine($"\tInserting entry: {html.Url}");
 
                 sb.AppendLine(GetPageEntry(location, lastModified));
             }
@@ -31,10 +33,10 @@ namespace Blog.Generator.Processors
             WriteSitemaps(context.ScaffoldContext.SiteRoot, sb.ToString());
 
 
-            string ExtractLastModified(string htmlPath)
+            string ExtractLastModified(string htmlContent)
             {
                 var htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(File.ReadAllText(htmlPath));
+                htmlDoc.LoadHtml(htmlContent);
 
                 return htmlDoc.DocumentNode
                     .SelectSingleNode("/html/head/meta[@name = \"date\"]")
@@ -47,8 +49,8 @@ namespace Blog.Generator.Processors
             {
                 var content = GetSitemapsTemplate(urls);
                 var sitemapsPath = Path.Join(path, "sitemaps.xml");
+
                 File.WriteAllText(sitemapsPath, content);
-                Console.WriteLine("Sitemaps.xml created");
             }
         }
 

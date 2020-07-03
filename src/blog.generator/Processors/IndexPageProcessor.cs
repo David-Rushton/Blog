@@ -11,6 +11,7 @@ namespace Blog.Generator.Processors
     {
         public override void Invoke(FinaliseContext context)
         {
+            var index = context.HtmlContexts["/index.html"];
             var articles = context.MarkupContexts
                 .OrderByDescending(a => a.PostedDate)
                 .Select((a, i) => new
@@ -22,49 +23,30 @@ namespace Blog.Generator.Processors
                         a.AgeInDays,
                         ImagePath = a.Image.Path,
                         HtmlUrl = a.Html.Url,
-                        IndexStr = i.ToString(),
-                        IndexInt = i
+                        Index = i.ToString()
                     })
                 .ToList()
             ;
-            var indexPath = Path.Join(context.ScaffoldContext.SiteRoot, "index.html");
-            var indexContent = File.ReadAllText(indexPath);
 
 
-            Console.WriteLine($"Generating index page: {indexPath}");
-            indexContent = indexContent
+            Console.WriteLine($"Generating index page: {index.Url}");
+            index.Content = index.Content
                 .Replace("$(last-updated)", DateTime.Now.ToString("yyyy-MM-dd"))
                 .Replace("$(version-number)", context.ScaffoldContext.VersionNumber)
             ;
 
             foreach(var article in articles)
             {
-                Console.WriteLine($"\tInserting article preview #{article.IndexStr}");
-                indexContent = indexContent
-                    .Replace($"$(article-title-{article.IndexStr})", GetTitle(article.IndexInt, article.Title, article.AgeInDays))
-                    .Replace($"$(article-slug-{article.IndexStr})",  article.Slug)
-                    .Replace($"$(article-image-{article.IndexStr})", article.ImagePath)
-                    .Replace($"$(article-path-{article.IndexStr})",  article.HtmlUrl)
+                Console.WriteLine($"\tInserting article preview #{article.Index}: {article.Title}");
+                index.Content = index.Content
+                    .Replace($"$(article-title-{article.Index})", article.Title)
+                    .Replace($"$(article-slug-{article.Index})",  article.Slug)
+                    .Replace($"$(article-image-{article.Index})", article.ImagePath)
+                    .Replace($"$(article-path-{article.Index})",  article.HtmlUrl)
                 ;
             }
-
-
-            File.WriteAllText(indexPath, indexContent);
         }
 
-        public override string ToString()
-            => "Index Page Processor"
-        ;
-
-
-        // TODO: Switch to NewBadgeProcessor.
-        private string GetTitle(int index, string title, double ageInDays)
-        {
-            // No need to tag the lead article as new
-            if(ageInDays < 10 && index > 0)
-                title += " <span class=\"badge badge-primary\">new</span>";
-
-            return title;
-        }
+        public override string ToString() => "Index Page Processor";
     }
 }
