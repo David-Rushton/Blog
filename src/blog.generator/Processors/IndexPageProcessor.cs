@@ -11,47 +11,43 @@ namespace Blog.Generator.Processors
     {
         public override void Invoke(FinaliseContext context)
         {
+            var index = context.HtmlContexts["/index.html"];
             var articles = context.MarkupContexts
                 .OrderByDescending(a => a.PostedDate)
+                .Take(5)
                 .Select((a, i) => new
                     {
                         a.Title,
                         a.Author,
                         a.PostedDate,
                         a.Slug,
-                        ImagePath = a.Image.Path,
+                        a.AgeInDays,
+                        ImagePath = a.Image.Url,
                         HtmlUrl = a.Html.Url,
                         Index = i.ToString()
                     })
                 .ToList()
             ;
-            var indexPath = Path.Join(context.ScaffoldContext.SiteRoot, "index.html");
-            var indexContent = File.ReadAllText(indexPath);
 
 
-            Console.WriteLine($"Generating index page: {indexPath}");
-            indexContent = indexContent
+            Console.WriteLine($"Generating index page: {index.Url}");
+            index.Content = index.Content
                 .Replace("$(last-updated)", DateTime.Now.ToString("yyyy-MM-dd"))
                 .Replace("$(version-number)", context.ScaffoldContext.VersionNumber)
             ;
 
             foreach(var article in articles)
             {
-                Console.WriteLine($"\tInserting article preview #{article.Index}");
-                indexContent = indexContent
-                    .Replace($"$(article-title-{article.Index})", article.Author)
+                Console.WriteLine($"\tInserting article preview #{article.Index}: {article.Title}");
+                index.Content = index.Content
+                    .Replace($"$(article-title-{article.Index})", article.Title)
                     .Replace($"$(article-slug-{article.Index})",  article.Slug)
                     .Replace($"$(article-image-{article.Index})", article.ImagePath)
                     .Replace($"$(article-path-{article.Index})",  article.HtmlUrl)
                 ;
             }
-
-
-            File.WriteAllText(indexPath, indexContent);
         }
 
-        public override string ToString()
-            => "Index Page Processor"
-        ;
+        public override string ToString() => "Index Page Processor";
     }
 }

@@ -3,6 +3,7 @@ using Blog.Generator.Processors.Abstractions;
 using Blog.Generator.Processors.Models;
 using System;
 using System.IO;
+using System.Linq;
 using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
@@ -12,6 +13,7 @@ namespace Blog.Generator.Processors
 {
     public class YamlProcessor : MarkupProcessor
     {
+        const string _tagGlyph = "🏷️";
         readonly IDeserializer _yamlPipeline;
 
 
@@ -28,10 +30,11 @@ namespace Blog.Generator.Processors
 
             context.Title = frontMatter.Title;
             context.Slug = frontMatter.Slug;
-            context.Tags = frontMatter.Tags;
+            context.Tags = frontMatter.Tags.Select(tag => $"{_tagGlyph}{tag}").ToArray();
             context.PostedDate = frontMatter.PostedDate;
             context.Image.Credit = frontMatter.ImageCredit;
-            context.Image.Path = frontMatter.Image;
+            context.Image.Provider = frontMatter.ImageProvider;
+            context.Image.Url = frontMatter.Image;
 
 
             FrontMatterModel GetArticleFrontMatter(string article)

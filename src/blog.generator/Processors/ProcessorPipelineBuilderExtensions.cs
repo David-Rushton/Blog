@@ -65,5 +65,19 @@ namespace Blog.Generator.Processors
             pipelineBuilder.RegisterPipelineProcessor(new IndexPageProcessor());
             return pipelineBuilder;
         }
+
+        public static ProcessorPipelineBuilder UseArticleNavigationProcessor(
+            this ProcessorPipelineBuilder pipelineBuilder
+        )
+        {
+            pipelineBuilder.RegisterPipelineProcessor(new ArticleNavigationProcessor());
+            return pipelineBuilder;
+        }
+
+        public static ProcessorPipelineBuilder UseArticleSearchProcessor(this ProcessorPipelineBuilder pipelineBuilder)
+        {
+            pipelineBuilder.RegisterPipelineProcessor(new ArticleSearchProcessor());
+            return pipelineBuilder;
+        }
     }
 }

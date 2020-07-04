@@ -1,22 +1,23 @@
 using System;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 
 namespace Blog.Generator.Contexts
 {
+    /// <summary>
+    /// Contains information required to convert raw markup articles in processed Html files
+    /// </summary>
     public class MarkupContext
     {
-        // Used to suppress nullable warnings
-        public MarkupContext()
-            : this("", "", "", "")
-        { }
-
-        public MarkupContext(string markdownPath, string markdownContent, string htmlUrl, string htmlContentTemplate)
+        public MarkupContext(ScaffoldContext scaffoldContext, string markdownPath, string markdownContent, string htmlUrl, string htmlContentTemplate)
         {
             Markdown = new MarkdownProperties();
             Html = new HtmlProperties();
             Image = new ImageProperties();
 
+            ScaffoldContext = scaffoldContext;
             Title = "";
             Slug = "";
             Tags = new string[] { "" };
@@ -26,19 +27,24 @@ namespace Blog.Generator.Contexts
             Markdown.Content = markdownContent;
             Html.Url = htmlUrl;
             Html.Path = Path.ChangeExtension(markdownPath, ".html");
-            Html.ContentTemplate = htmlContentTemplate;
+            Html.Content = htmlContentTemplate;
         }
 
 
+        public ScaffoldContext ScaffoldContext { get; internal set; }
         public string Title { get; set; }
         public string Slug { get; set; }
         public string[] Tags { get; set; }
         public string Author => "David Rushton";
         public DateTime PostedDate { get; set; }
+        public Double AgeInDays => (DateTime.Now - PostedDate).TotalDays;
         public ImageProperties Image { get; set; }
-        public MarkdownProperties Markdown { get; internal set; }
-        public HtmlProperties Html { get; internal set; }
+        public MarkdownProperties Markdown { get; set; }
+        public HtmlProperties Html { get; set; }
 
+
+        public string GetPostedDateAsString() => PostedDate.ToString("yyyy-MM-dd");
+        public string GetFlattenedTags() => String.Join(" ", Tags);
         public override string ToString()
             => String.Format
             (
@@ -48,7 +54,7 @@ namespace Blog.Generator.Contexts
                 String.Join(", ", Tags),
                 Author,
                 PostedDate.ToString("yyyy-MM-dd"),
-                Image.Path,
+                Image.Url,
                 Image.Credit
             )
         ;
@@ -65,21 +71,42 @@ namespace Blog.Generator.Contexts
 
         public class HtmlProperties
         {
-            public HtmlProperties() => (Url, Path, ContentTemplate) = ("", "", "");
+            private string _content = "";
+            private bool _locked = false;
+
+
+            public HtmlProperties() => (Url, Path, Content) = ("", "", "");
 
 
             public string Url { get; internal set; }
             public string Path { get; internal set; }
-            public string ContentTemplate { get; internal set; }
+            public bool IsDirty { get; internal set; }
+            public string Content
+            {
+                get => _content;
+                set
+                {
+                    if(_locked)
+                        throw new Exception($"This file has been locked: {Path}\n\tIt can only be updated via the finalise context");
+
+                    IsDirty = true;
+                    _content = value;
+                }
+            }
+
+
+            public async Task SaveContentAsync() => await File.WriteAllTextAsync(Path, _content, Encoding.UTF8);
+            public void LockContent() => _locked = true;
         }
 
         public class ImageProperties
         {
-            public ImageProperties() => (Credit, Path) = ("", "");
+            public ImageProperties() => (Credit, Provider, Url) = ("", "", "");
 
 
             public string Credit { get; set; }
-            public string Path { get; set; }
+            public string Provider { get; set; }
+            public string Url { get; set; }
         }
     }
 }

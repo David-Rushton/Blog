@@ -21,18 +21,19 @@ namespace Blog.Generator.Processors
         {
             Console.WriteLine($"Converting markdown to Html: {context.Markdown.Path}");
 
-            var htmlContent = context.Html.ContentTemplate
-                .Replace("$(article-content)",      Markdown.ToHtml(context.Markdown.Content, _markdownPipeline))
-                .Replace("$(article-author)",       context.Author)
-                .Replace("$(article-posted-date)",  context.PostedDate.ToString("yyyy-MM-dd"))
-                .Replace("$(article-title)",        context.Title)
-                .Replace("$(article-slug)",         context.Slug)
-                .Replace("$(article-image)",        context.Image.Path)
-                .Replace("$(article-image-credit)", context.Image.Credit)
+            var htmlContent = context.Html.Content
+                .Replace("$(article-content)",          Markdown.ToHtml(context.Markdown.Content, _markdownPipeline))
+                .Replace("$(article-author)",           context.Author)
+                .Replace("$(article-posted-date)",      context.GetPostedDateAsString())
+                .Replace("$(article-title)",            context.Title)
+                .Replace("$(article-slug)",             context.Slug)
+                .Replace("$(article-image)",            context.Image.Url)
+                .Replace("$(article-tags)",             context.GetFlattenedTags())
+                .Replace("$(article-image-credit)",     context.Image.Credit)
+                .Replace("$(article-image-provider)",   context.Image.Provider)
             ;
 
-            Console.WriteLine($"Saving content: {context.Html.Path}");
-            File.WriteAllText(context.Html.Path, htmlContent);
+            context.Html.Content = htmlContent;
         }
 
         public override string ToString()

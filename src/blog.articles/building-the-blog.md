@@ -4,7 +4,8 @@ slug: I like to define what I'm trying to achieve
 tags: [code, intro, jamstack, ci-cd, sdlc]
 date: 2020-06-10
 image: /blog.articles/media/chart-close-up-data-desk-590022.jpg
-image-credit: Photo by Lukas from Pexels
+image-credit: Lukas
+image-provider: Pexels
 ---
 
 I love a list.  The act of writing them helps me to clarify my thoughts.  Ticking off completed tasks provides a

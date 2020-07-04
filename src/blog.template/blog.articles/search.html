@@ -1,23 +1,24 @@
 <!doctype html>
 <html lang="en-gb">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="David Rushton">
-    <meta name="date" content="2020-06-18">
+    <meta name="date" content="$(last-updated)">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-          crossorigin="anonymous">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/default.min.css">
 
-    <title>david-rushton.dev</title>
+    <title>david-rushton.dev &#10; blog search</title>
 </head>
-<body class="bg-light" style="padding-top: 56px;">
+<body style="padding-top: 56px;">
 
+    <!-- Navigation bar -->
     <header>
         <div class="bg-dark collapse" id="navbarHeader">
             <div class="container">
@@ -54,12 +55,12 @@
                 </a>
 
                 <!-- Link to search page -->
-                <a href="/blog.articles/search.html" class="ml-auto nav-link">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <a href="/blog.articles/search.html" class="ml-auto nav-link disabled">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search disabled" fill="white" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
                         <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
                     </svg>
-                    <span class="text-white">Search</span>
+                    <span class="text-white disabled">Search</span>
                 </a>
 
                 <!-- Expand to view contract details -->
@@ -73,12 +74,46 @@
         </nav>
     </header>
 
-    <div class="container marketing" style="padding-top: 10px;">
-        <h1><code>404></code></h1>
-        <h2>Oh no...</h2>
-        <h4>It didn't work</h4>
+
+    <!-- Article title bar -->
+    <div class="jumbotron text-center" style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/blog.articles/media/black-binocular-on-round-device-63901.jpg'); background-size: cover;">
+        <div>
+            <h1 class="text-white">blog search</h1>
+        </div>
     </div>
 
+
+    <!-- Main content -->
+    <div class="container marketing">
+
+        <ul class="nav nav-tabs" id="search-tabs" role="tablist">
+            <!-- Search by post date -->
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="search-tabs-by-post-date" data-toggle="tab" href="#post-date" aria-selected="true">post date</a>
+            </li>
+
+            <!-- Search by tag -->
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="search-tabs-by-tag" data-toggle="tab" href="#tag" aria-selected="false">tag</a>
+            </li>
+        </ul>
+
+        <!-- Search tabs content -->
+        <div class="tab-content" id="search-tabs-content">
+            <div class="tab-pane fade show active" id="post-date" role="tabpanel" aria-labelledby="search-tabs-by-post-date">
+                <div>
+                    <br>
+                    $(search-by-post-date)
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tag" role="tabpanel" aria-labelledby="search-tabs-by-tag">
+                <div>
+                    <br>
+                    $(search-by-tag)
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -86,5 +121,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/powershell.min.js"></script>
-</body>
+    <script src="/logic/blog.common.js"></script>
+  </body>
 </html>
