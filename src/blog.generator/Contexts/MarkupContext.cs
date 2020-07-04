@@ -42,6 +42,8 @@ namespace Blog.Generator.Contexts
         public MarkdownProperties Markdown { get; set; }
         public HtmlProperties Html { get; set; }
 
+
+        public string ConvertPostedDateToString() => PostedDate.ToString("yyyy-MM-dd");
         public override string ToString()
             => String.Format
             (
@@ -51,7 +53,7 @@ namespace Blog.Generator.Contexts
                 String.Join(", ", Tags),
                 Author,
                 PostedDate.ToString("yyyy-MM-dd"),
-                Image.Path,
+                Image.Url,
                 Image.Credit
             )
         ;
@@ -98,12 +100,12 @@ namespace Blog.Generator.Contexts
 
         public class ImageProperties
         {
-            public ImageProperties() => (Credit, Provider, Path) = ("", "", "");
+            public ImageProperties() => (Credit, Provider, Url) = ("", "", "");
 
 
             public string Credit { get; set; }
             public string Provider { get; set; }
-            public string Path { get; set; }
+            public string Url { get; set; }
         }
     }
 }
