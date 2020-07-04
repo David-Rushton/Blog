@@ -42,8 +42,10 @@
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-dark bg-dark shadow-sm fixed-top">
+        <nav class="navbar navbar-dark bg-dark fixed-top">
             <div class="container d-flex justify-content-between">
+
+                <!-- Logo and link to home page -->
                 <a href="/index.html" class="navbar-brand d-flex align-items-center">
                     <svg class="bi bi-terminal mr-2" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M14 2H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
@@ -51,11 +53,23 @@
                     </svg>
                     <strong>david-rushton.dev</strong>
                 </a>
+
+                <!-- Link to search page -->
+                <a href="/blog.articles/search.html" class="ml-auto nav-link disabled">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search disabled" fill="white" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                    </svg>
+                    <span class="text-white disabled">Search</span>
+                </a>
+
+                <!-- Expand to view contract details -->
                 <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader"
                         aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation"
                         onclick="scrollToTop()">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
             </div>
         </nav>
     </header>
@@ -71,7 +85,6 @@
 
     <!-- Main content -->
     <div class="container marketing">
-
 
         <ul class="nav nav-tabs" id="search-tabs" role="tablist">
             <!-- Search by post date -->
@@ -89,11 +102,13 @@
         <div class="tab-content" id="search-tabs-content">
             <div class="tab-pane fade show active" id="post-date" role="tabpanel" aria-labelledby="search-tabs-by-post-date">
                 <div>
+                    <br>
                     $(search-by-post-date)
                 </div>
             </div>
             <div class="tab-pane fade" id="tag" role="tabpanel" aria-labelledby="search-tabs-by-tag">
                 <div>
+                    <br>
                     $(search-by-tag)
                 </div>
             </div>
