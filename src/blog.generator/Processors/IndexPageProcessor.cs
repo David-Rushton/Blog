@@ -21,7 +21,7 @@ namespace Blog.Generator.Processors
                         a.PostedDate,
                         a.Slug,
                         a.AgeInDays,
-                        ImagePath = a.Image.Path,
+                        ImagePath = a.Image.Url,
                         HtmlUrl = a.Html.Url,
                         Index = i.ToString()
                     })

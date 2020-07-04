@@ -32,7 +32,7 @@ namespace Blog.Generator.Processors
             context.PostedDate = frontMatter.PostedDate;
             context.Image.Credit = frontMatter.ImageCredit;
             context.Image.Provider = frontMatter.ImageProvider;
-            context.Image.Path = frontMatter.Image;
+            context.Image.Url = frontMatter.Image;
 
 
             FrontMatterModel GetArticleFrontMatter(string article)
