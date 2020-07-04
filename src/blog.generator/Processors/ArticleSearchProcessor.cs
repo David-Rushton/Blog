@@ -148,7 +148,7 @@ namespace Blog.Generator.Processors
                         <div class=""row no-gutters"">
                             <div class=""col-md-4"">
                                 <a href=""$(article-url)"">
-                                    <img src=""$(article-image)"" class=""card-img"" style=""height: 100%; "" alt=""photo by $(article-image-credit) from $(article-image-provider)"">
+                                    <img src=""$(article-image)"" loading=""lazy"" class=""card-img"" style=""height: 100%; "" alt=""photo by $(article-image-credit) from $(article-image-provider)"">
                                 </a>
                             </div>
                             <div class=""col-md-8"">
