@@ -1,7 +1,8 @@
 using Blog.Generator.Contexts;
 using Blog.Generator.Processors.Abstractions;
 using System;
-using System.IO;
+using System.Text;
+using System.Linq;
 
 
 namespace Blog.Generator.Processors
@@ -13,14 +14,30 @@ namespace Blog.Generator.Processors
 
         public override void Invoke(FinaliseContext context)
         {
+            Console.WriteLine("Generating article search page:");
             var searchPage = context.HtmlContexts[_searchUrl];
+            var searchByDate = context.MarkupContexts.OrderByDescending(c => c.PostedDate);
+            var sb = new StringBuilder();
+
+            foreach(var article in searchByDate)
+            {
+                Console.WriteLine($"\tInserted search by date entry: {article.Title}");
+                sb.Append(GetSearchCard(
+                    article.Image.Url,
+                    article.Image.Credit,
+                    article.Image.Provider,
+                    article.Title,
+                    article.Slug,
+                    article.ConvertPostedDateToString()
+                ));
+            }
+
+            searchPage.Content = searchPage.Content.Replace("$(search-by-post-date)", sb.ToString());
         }
 
         public override string ToString()
             => "Article Search Processor"
         ;
-
-
 
 
         private string GetSearchCard(
