@@ -14,6 +14,7 @@ namespace Blog.Generator.Processors
             var index = context.HtmlContexts["/index.html"];
             var articles = context.MarkupContexts
                 .OrderByDescending(a => a.PostedDate)
+                .Take(5)
                 .Select((a, i) => new
                     {
                         a.Title,
