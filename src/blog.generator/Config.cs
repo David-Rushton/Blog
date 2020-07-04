@@ -30,13 +30,13 @@ namespace Blog.Generator
         public override string ToString()
             => String.Format
             (
-                "Config:\n\tVersion Number: {0}\n\tBlog Root: {1}\n\tTemplate Root: {2}\n\tArticles Source Root: {3}\n\tArticles Target Root: {4}\n\tNew Badge Cutoff In Days{5}",
+                "Config:\n\tVersion Number: {0}\n\tBlog Root: {1}\n\tTemplate Root: {2}\n\tArticles Source Root: {3}\n\tArticles Target Root: {4}\n\tNew Badge Cutoff In Days: {5}",
                 VersionNumber,
                 BlogRoot,
                 TemplateRoot,
                 ArticlesSourceRoot,
                 ArticlesTargetRoot,
-                NewBadgeCutoffInDays
+                NewBadgeCutoffInDays.ToString("#,0")
             )
         ;
     }
