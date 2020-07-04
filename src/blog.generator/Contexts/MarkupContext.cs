@@ -43,7 +43,8 @@ namespace Blog.Generator.Contexts
         public HtmlProperties Html { get; set; }
 
 
-        public string ConvertPostedDateToString() => PostedDate.ToString("yyyy-MM-dd");
+        public string GetPostedDateAsString() => PostedDate.ToString("yyyy-MM-dd");
+        public string GetFlattenedTags() => String.Join(" ", Tags);
         public override string ToString()
             => String.Format
             (
