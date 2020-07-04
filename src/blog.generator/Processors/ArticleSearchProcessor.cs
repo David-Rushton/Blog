@@ -53,7 +53,7 @@ namespace Blog.Generator.Processors
             // of cards linking to the various articles with that tag.  Each article can appear in multiple sections.
             foreach(var tag in searchByTag)
             {
-                Console.WriteLine($"\tInserting search by tag: {tag.Tag}:");
+                Console.WriteLine($"\tInserting search entry for tag: {tag.Tag}");
 
                 searchTable.Append(GetSearchTableRow(tag.TagId, tag.Tag, tag.ArticlesCount));
 
@@ -87,7 +87,7 @@ namespace Blog.Generator.Processors
 
             foreach(var article in searchByDate)
             {
-                Console.WriteLine($"\tInserted search by date entry: {article.Title}");
+                Console.WriteLine($"\tInserting search entry for: {article.Title}");
                 currentPeriod = article.PostedDate.ToString("MMMM yyyy");
 
                 if(currentPeriod != lastPeriod)
