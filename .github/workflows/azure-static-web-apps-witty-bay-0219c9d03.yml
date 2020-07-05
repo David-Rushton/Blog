@@ -26,7 +26,7 @@ jobs:
           dotnet-version: '3.1.x'
 
       - name: Generate Release notes
-        run: scripts/Get-ReleaseNotes.ps1
+        run: scripts/Get-ReleaseNotes.ps1 -Verbose
         shell: "pwsh"
 
       - name: Generate Site
