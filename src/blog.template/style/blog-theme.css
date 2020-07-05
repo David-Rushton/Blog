@@ -1,15 +1,19 @@
-@import url(https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css);
+@import url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@4/distr/fira_code.css');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
+
+body {
+  font-family: 'Baloo 2', cursive;
+  font-size: 110%;
+}
 
 
-/* Adds Fira Code to our site */
+/* Enables Fira Code for code examples */
 code {
-  font-family: 'Fira Code',
-  monospace;
+  font-family: 'Fira Code', monospace;
 }
 
 @supports (font-variation-settings: normal) {
   code {
-    font-family: 'Fira Code VF',
-    monospace;
+    font-family: 'Fira Code VF', monospace;
   }
 }
