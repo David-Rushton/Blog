@@ -38,7 +38,7 @@ jobs:
           --template-root src/blog.template `
           --articles-source-root src/blog.articles `
           --articles-target-root src/blog/blog.articles `
-          --release-notes-path release-notes.md `
+          --release-notes-path ./release-notes.md `
           --new-badge-cutoff-in-days 10
         shell: "pwsh"
 
