@@ -45,6 +45,7 @@ $mdLog = "# Release Notes`n"
 $keys = $versionLog.Keys | Sort-Object -Descending
 foreach($key in $keys) {
 
+    Write-Verbose "Building release notes for $key"
     if($versionLog[$key].Count -gt 0) {
 
         $mdLog += "`n## $key`n`n"
@@ -62,4 +63,5 @@ $outArgs = @{
     FilePath = Join-Path -Path $PSScriptRoot -ChildPath '..' 'release-notes.md'
     Encoding = 'utf8'
 }
+Write-Verbose "Saving release notes to file: $($outArgs.FilePath)"
 $mdLog | Out-File @outArgs

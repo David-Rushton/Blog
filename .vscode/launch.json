@@ -11,7 +11,7 @@
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/src/blog.generator/bin/Debug/netcoreapp3.1/blog.generator.dll",
             "args": [
-                "--version-number", "0.0.0-dev:abcdefg",
+                "--version-number", "0.0.local-dev abcdefg",
                 "--blog-root", "${workspaceFolder}/src/blog",
                 "--template-root", "${workspaceFolder}/src/blog.template",
                 "--articles-source-root", "${workspaceFolder}/src/blog.articles",

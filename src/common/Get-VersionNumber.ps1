@@ -35,5 +35,5 @@ if($IncludeSha) {
     $versionNumber = "$versionNumber $shortSha"
 }
 
-
+Write-Verbose "Returning version number: $versionNumber"
 return $versionNumber
