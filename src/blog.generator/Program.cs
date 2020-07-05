@@ -15,6 +15,7 @@ namespace Blog.Generator
         /// <param name="templateRoot">Template blog site to copy</param>
         /// <param name="articlesSourceRoot">Location of markdown articles</param>
         /// <param name="articlesTargetRoot">Location to inject articles</param>
+        /// <param name="releaseNotesPath">Path to the release notes file</param>
         /// <param name="newBadgeCutoffInDays">The maximum age for articles to be badged as new</param>
         static async Task Main(
             string versionNumber,
@@ -22,6 +23,7 @@ namespace Blog.Generator
             string templateRoot,
             string articlesSourceRoot,
             string articlesTargetRoot,
+            string releaseNotesPath,
             int newBadgeCutoffInDays = 10
         )
         {
@@ -38,19 +40,26 @@ namespace Blog.Generator
 
             void ValidateInputArgs()
             {
-                if (String.IsNullOrEmpty(versionNumber))
+                if(String.IsNullOrEmpty(versionNumber))
                     throw new Exception("--version-number is a required arg");
 
-                if ( ! Directory.Exists(templateRoot) )
+                if( ! Directory.Exists(templateRoot) )
                     throw new Exception($"Invalid path to site template: {templateRoot}");
 
-                if (! Directory.Exists(articlesSourceRoot) )
+                if(! Directory.Exists(articlesSourceRoot) )
                     throw new Exception($"Invalid path to articles: {articlesSourceRoot}");
+
+                if( ! File.Exists(releaseNotesPath) ) {
+                    throw new Exception($"Invalid path to release notes: {releaseNotesPath}");
+                }
             }
 
             App Bootstrap()
             {
-                var config = new Config(versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot, newBadgeCutoffInDays);
+                var config = new Config(
+                    versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot,
+                    releaseNotesPath, newBadgeCutoffInDays
+                );
                 var contextFactory = new ContextFactory(config);
                 var processorPipeline = new ProcessorPipelineBuilder(config)
                     .UseDropExistingSiteProcessor()

@@ -19,6 +19,7 @@
                 "--template-root", "${workspaceFolder}/src/blog.template",
                 "--articles-source-root", "${workspaceFolder}/src/blog.articles",
                 "--articles-target-root", "${workspaceFolder}/src/blog/blog.articles",
+                "--release-notes-path", "${workspaceFolder}/release-notes.md",
                 "--new-badge-cutoff-in-days", "10"
             ],
             "promptOnClose": false,
