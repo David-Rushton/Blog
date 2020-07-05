@@ -41,7 +41,7 @@ foreach($line in $rawLog) {
 
 
 # The dictionary is converted into a markdown document
-$mdLog = "# Change Log`n"
+$mdLog = "# Release Notes`n"
 $keys = $versionLog.Keys | Sort-Object -Descending
 foreach($key in $keys) {
 
