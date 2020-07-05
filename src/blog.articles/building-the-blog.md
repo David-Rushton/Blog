@@ -1,7 +1,7 @@
 ---
 title: Building the Blog
 slug: I like to define what I'm trying to achieve
-tags: [code, intro, jamstack, ci-cd, sdlc]
+tags: [code, intro, jam-stack, ci-cd, sdlc]
 date: 2020-06-10
 image: /blog.articles/media/chart-close-up-data-desk-590022.jpg
 image-credit: Lukas
