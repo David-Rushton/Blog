@@ -2,6 +2,10 @@
 src/blog/
 
 
+# release-notes is auto generated, from Git log, on each build
+release-notes.md
+
+
 # .net core build items
 bin/
 obj/
