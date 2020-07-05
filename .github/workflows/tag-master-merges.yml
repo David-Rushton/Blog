@@ -26,5 +26,6 @@ jobs:
       with:
         tag_name: ${{ env.version_number }}
         release_name: "Release ${{ env.version_number }}"
+        body_path: release-notes.md
         prerelease: true
         commitish: ${{ github.sha }}

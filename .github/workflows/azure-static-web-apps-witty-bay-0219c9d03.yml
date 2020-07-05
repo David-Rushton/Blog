@@ -25,6 +25,10 @@ jobs:
         with:
           dotnet-version: '3.1.x'
 
+      - name: Generate Release notes
+        run: scripts/Get-ReleaseNotes.ps1
+        shell: "pwsh"
+
       - name: Generate Site
         run: |
           dotnet run --project src/blog.generator/blog.generator.csproj `
@@ -34,6 +38,7 @@ jobs:
           --template-root src/blog.template `
           --articles-source-root src/blog.articles `
           --articles-target-root src/blog/blog.articles `
+          --release-notes-path release-notes.md `
           --new-badge-cutoff-in-days 10
         shell: "pwsh"
 
