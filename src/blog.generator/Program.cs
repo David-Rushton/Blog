@@ -71,6 +71,7 @@ namespace Blog.Generator
                     .UseArticleSearchProcessor()
                     .UseIndexPageProcessor()
                     .UseSitemapsProcessor()
+                    .UseReleaseNotesProcessor()
                     .Build()
                 ;
 

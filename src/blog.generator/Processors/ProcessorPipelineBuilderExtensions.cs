@@ -79,5 +79,16 @@ namespace Blog.Generator.Processors
             pipelineBuilder.RegisterPipelineProcessor(new ArticleSearchProcessor());
             return pipelineBuilder;
         }
+
+        public static ProcessorPipelineBuilder UseReleaseNotesProcessor(this ProcessorPipelineBuilder pipelineBuilder)
+        {
+            var markdownPipeline = new MarkdownPipelineBuilder()
+                .UseAdvancedExtensions()
+                .Build()
+            ;
+
+            pipelineBuilder.RegisterPipelineProcessor(new ReleaseNotesProcessor(markdownPipeline));
+            return pipelineBuilder;
+        }
     }
 }
