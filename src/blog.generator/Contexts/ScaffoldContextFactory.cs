@@ -15,6 +15,7 @@ namespace Blog.Generator.Contexts
                 ArticlesSourceRoot = config.ArticlesSourceRoot,
                 ArticlesTargetRoot = config.ArticlesTargetRoot,
                 VersionNumber = config.VersionNumber,
+                ReleaseNotesPath = config.ReleaseNotesPath,
                 NewBadgeCutoffInDays = config.NewBadgeCutoffInDays
             }
         ;

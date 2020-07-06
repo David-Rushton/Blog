@@ -10,7 +10,7 @@ namespace Blog.Generator.Contexts
     {
         // Used to suppress nullable warnings
         public ScaffoldContext()
-            : this("", "", "", "", "", 0)
+            : this("", "", "", "", "", "", 0)
         { }
 
         public ScaffoldContext(
@@ -19,10 +19,11 @@ namespace Blog.Generator.Contexts
             string articlesSourceRoot,
             string articlesTargetRoot,
             string versionNumber,
+            string releaseNotesPath,
             int newBadgeCutoffInDays
         )
-            => (SiteRoot, TemplateSiteRoot, ArticlesSourceRoot, ArticlesTargetRoot, VersionNumber, NewBadgeCutoffInDays)
-            =  (siteRoot, templateSiteRoot, articlesSourceRoot, articlesTargetRoot, versionNumber, newBadgeCutoffInDays)
+            => (SiteRoot, TemplateSiteRoot, ArticlesSourceRoot, ArticlesTargetRoot, VersionNumber, ReleaseNotesPath, NewBadgeCutoffInDays)
+            =  (siteRoot, templateSiteRoot, articlesSourceRoot, articlesTargetRoot, versionNumber, releaseNotesPath, newBadgeCutoffInDays)
         ;
 
 
@@ -31,6 +32,7 @@ namespace Blog.Generator.Contexts
         public string ArticlesSourceRoot { get; internal set; }
         public string ArticlesTargetRoot { get; internal set; }
         public string VersionNumber { get; internal set; }
+        public string ReleaseNotesPath  { get; internal set; }
         public int NewBadgeCutoffInDays { get; internal set; }
 
 

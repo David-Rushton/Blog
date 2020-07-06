@@ -1,3 +1,13 @@
+<#
+    .SYNOPSIS
+    Returns the current version number
+
+    .DESCRIPTION
+    The version number is built from version.xml + the current Github build number and short SHA
+
+    .PARAMETER IncludeSha
+    Includes the current SHA in the returned version number
+#>
 [CmdletBinding()]
 param(
     [switch]$IncludeSha
@@ -25,5 +35,5 @@ if($IncludeSha) {
     $versionNumber = "$versionNumber $shortSha"
 }
 
-
+Write-Verbose "Returning version number: $versionNumber"
 return $versionNumber
