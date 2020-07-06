@@ -54,6 +54,12 @@ namespace Blog.Generator.Processors
             return pipelineBuilder;
         }
 
+        public static ProcessorPipelineBuilder UseBlockQuoteFormatProcessor(this ProcessorPipelineBuilder pipelineBuilder)
+        {
+            pipelineBuilder.RegisterPipelineProcessor(new BlockquoteFormatProcessor());
+            return pipelineBuilder;
+        }
+
         public static ProcessorPipelineBuilder UseSitemapsProcessor(this ProcessorPipelineBuilder pipelineBuilder)
         {
             pipelineBuilder.RegisterPipelineProcessor(new SitemapsProcessor());

@@ -67,6 +67,7 @@ namespace Blog.Generator
                     .UseInjectMarkdownArticlesProcessor()
                     .UseYamlProcessor()
                     .UseMarkdownProcessor()
+                    .UseBlockQuoteFormatProcessor()
                     .UseArticleNavigationProcessor()
                     .UseArticleSearchProcessor()
                     .UseIndexPageProcessor()
