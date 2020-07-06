@@ -11,6 +11,8 @@ param(
 
 
 Set-StrictMode -Version 'Latest'
+$ErrorActionPreference = 'Stop'
+$ErrorView = 'NormalView'
 
 
 # We are only interested in key messages
