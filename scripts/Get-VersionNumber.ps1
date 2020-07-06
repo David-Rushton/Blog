@@ -15,7 +15,7 @@ param(
 
 Set-StrictMode -Version 'Latest'
 
-$versionPath = Join-Path -Path $PSScriptRoot -ChildPath 'version.xml'
+$versionPath = Join-Path -Path $PSScriptRoot -ChildPath '..' 'src' 'common' 'version.xml'
 $versionXml = Select-Xml -Path $versionPath -XPath '/version'
 
 

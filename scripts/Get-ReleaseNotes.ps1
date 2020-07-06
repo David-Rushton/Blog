@@ -24,7 +24,8 @@ $rawLog = (git log --pretty=format:"%D%+s%n" | Select-String -Pattern $keyLogEnt
 
 # The log is read into a dictionary, using the the version number as a key
 # This allows us to process and sort the content later
-$currentVersion = 'vNext'
+$currentVersionPath = Join-Path -Path $PSScriptRoot -ChildPath 'Get-VersionNumber.ps1'
+$currentVersion = & $currentVersionPath
 $versionLog = @{}
 $versionLog[$currentVersion] = @()
 
