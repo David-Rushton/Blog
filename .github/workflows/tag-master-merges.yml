@@ -15,7 +15,7 @@ jobs:
     - name: Get Version Number
       id: ver
       run: |
-        $version = src/common/Get-VersionNumber.ps1
+        $version = scripts/Get-VersionNumber.ps1
         echo "::set-env name=version_number::$version"
       shell: pwsh
 
