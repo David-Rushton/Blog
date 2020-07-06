@@ -20,8 +20,7 @@ $keyLogEntryPattern = '(^tag:\sv\d\.\d\.\d+$|^Feature:|^Fix:\s|^Docs:\s|^Interna
 
 # Extract raw data from Git log
 $rawLog = (git log --pretty=format:"%D%+s%n" | Select-String -Pattern $keyLogEntryPattern)
-Write-Verbose "Git log:`n$( git log --pretty=format:"%D%+s%n" )"
-& git log --pretty=format:"%D%+s%n"
+& git log
 
 
 # The log is read into a dictionary, using the the version number as a key
