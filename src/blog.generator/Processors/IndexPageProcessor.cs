@@ -21,6 +21,7 @@ namespace Blog.Generator.Processors
                         a.Author,
                         a.PostedDate,
                         a.Slug,
+                        Tags = a.GetFlattenedTags(),
                         a.AgeInDays,
                         ImagePath = a.Image.Url,
                         HtmlUrl = a.Html.Url,
@@ -42,6 +43,7 @@ namespace Blog.Generator.Processors
                 index.Content = index.Content
                     .Replace($"$(article-title-{article.Index})", article.Title)
                     .Replace($"$(article-slug-{article.Index})",  article.Slug)
+                    .Replace($"$(article-tags-{article.Index})",  article.Tags)
                     .Replace($"$(article-image-{article.Index})", article.ImagePath)
                     .Replace($"$(article-path-{article.Index})",  article.HtmlUrl)
                 ;
