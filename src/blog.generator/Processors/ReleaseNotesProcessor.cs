@@ -24,8 +24,9 @@ namespace Blog.Generator.Processors
             var htmlReleaseNotes = Markdown.ToHtml(mdReleaseNotes, _pipeline);
 
             releaseNotesPage.Content = releaseNotesPage.Content
-                .Replace("$(last-updated)", DateTime.Now.ToString("yyy-MM-dd"))
-                .Replace("$(release-notes)", htmlReleaseNotes)
+                .Replace("$(version-number)",   context.ScaffoldContext.VersionNumber)
+                .Replace("$(last-updated)",     DateTime.Now.ToString("yyy-MM-dd"))
+                .Replace("$(release-notes)",    htmlReleaseNotes)
             ;
         }
 
