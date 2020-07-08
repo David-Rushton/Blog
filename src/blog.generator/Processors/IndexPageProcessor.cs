@@ -21,7 +21,8 @@ namespace Blog.Generator.Processors
                         a.Author,
                         a.PostedDate,
                         a.Slug,
-                        a.AgeInDays,
+                        Tags = a.GetFlattenedTags(),
+                        IsNew = a.AgeInDays <= context.ScaffoldContext.NewBadgeCutoffInDays,
                         ImagePath = a.Image.Url,
                         HtmlUrl = a.Html.Url,
                         Index = i.ToString()
@@ -42,12 +43,17 @@ namespace Blog.Generator.Processors
                 index.Content = index.Content
                     .Replace($"$(article-title-{article.Index})", article.Title)
                     .Replace($"$(article-slug-{article.Index})",  article.Slug)
+                    .Replace($"$(article-tags-{article.Index})",  article.Tags)
                     .Replace($"$(article-image-{article.Index})", article.ImagePath)
                     .Replace($"$(article-path-{article.Index})",  article.HtmlUrl)
+                    .Replace($"$(article-badge-{article.Index})", GetBadge(article.IsNew))
                 ;
             }
         }
 
         public override string ToString() => "Index Page Processor";
+
+
+        private string GetBadge(bool isNew) => isNew ? "<span style=\" font-weight: normal; \" class=\"badge badge-warning\">new</span>" : "";
     }
 }
