@@ -1,3 +1,7 @@
+# Contains our Cosmos API keys
+.vscode/settings.json
+
+
 # Blog is the build artifact
 src/blog/
 
