@@ -16,6 +16,7 @@ namespace Blog.Generator
         /// <param name="articlesSourceRoot">Location of markdown articles</param>
         /// <param name="articlesTargetRoot">Location to inject articles</param>
         /// <param name="releaseNotesPath">Path to the release notes file</param>
+        /// <param name="connectionString">Connection string for cosmos db</param>
         /// <param name="newBadgeCutoffInDays">The maximum age for articles to be badged as new</param>
         static async Task Main(
             string versionNumber,
@@ -24,10 +25,12 @@ namespace Blog.Generator
             string articlesSourceRoot,
             string articlesTargetRoot,
             string releaseNotesPath,
+            string connectionString,
             int newBadgeCutoffInDays = 10
         )
         {
             try {
+                Console.WriteLine($"----------> {connectionString} <--------------------");
                 ValidateInputArgs();
                 await Bootstrap().InvokeAsync();
             }
