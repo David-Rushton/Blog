@@ -30,7 +30,6 @@ namespace Blog.Generator
         )
         {
             try {
-                Console.WriteLine($"----------> {connectionString} <--------------------");
                 ValidateInputArgs();
                 await Bootstrap().InvokeAsync();
             }
@@ -45,6 +44,9 @@ namespace Blog.Generator
             {
                 if(String.IsNullOrEmpty(versionNumber))
                     throw new Exception("--version-number is a required arg");
+
+                if(String.IsNullOrEmpty(connectionString))
+                    throw new Exception("--connection-string is a required arg");
 
                 if( ! Directory.Exists(templateRoot) )
                     throw new Exception($"Invalid path to site template: {templateRoot}");
@@ -61,7 +63,7 @@ namespace Blog.Generator
             {
                 var config = new Config(
                     versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot,
-                    releaseNotesPath, newBadgeCutoffInDays
+                    releaseNotesPath, connectionString, newBadgeCutoffInDays
                 );
                 var contextFactory = new ContextFactory(config);
                 var processorPipeline = new ProcessorPipelineBuilder(config)
