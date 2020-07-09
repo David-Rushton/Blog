@@ -21,7 +21,7 @@ namespace Blog.Generator.Processors
                         a.Author,
                         a.PostedDate,
                         a.Slug,
-                        Tags = a.GetFlattenedTags(),
+                        Tags = a.GetDelimitedTags(),
                         IsNew = a.AgeInDays <= context.ScaffoldContext.NewBadgeCutoffInDays,
                         ImagePath = a.Image.Url,
                         HtmlUrl = a.Html.Url,
@@ -45,7 +45,7 @@ namespace Blog.Generator.Processors
                     .Replace($"$(article-slug-{article.Index})",  article.Slug)
                     .Replace($"$(article-tags-{article.Index})",  article.Tags)
                     .Replace($"$(article-image-{article.Index})", article.ImagePath)
-                    .Replace($"$(article-path-{article.Index})",  article.HtmlUrl)
+                    .Replace($"$(article-path-{article.Index})",  article.HtmlUrl.RelativeUrl)
                     .Replace($"$(article-badge-{article.Index})", GetBadge(article.IsNew))
                 ;
             }
