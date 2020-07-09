@@ -51,3 +51,17 @@ I'm building a blog.  Here are my goals:
 ## Profit!
 
 - [x] Great domain name, that is useful for career building
+
+
+---
+
+## Thanks
+
+- [SVGPro](https://www.svgrepo.com/)
+- [Simple Icons](https://simpleicons.org/)
+- [Sheild.IO](https://shield.io)
+- CloudFlaire
+- Bootstrap
+- Azure
+- Highlight.js
+- Goolge Fonts
