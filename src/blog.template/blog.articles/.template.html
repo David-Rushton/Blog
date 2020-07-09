@@ -13,9 +13,10 @@
     <link rel="manifest" href="../site.webmanifest">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style/blog-theme.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+
 
     <title>david-rushton.dev &#10; $(article-title)</title>
 </head>
@@ -93,14 +94,51 @@
         <hr>
 
         $(article-content)
-
         <hr>
+
+        <!-- Navigation -->
         <nav aria-label="Article navigation">
             <ul class="pagination">
                 <li class="page-item $(disable-previous-article-navigation)"><a class="page-link" href="$(previous-article-path)">previous</a></li>
                 <li class="page-item $(disable-next-article-navigation)"><a class="page-link" href="$(next-article-path)">next</a></li>
             </ul>
         </nav>
+        <hr>
+
+        <!-- Up votes, or not  -->
+        <div>
+            <h4>over to you</h4>
+            <div class="share-container">
+                <span class="share-label">vote</span>
+                <a class="share-link" href="#" onclick="upVoteArticle('$(article-title)'); return false;">👍</a>
+                <span class="share-up-votes">1</span>
+            </div>
+            <div class="share-container">
+                <span class="share-label">share</span>
+                <a class="share-link" href="https://www.linkedin.com/sharing/share-offsite/?url=$(article-id)">
+                    <img class="share-img" height="32" width="32" alt="LinkedIn" src="/blog.articles/media/linkedin.svg" />
+                </a>
+                <a class="share-link" href="https://news.ycombinator.com/submitlink?u=$(article-id)&t=$(article-title-encoded)">
+                    <img class="share-img" height="32" width="32" alt="Hacker News" src="/blog.articles/media/hacker.news.png" />
+                </a>
+                <a class="share-link" href="https://twitter.com/intent/tweet?url=$(article-id)&text=$(article-slug-encoded)&via=DavidRushton55&hashtags=$(article-tags-encoded)">
+                    <img class="share-img" height="32" width="32" alt="Twitter" src="/blog.articles/media/twitter.svg" />
+                </a>
+                <a class="share-link" href="https://reddit.com/submit?url=$(article-id)&title=$(article-title-encoded)">
+                    <img class="share-img" height="32" width="32" alt="Reddit" src="/blog.articles/media/reddit.svg" />
+                </a>
+                <a class="share-link" href="https://api.whatsapp.com/send?phone&text=$(article-title-encoded)%20$(article-id)">
+                    <img class="share-img" height="32" width="32" alt="WhatsApp" src="/blog.articles/media/whatsapp.svg" />
+                </a>
+                <a class="share-link" href="mailto:?subject=$(article-title)&body=$(article-id)">
+                    <img class="share-img" height="32" width="32" alt="Email" src="/blog.articles/media/email.svg" />
+                </a>
+                <a class="share-link" href="javascript:window.print()">
+                    <img class="share-img" height="32" width="32" alt="Print" src="/blog.articles/media/printer.svg" />
+                </a>
+            </div>
+        </div>
+        <hr>
     </div>
 
 

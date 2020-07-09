@@ -4,6 +4,7 @@
 body {
   font-family: 'Baloo 2', cursive;
   font-size: 110%;
+  line-height: 110%;
 }
 
 
@@ -16,4 +17,37 @@ code {
   code {
     font-family: 'Fira Code VF', monospace;
   }
+}
+
+
+/* Styling the share buttons */
+.share-container {
+  line-height: 150%;
+  min-height: 50px;
+}
+
+.share-label {
+  display: inline-block;
+  min-width: 50px;
+}
+
+.share-link {
+  text-decoration: none;
+}
+
+.share-link .share-img {
+  padding: 5px;
+  transition: all .2s ease-in-out;
+}
+
+.share-up-votes {
+  font-weight: bold;
+}
+
+.share-link:hover {
+  font-size: 150%;
+}
+
+.share-img:hover {
+  transform: scale(1.5);
 }
