@@ -8,7 +8,7 @@
       "methods": [
         "get"
       ],
-      "route": "message"
+      "route": "upvotes/{id:int}"
     },
     {
       "type": "http",
