@@ -41,7 +41,7 @@ jobs:
           --articles-source-root src/blog.articles `
           --articles-target-root src/blog/blog.articles `
           --release-notes-path ./release-notes.md `
-          --connection-string ${{ secrets.DB_RO_CONNECTION_STRING }} `
+          --connection-string '${{ secrets.DB_RO_CONNECTION_STRING }}' `
           --new-badge-cutoff-in-days 10
         shell: "pwsh"
 
