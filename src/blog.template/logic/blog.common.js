@@ -27,3 +27,9 @@ function scrollToTop() {
 
     smoothScroll();
 }
+
+
+// up vote an article
+function upVoteArticle(articleId) {
+    window.alert(`upvoting ${articleId}`);
+}
