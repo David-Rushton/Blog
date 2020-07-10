@@ -38,8 +38,8 @@ jobs:
           --version-number "$(scripts/Get-VersionNumber.ps1 -IncludeSha)" `
           --blog-root src/blog `
           --template-root src/blog.template `
-          --articles-source-root src/blog.articles `
-          --articles-target-root src/blog/blog.articles `
+          --articles-source-root src/articles `
+          --articles-target-root src/blog/articles `
           --release-notes-path ./release-notes.md `
           --db-connection-string '${{ secrets.DB_RO_CONNECTION_STRING }}' `
           --db-name blogdb `

@@ -9,7 +9,7 @@ namespace Blog.Generator.Processors
 {
     public class ArticleSearchProcessor : FinaliseProcessor
     {
-        const string _searchUrl = "/blog.articles/search.html";
+        const string _searchUrl = "/articles/search.html";
 
 
         public override void Invoke(FinaliseContext context)
