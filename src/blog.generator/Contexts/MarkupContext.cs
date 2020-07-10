@@ -34,6 +34,7 @@ namespace Blog.Generator.Contexts
         }
 
 
+        public string? Id { get; set; }
         public ScaffoldContext ScaffoldContext { get; internal set; }
         public string Title { get; set; }
         public string Slug { get; set; }

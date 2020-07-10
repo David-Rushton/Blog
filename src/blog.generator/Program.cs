@@ -1,4 +1,5 @@
 ﻿using Blog.Generator.Contexts;
+using Blog.Generator.Db;
 using Blog.Generator.Processors;
 using System;
 using System.CommandLine.DragonFruit;
@@ -69,11 +70,13 @@ namespace Blog.Generator
                     versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot,
                     releaseNotesPath, dbConnectionString, dbName, dbContainer, newBadgeCutoffInDays
                 );
+                var articleDb = new ArticleDb(config);
                 var contextFactory = new ContextFactory(config);
-                var processorPipeline = new ProcessorPipelineBuilder(config)
+                var processorPipeline = new ProcessorPipelineBuilder(config, articleDb)
                     .UseDropExistingSiteProcessor()
                     .UseCloneSiteFromTemplateProcessor()
                     .UseInjectMarkdownArticlesProcessor()
+                    .UseArticleIdProcessor()
                     .UseYamlProcessor()
                     .UseMarkdownProcessor()
                     .UseBlockQuoteFormatProcessor()
