@@ -23,7 +23,8 @@ namespace Blog.Generator.Processors
             Console.WriteLine($"Converting markdown to Html: {context.Markdown.Path}");
 
             var htmlContent = context.Html.Content
-                .Replace("$(article-id)",               context.Html.Url.AbsoluteUrl)
+                .Replace("$(article-id)",               context.Id)
+                .Replace("$(article-url)",              context.Html.Url.AbsoluteUrl)
                 .Replace("$(article-content)",          Markdown.ToHtml(context.Markdown.Content, _markdownPipeline))
                 .Replace("$(article-author)",           context.Author)
                 .Replace("$(article-posted-date)",      context.GetPostedDateAsString())

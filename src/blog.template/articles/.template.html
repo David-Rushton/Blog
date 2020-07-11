@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-gb">
-<head>
+<head data-article-id="$(article-id)">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -110,27 +110,27 @@
             <h4>over to you</h4>
             <div class="share-container">
                 <span class="share-label">vote</span>
-                <a class="share-link" href="#" onclick="upVoteArticle('$(article-title)'); return false;">👍</a>
-                <span class="share-up-votes">1</span>
+                <a id="article-up-vote" >👍</a>
+                <span id="article-up-vote-count" data-up-vote-count="1">1</span>
             </div>
             <div class="share-container">
                 <span class="share-label">share</span>
-                <a class="share-link" href="https://www.linkedin.com/sharing/share-offsite/?url=$(article-id)">
+                <a class="share-link" href="https://www.linkedin.com/sharing/share-offsite/?url=$(article-url)">
                     <img class="share-img" height="32" width="32" alt="LinkedIn" src="/articles/media/linkedin.svg" />
                 </a>
-                <a class="share-link" href="https://news.ycombinator.com/submitlink?u=$(article-id)&t=$(article-title-encoded)">
+                <a class="share-link" href="https://news.ycombinator.com/submitlink?u=$(article-url)&t=$(article-title-encoded)">
                     <img class="share-img" height="32" width="32" alt="Hacker News" src="/articles/media/hacker.news.png" />
                 </a>
-                <a class="share-link" href="https://twitter.com/intent/tweet?url=$(article-id)&text=$(article-slug-encoded)&via=DavidRushton55&hashtags=$(article-tags-encoded)">
+                <a class="share-link" href="https://twitter.com/intent/tweet?url=$(article-url)&text=$(article-slug-encoded)&via=DavidRushton55&hashtags=$(article-tags-encoded)">
                     <img class="share-img" height="32" width="32" alt="Twitter" src="/articles/media/twitter.svg" />
                 </a>
-                <a class="share-link" href="https://reddit.com/submit?url=$(article-id)&title=$(article-title-encoded)">
+                <a class="share-link" href="https://reddit.com/submit?url=$(article-url)&title=$(article-title-encoded)">
                     <img class="share-img" height="32" width="32" alt="Reddit" src="/articles/media/reddit.svg" />
                 </a>
-                <a class="share-link" href="https://api.whatsapp.com/send?phone&text=$(article-title-encoded)%20$(article-id)">
+                <a class="share-link" href="https://api.whatsapp.com/send?phone&text=$(article-title-encoded)%20$(article-url)">
                     <img class="share-img" height="32" width="32" alt="WhatsApp" src="/articles/media/whatsapp.svg" />
                 </a>
-                <a class="share-link" href="mailto:?subject=$(article-title)&body=$(article-id)">
+                <a class="share-link" href="mailto:?subject=$(article-title)&body=$(article-url)">
                     <img class="share-img" height="32" width="32" alt="Email" src="/articles/media/email.svg" />
                 </a>
                 <a class="share-link" href="javascript:window.print()">
