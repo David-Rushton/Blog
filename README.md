@@ -64,4 +64,5 @@ I'm building a blog.  Here are my goals:
 - Bootstrap
 - Azure
 - Highlight.js
-- Goolge Fonts
+- Google Fonts
+- [UptimeRobot](https://uptimerobot.com/)
