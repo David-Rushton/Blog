@@ -1,20 +1,106 @@
-// Highlight.js used to highlight syntax
-hljs.initHighlightingOnLoad();
+/**
+ * in non-production environments warnings and errors are made more visible to the user
+ */
+(extendedLoggingInNonProudctionEnvironments = () => {
+
+    const isProduction = window.location.href.startsWith('https://david-rushton.dev');
+    const originalConsole = window.console;
+
+    if( ! isProduction ) {
+
+        console.log('Extended alerting enabled');
+
+        console.warn = function(message) {
+            originalConsole.apply(this, arguments);
+            alert(message);
+        };
+
+        console.error = function(message) {
+            originalConsole.apply(this, arguments);
+            alert(message);
+        };
+    }
+
+})();
 
 
-// Bootstrap does not format tables by default
-// These class have to be applied
-document.querySelectorAll('table').forEach(tbl => {
-    tbl.classList.add('table');
-    tbl.classList.add('table-hover');
-});
+/**
+ * cosmetic upgrades
+ */
+(extendFormatting = () => {
 
-document.querySelectorAll('thead').forEach(thead => {
-    thead.classList.add('thead-light');
-});
+    // Enable Highlight.js
+    // Pretty prints code examples
+    hljs.initHighlightingOnLoad();
 
 
-// smooth scroll back to the top of the page
+    // Bootstrap does not format tables by default
+    document.querySelectorAll('table').forEach(tbl => {
+        tbl.classList.add('table');
+        tbl.classList.add('table-hover');
+    });
+
+    document.querySelectorAll('thead').forEach(thead => {
+        thead.classList.add('thead-light');
+    });
+
+})();
+
+
+/**
+ * controls upvote behaviour
+ */
+(enableUpvotes = async () => {
+
+    const id = document.querySelector('head[data-article-id').getAttribute('data-article-id');
+    const upvoteTag = document.querySelector('#article-up-vote-count');
+    let upvoteScore = 0;
+
+    const makeApiCall = async (method) => await fetch(`/api/v1/upvotes/${id}`, { method: method });
+    const updateDisplay = () => upvoteTag.innerText = upvoteScore.toLocaleString();
+
+
+    // query db for current upvote score
+    const articleRecord = await makeApiCall('GET');
+    if( ! articleRecord.ok ) {
+        console.error(`Cannot retrieve current upvote score.  Id: ${id}`);
+        return;
+    }
+
+    // read value and display to user
+    const articleJson = await articleRecord.json();
+    upvoteScore = articleJson.article.upVotes;
+    updateDisplay();
+
+
+    // event handler upvote button
+    document.querySelector('#article-up-vote').onclick = async function() {
+
+        console.log(`Upvoting article.  Id: ${id}`);
+
+        // update display first - appears faster to user
+        upvoteScore++;
+        updateDisplay();
+
+        let response = await makeApiCall('POST');
+        if( ! response.ok )
+            console.error(`Cannot upvote article.  Id: ${id}`);
+    };
+})();
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Smooth scroll to top of page
+ */
 function scrollToTop() {
     const smoothScroll = () => {
         const c = document.documentElement.scrollTop || document.body.scrollTop;
@@ -26,77 +112,4 @@ function scrollToTop() {
     };
 
     smoothScroll();
-}
-
-
-// up vote an article
-function upVoteArticle(articleId) {
-    window.alert(`upvoting ${articleId}`);
-}
-
-
-
-
-
-
-/**
- * Fetches the number of up votes for the article
- */
-document.body.onload = async function () {
-
-
-    console.log("updating up dots...");
-
-
-    const htmlTag = document.getElementsByTagName("head")[0];
-
-    if( ! htmlTag.hasAttribute("data-article-id") )
-        return;
-
-
-    const id = htmlTag.getAttribute("data-article-id");
-    const response = await fetch(`/api/v1/upvotes/${id}`, { method: 'GET' });
-
-    if(! response.ok)
-        console.error(`cannot retrieve article up-vote count: ${id}`);
-
-
-    let upVoteTag = document.getElementById('article-up-vote-count');
-    let responseJson = await response.json();
-    let currentCount = responseJson.article.upVotes;
-    upVoteTag.setAttribute('data-up-vote-count', currentCount);
-    upVoteTag.innerText = currentCount.toLocaleString();
-
-    console.log("\tcomplete...");
-}
-
-
-/**
- * Handles up votes
- */
-document.getElementById("article-up-vote").onclick = async function() {
-
-    console.log("up dotting article...");
-
-
-    const htmlTag = document.getElementsByTagName("head")[0];
-
-    if( ! htmlTag.hasAttribute("data-article-id") )
-        return;
-
-
-    const id = htmlTag.getAttribute("data-article-id");
-    const response = await fetch(`/api/v1/upvotes/${id}`, { method: 'POST' });
-
-    if(! response.ok)
-        console.error(`cannot update article up-vote count: ${id}`);
-
-
-    let upVoteTag = document.getElementById('article-up-vote-count');
-    let currentCount = parseInt(upVoteTag.getAttribute('data-up-vote-count')) + 1;
-    upVoteTag.setAttribute('data-up-vote-count', currentCount);
-    upVoteTag.innerText = currentCount.toLocaleString();
-
-
-    console.log("\tcomplete...");
 }
