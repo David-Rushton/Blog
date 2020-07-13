@@ -111,30 +111,36 @@
                 <strong class="text-primary">&gt;</strong>
 
                upvote
-                <a class="share-link" class="rotate-center" id="article-up-vote">👍</a>
-                <span id="article-up-vote-count">-</span> |
+                <a class="share-link" id="article-up-vote" >
+                    <img class="pulsate-fwd" height="32" width="32" alt="up vote" src="/articles/media/upvote.svg" />
+                    <span id="article-up-vote-count">-</span>
+                </a>
+
+
+                <br>
+                <strong class="text-primary">&gt;</strong>
 
                 share
                 <a class="share-link" href="https://www.linkedin.com/sharing/share-offsite/?url=$(article-url)">
-                    <img class="rotate-center" height="32" width="32" alt="LinkedIn" src="/articles/media/linkedin.svg" />
+                    <img class="pulsate-fwd" height="32" width="32" alt="LinkedIn" src="/articles/media/linkedin.svg" />
                 </a>
                 <a class="share-link" href="https://news.ycombinator.com/submitlink?u=$(article-url)&t=$(article-title-encoded)">
-                    <img class="rotate-center" height="32" width="32" alt="Hacker News" src="/articles/media/hacker.news.png" />
+                    <img class="pulsate-fwd" height="32" width="32" alt="Hacker News" src="/articles/media/hacker.news.png" />
                 </a>
                 <a class="share-link" href="https://twitter.com/intent/tweet?url=$(article-url)&text=$(article-slug-encoded)&via=DavidRushton55&hashtags=$(article-tags-encoded)">
-                    <img class="rotate-center" height="32" width="32" alt="Twitter" src="/articles/media/twitter.svg" />
+                    <img class="pulsate-fwd" height="32" width="32" alt="Twitter" src="/articles/media/twitter.svg" />
                 </a>
                 <a class="share-link" href="https://reddit.com/submit?url=$(article-url)&title=$(article-title-encoded)">
-                    <img class="rotate-center" height="32" width="32" alt="Reddit" src="/articles/media/reddit.svg" />
+                    <img class="pulsate-fwd" height="32" width="32" alt="Reddit" src="/articles/media/reddit.svg" />
                 </a>
                 <a class="share-link" href="https://api.whatsapp.com/send?phone&text=$(article-title-encoded)%20$(article-url)">
-                    <img class="rotate-center" height="32" width="32" alt="WhatsApp" src="/articles/media/whatsapp.svg" />
+                    <img class="pulsate-fwd" height="32" width="32" alt="WhatsApp" src="/articles/media/whatsapp.svg" />
                 </a>
                 <a class="share-link" href="mailto:?subject=$(article-title)&body=$(article-url)">
-                    <img class="rotate-center" height="32" width="32" alt="Email" src="/articles/media/email.svg" />
+                    <img class="pulsate-fwd" height="32" width="32" alt="Email" src="/articles/media/email.svg" />
                 </a>
                 <a class="share-link" href="javascript:window.print()">
-                    <img class="rotate-center" height="32" width="32" alt="Print" src="/articles/media/printer.svg" />
+                    <img class="pulsate-fwd" height="32" width="32" alt="Print" src="/articles/media/printer.svg" />
                 </a>
             </div>
         </div>
@@ -147,6 +153,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/languages/powershell.min.js"></script>
-    <script src="/logic/blog.common.js"></script>
+    <script src="/logic/blog.common.js" async></script>
+    <script src="/logic/blog.upvotes.js" async></script>
   </body>
 </html>
