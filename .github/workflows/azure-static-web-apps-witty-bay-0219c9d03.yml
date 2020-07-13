@@ -28,13 +28,13 @@ jobs:
           dotnet-version: '3.1.x'
 
       - name: Get DB Container Name
-          run: |
-            if [[ github.ref == *master ]]; then
-              echo "::set-env name=db_container_name::article"
-            else
-              echo "::set-env name=db_container_name::article-dev"
-            fi
-          shell: bash
+        run: |
+          if [[ github.ref == *master ]]; then
+            echo "::set-env name=db_container_name::article"
+          else
+            echo "::set-env name=db_container_name::article-dev"
+          fi
+        shell: bash
 
       - name: Generate Release Notes
         run: scripts/Get-ReleaseNotes.ps1 -Verbose
