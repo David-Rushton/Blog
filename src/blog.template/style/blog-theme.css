@@ -27,6 +27,11 @@ code {
 }
 
 
+.no-show {
+  display: none;
+}
+
+
 /* Styling the share buttons */
 #article-share-section {
   padding-top: 5px;
