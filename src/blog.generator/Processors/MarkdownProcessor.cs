@@ -25,6 +25,7 @@ namespace Blog.Generator.Processors
             var htmlContent = context.Html.Content
                 .Replace("$(article-id)",               context.Id)
                 .Replace("$(article-url)",              context.Html.Url.AbsoluteUrl)
+                .Replace("$(article-path)",             context.Html.Url.RelativeUrl)
                 .Replace("$(article-content)",          Markdown.ToHtml(context.Markdown.Content, _markdownPipeline))
                 .Replace("$(article-author)",           context.Author)
                 .Replace("$(article-posted-date)",      context.GetPostedDateAsString())
