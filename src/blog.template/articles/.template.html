@@ -105,43 +105,60 @@
         </nav>
         <hr>
 
-        <!-- Up votes, or not  -->
+        <!-- Social  -->
         <div>
-            <div class="text-muted">
+            <div id="article-up-vote-section">
+                <!-- Upvotes -->
                 <strong class="text-primary">&gt;</strong>
-
-               upvote
-                <a class="share-link" id="article-up-vote" >
-                    <img class="pulsate-fwd" height="32" width="32" alt="up vote" src="/articles/media/upvote.svg" />
+                <span class="share-label">upvote</span>
+                <a id="article-up-vote" class="btn btn-light">
+                    <img height="24" width="24" alt="up vote" src="/articles/media/upvote.svg">
                     <span id="article-up-vote-count">-</span>
                 </a>
+            </div>
 
-
-                <br>
+            <div id="article-share-section">
+                <!-- Share -->
                 <strong class="text-primary">&gt;</strong>
+                <span class="share-label">share</span>
+                <div class="btn-group" role="group" aria-label="button group">
+                    <a class="btn btn-light" href="https://www.linkedin.com/sharing/share-offsite/?url=$(article-url)">
+                        <img height="24" width="24" alt="LinkedIn" src="/articles/media/linkedin.svg"/>
+                    </a>
+                    <a class="btn btn-light" href="https://news.ycombinator.com/submitlink?u=$(article-url)&t=$(article-title-encoded)">
+                        <img height="24" width="24" alt="Hacker News" src="/articles/media/hacker.news.png"/>
+                    </a>
+                    <a class="btn btn-light" href="https://twitter.com/intent/tweet?url=$(article-url)&text=$(article-slug-encoded)&via=DavidRushton55&hashtags=$(article-tags-encoded)">
+                        <img height="24" width="24" alt="Twitter" src="/articles/media/twitter.svg"/>
+                    </a>
+                    <a class="btn btn-light" href="https://reddit.com/submit?url=$(article-url)&title=$(article-title-encoded)">
+                        <img height="24" width="24" alt="Reddit" src="/articles/media/reddit.svg"/>
+                    </a>
+                    <a class="btn btn-light" href="https://api.whatsapp.com/send?phone&text=$(article-title-encoded)%20$(article-url)">
+                        <img height="24" width="24" alt="WhatsApp" src="/articles/media/whatsapp.svg"/>
+                    </a>
+                    <a class="btn btn-light" href="mailto:?subject=$(article-title)&body=$(article-url)">
+                        <img height="24" width="24" alt="Email" src="/articles/media/email.svg"/>
+                    </a>
+                    <a class="btn btn-light" href="javascript:window.print()">
+                        <img height="24" width="24" alt="Print" src="/articles/media/printer.svg"/>
+                    </a>
+                </div>
+            </div>
 
-                share
-                <a class="share-link" href="https://www.linkedin.com/sharing/share-offsite/?url=$(article-url)">
-                    <img class="pulsate-fwd" height="32" width="32" alt="LinkedIn" src="/articles/media/linkedin.svg" />
-                </a>
-                <a class="share-link" href="https://news.ycombinator.com/submitlink?u=$(article-url)&t=$(article-title-encoded)">
-                    <img class="pulsate-fwd" height="32" width="32" alt="Hacker News" src="/articles/media/hacker.news.png" />
-                </a>
-                <a class="share-link" href="https://twitter.com/intent/tweet?url=$(article-url)&text=$(article-slug-encoded)&via=DavidRushton55&hashtags=$(article-tags-encoded)">
-                    <img class="pulsate-fwd" height="32" width="32" alt="Twitter" src="/articles/media/twitter.svg" />
-                </a>
-                <a class="share-link" href="https://reddit.com/submit?url=$(article-url)&title=$(article-title-encoded)">
-                    <img class="pulsate-fwd" height="32" width="32" alt="Reddit" src="/articles/media/reddit.svg" />
-                </a>
-                <a class="share-link" href="https://api.whatsapp.com/send?phone&text=$(article-title-encoded)%20$(article-url)">
-                    <img class="pulsate-fwd" height="32" width="32" alt="WhatsApp" src="/articles/media/whatsapp.svg" />
-                </a>
-                <a class="share-link" href="mailto:?subject=$(article-title)&body=$(article-url)">
-                    <img class="pulsate-fwd" height="32" width="32" alt="Email" src="/articles/media/email.svg" />
-                </a>
-                <a class="share-link" href="javascript:window.print()">
-                    <img class="pulsate-fwd" height="32" width="32" alt="Print" src="/articles/media/printer.svg" />
-                </a>
+            <div id="article-comments">
+
+                <!-- Comments -->
+                <strong class="text-primary">&gt;</strong>
+                <span class="share-label">comment</span>
+                <button class="btn btn-light dropdown-toggle" type="button" id="comment-login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    login with...
+                </button>
+                <div class="dropdown-menu" aria-labelledby="comment-login">
+                    <a class="dropdown-item" href="/login/github?post_login_redirect_uri=$(articel-path)">Github</a>
+                    <a class="dropdown-item" href="/login/google?post_login_redirect_uri=$(articel-path)">Google</a>
+                    <a class="dropdown-item" href="/login/twitter?post_login_redirect_uri=$(articel-path)">Twitter</a>
+                </div>
             </div>
         </div>
         <hr>

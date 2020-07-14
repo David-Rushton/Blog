@@ -25,7 +25,7 @@
 
 
     // event handler upvote button
-    document.querySelector('#article-up-vote').onclick = async function() {
+    document.querySelector('#article-up-vote').addEventListener('click', async function() {
 
         // update display first - appears faster to user
         upvoteScore++;
@@ -33,6 +33,6 @@
 
         let response = await makeApiCall('POST');
         if( ! response.ok )
-            console.error(`Cannot upvote article.  Id: ${id}`);
-    };
+          console.error(`Cannot upvote article.  Id: ${id}`);
+    });
 })();

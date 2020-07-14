@@ -28,6 +28,16 @@ code {
 
 
 /* Styling the share buttons */
+#article-share-section {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.share-label {
+  display: inline-block;
+  width: 80px;
+}
+
 a.share-link {
   text-decoration: none;
   cursor: pointer;
