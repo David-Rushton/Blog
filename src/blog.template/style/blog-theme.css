@@ -27,11 +27,6 @@ code {
 }
 
 
-.no-show {
-  display: none;
-}
-
-
 /* Styling the share buttons */
 #article-share-section {
   padding-top: 5px;
@@ -43,18 +38,9 @@ code {
   width: 75px;
 }
 
-a.share-link {
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.pulsate-fwd {
-  padding: 5px;
-}
-
-.pulsate-fwd:hover {
-	-webkit-animation: pulsate-fwd 0.5s ease-in-out infinite both;
-	        animation: pulsate-fwd 0.5s ease-in-out infinite both;
+/* Hides logged in/logged out comments sections */
+.no-show {
+  display: none;
 }
 
 
@@ -64,40 +50,6 @@ a.share-link {
  * See http://animista.net/license for more info.
  * w: http://animista.net, t: @cssanimista
  * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation pulsate-fwd
- * ----------------------------------------
- */
- @-webkit-keyframes pulsate-fwd {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  50% {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-@keyframes pulsate-fwd {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  50% {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
 
 /**
  * ----------------------------------------
