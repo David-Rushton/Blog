@@ -110,7 +110,7 @@
             <div id="article-up-vote-section">
                 <!-- Upvotes -->
                 <strong class="text-primary">&gt;</strong>
-                <span class="share-label">upvote</span>
+                <span class="share-label text-muted">upvote</span>
                 <a id="article-up-vote" class="btn btn-light">
                     <img height="24" width="24" alt="up vote" src="/articles/media/upvote.svg">
                     <span id="article-up-vote-count">-</span>
@@ -120,7 +120,7 @@
             <div id="article-share-section">
                 <!-- Share -->
                 <strong class="text-primary">&gt;</strong>
-                <span class="share-label">share</span>
+                <span class="share-label text-muted">share</span>
                 <div class="btn-group" role="group" aria-label="button group">
                     <a class="btn btn-light" href="https://www.linkedin.com/sharing/share-offsite/?url=$(article-url)">
                         <img height="24" width="24" alt="LinkedIn" src="/articles/media/linkedin.svg"/>
@@ -150,7 +150,7 @@
 
                 <!-- Comments -->
                 <strong class="text-primary">&gt;</strong>
-                <span class="share-label">comment</span>
+                <span class="share-label text-muted">comment</span>
                 <button id="comment-login" class="btn btn-light dropdown-toggle" type="button" id="comment-login" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     login with...
                 </button>
@@ -160,7 +160,7 @@
                     <a class="dropdown-item" href="/login/twitter?post_login_redirect_uri=$(article-path)">Twitter</a>
                 </div>
 
-                <button id="comment-logout" class="btn btn-light" type="button" href="/logout?post_logout_redirect_uri=$(article-path)">logout</button>
+                <a id="comment-logout" class="btn btn-light" href="/logout?post_logout_redirect_uri=$(article-path)">logout</a>
 
                 <button class="btn btn-light comment-add-comment" type="button" data-toggle="modal" data-target="#comment-model">add a comment</button>
                 <div class="modal fade" id="comment-model" tabindex="-1" role="dialog" aria-labelledby="comment-add-comment" aria-hidden="true">
