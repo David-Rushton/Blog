@@ -1,23 +1,13 @@
-const mongo = require('mongodb');
-const mongoClient = require('mongodb').MongoClient;
-const blogDbConfig = (() => {
+'use strict';
 
-    let isProduction = ('BLOG_ENVIRONMENT' in process.env && process.env.BLOG_ENVIRONMENT == 'PRODUCTION');
-    let containerName = process.env.DB_CONTAINER;
-    let containerNameDev = `${process.env.DB_CONTAINER}-dev`;
-
-    return {
-        dbConnectionString: process.env.DB_RW_CONNECTION_STRING,
-        dbName: process.env.DB_NAME,
-        dbContainer: isProduction ? containerName : containerNameDev
-    };
-})();
+const BlogDb = require('../lib/blogdb');
+const config = require('../lib/config');
 
 
 /**
  * Exception method for reporting encountered issues
- * @param {int} status -
- * @param {string} message -
+ * @param {int} status - http status code
+ * @param {string} message - exception message
  */
 function upVoteException(status, message) {
     this.status = status;
@@ -26,68 +16,6 @@ function upVoteException(status, message) {
     this.toString = function() {
         `status: ${status} message: ${message}`;
     };
-}
-
-
-/**
- * Read and write to the db
- */
-class blogDb {
-
-    constructor() {
-        this.client;
-        this.container;
-    }
-
-
-    /**
-     * Connects to the blog db
-     * @param {string} connectionString - Cosmos db connection string
-     * @param {string} dbName - Cosmos db database name
-     * @param {string} dbContainer - Comsmos db container name
-     */
-    async connect({dbConnectionString, dbName, dbContainer}) {
-        this.client = await mongoClient
-            .connect(
-                dbConnectionString,
-                { useNewUrlParser: true, useUnifiedTopology: true }
-            )
-        ;
-
-        this.container = this.client
-            .db(dbName)
-            .collection(dbContainer)
-        ;
-    }
-
-    /**
-     * Returns an article from the db by id.
-     * If the id does not exist null is returned.
-     * @param {string} id
-     */
-    async getArticle(id) {
-        return await this.container
-            .findOne({ _id: id })
-        ;
-    }
-
-    /**
-     * Increment the number of upVotes for an article by 1.
-     * @param {string} id
-     */
-    async incrementUpVotes(id) {
-        return await this.container
-            .updateOne({ _id: id }, { $inc: { upVotes: 1 } })
-        ;
-    }
-
-
-    /**
-     * Closes our connection to the blog db.
-     */
-    disconnect() {
-        this.client.close();
-    }
 }
 
 
@@ -110,7 +38,7 @@ const returnError = (context, status, message) => {
 // Api entry point
 module.exports = async function(context, req) {
 
-    const db = new blogDb();
+    const db = new BlogDb();
 
     try {
 
@@ -118,13 +46,13 @@ module.exports = async function(context, req) {
         const id = context.bindingData.id;
         let article;
 
-        await db.connect(blogDbConfig);
+        await db.connect(config.db);
 
 
         if( ! ['GET', 'POST'].includes(method) )
-            throw new upVoteException(`request method not supported: ${method}`);
+            throw new upVoteException(500, `request method not supported: ${method}`);
 
-        if (method == 'POST')
+        if(method == 'POST')
             article = await db.incrementUpVotes(id);
 
         if(method == 'GET')
