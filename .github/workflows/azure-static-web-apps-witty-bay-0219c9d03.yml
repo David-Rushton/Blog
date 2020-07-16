@@ -14,6 +14,8 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
 
     runs-on: ubuntu-latest
+    env:
+      DOTNET_NOLOGO: true
 
     name: Build and Deploy Job
     steps:
@@ -27,6 +29,10 @@ jobs:
         with:
           dotnet-version: '3.1.x'
 
+      - name: Generate Release Notes
+         run: scripts/Get-ReleaseNotes.ps1 -Verbose
+         shell: "pwsh"
+
       - name: Get DB Container Name
         run: |
           if [[ github.ref == *master ]]; then
@@ -36,25 +42,27 @@ jobs:
           fi
         shell: bash
 
-      - name: Generate Release Notes
-        run: scripts/Get-ReleaseNotes.ps1 -Verbose
-        shell: "pwsh"
+      - name: Get Version Number
+        id: ver
+        run: |
+          $version = scripts/Get-VersionNumber.ps1 -IncludeSha
+          echo "::set-env name=version_number::$version"
+        shell: pwsh
 
       - name: Generate Site
         run: |
-          dotnet run --project src/blog.generator/blog.generator.csproj `
-          -- `
-          --version-number "$(scripts/Get-VersionNumber.ps1 -IncludeSha)" `
-          --blog-root src/blog `
-          --template-root src/blog.template `
-          --articles-source-root src/articles `
-          --articles-target-root src/blog/articles `
-          --release-notes-path ./release-notes.md `
-          --db-connection-string '${{ secrets.DB_RW_CONNECTION_STRING }}' `
-          --db-name blogdb `
-          --db-container ${{ env.db_container_name }} `
+          dotnet run --project src/blog.generator/blog.generator.csproj \
+          -- \
+          --version-number ${{ env.version_number }} \
+          --blog-root src/blog \
+          --template-root src/blog.template \
+          --articles-source-root src/articles \
+          --articles-target-root src/blog/articles \
+          --release-notes-path ./release-notes.md \
+          --db-connection-string '${{ secrets.DB_RW_CONNECTION_STRING }}' \
+          --db-name blogdb \
+          --db-container ${{ env.db_container_name }} \
           --new-badge-cutoff-in-days 10
-        shell: "pwsh"
 
       - name: Build And Deploy
         id: builddeploy
