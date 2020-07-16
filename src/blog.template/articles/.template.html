@@ -163,34 +163,40 @@
                 <a id="comment-logout" class="btn btn-light" href="/logout?post_logout_redirect_uri=$(article-path)">logout</a>
 
                 <button class="btn btn-light comment-add-comment" type="button" data-toggle="modal" data-target="#comment-model">add a comment</button>
-                <div class="modal fade" id="comment-model" tabindex="-1" role="dialog" aria-labelledby="comment-add-comment" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="comment-add-comment-title">New Comment</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="form-group">
-                                        <div id="comment-username"></div>
-                                        <label for="comment-text" class="col-form-label">comment:</label>
-                                        <textarea class="form-control" id="comment-text"></textarea>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
-                                <button type="button" class="btn btn-primary">post</button>
-                            </div>
-                        </div>
-                    </div>
+
+                <div id="comment-area">
+
                 </div>
             </div>
         </div>
         <hr>
+    </div>
+
+
+    <!-- New comment dialog -->
+    <div class="modal fade" id="comment-model" tabindex="-1" role="dialog" aria-labelledby="comment-add-comment" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="comment-add-comment-title">New Comment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <strong class="text-primary">&gt;</strong> <span id="comment-username"></span>
+                            <textarea class="form-control" id="comment-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">cancel</button>
+                    <button type="button" class="btn btn-primary" id="comment-add-comment-button">post</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 

@@ -12,7 +12,8 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "mongodb": "^3.5.9"
+    "mongodb": "^3.5.9",
+    "uuid": "^8.2.0"
   },
   "devDependencies": {}
 }

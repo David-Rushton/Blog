@@ -2,6 +2,7 @@
 
 const BlogDb = require('../lib/blogdb');
 const config = require('../lib/config');
+const { v4: uuidv4 } = require('uuid');
 
 
 /**
@@ -55,9 +56,6 @@ function getCommentDetailsOrThrowIfMissing(data) {
 
     let errors = [];
 
-    if( ! data.commentId )
-        errors.push('commentId');
-
     if( ! data.parentCommentId )
         errors.push('parentCommentId');
 
@@ -73,7 +71,7 @@ function getCommentDetailsOrThrowIfMissing(data) {
 
 
     return {
-        commentId: data.commentId,
+        commentId: uuidv4(),
         parentCommentId: data.parentCommentId,
         username: data.username,
         comment: data.comment

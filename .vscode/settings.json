@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "Bson",
+        "NOLOGO",
         "Pexels",
         "blogdb",
         "cdnjs",
@@ -12,6 +13,7 @@
         "unstyled",
         "upvote",
         "upvotes",
+        "uuidv",
         "vars"
     ],
     "terminal.integrated.fontFamily": "Cascadia Code PL",
