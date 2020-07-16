@@ -53,7 +53,7 @@ jobs:
         run: |
           dotnet run --project src/blog.generator/blog.generator.csproj \
           -- \
-          --version-number ${{ env.version_number }} \
+          --version-number '${{ env.version_number }}' \
           --blog-root src/blog \
           --template-root src/blog.template \
           --articles-source-root src/articles \
