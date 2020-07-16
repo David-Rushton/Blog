@@ -10,6 +10,7 @@ namespace Blog.Generator.Db.Models
     /// <summary>
     /// Article entry within the blog-db
     /// </summary>
+    [BsonIgnoreExtraElements]
     public class ArticleModel
     {
         public string? Id { get; set; }
