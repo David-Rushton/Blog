@@ -30,8 +30,8 @@ jobs:
           dotnet-version: '3.1.x'
 
       - name: Generate Release Notes
-         run: scripts/Get-ReleaseNotes.ps1 -Verbose
-         shell: "pwsh"
+        run: scripts/Get-ReleaseNotes.ps1 -Verbose
+        shell: "pwsh"
 
       - name: Get DB Container Name
         run: |
