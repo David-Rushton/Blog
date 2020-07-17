@@ -20,6 +20,19 @@ code {
 }
 
 
+/* upvotes */
+#article-up-vote-count {
+  display: inline-block;
+  text-indent: 10px;
+}
+
+#article-up-vote-spinner {
+  margin-left: 10px;
+  max-height: 24px;
+  max-width: 24px;
+}
+
+
 /* Header bar effect */
 .focus-in-expand {
 	-webkit-animation: focus-in-expand 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -41,6 +54,11 @@ code {
 /* Hides logged in/logged out comments sections */
 .no-show {
   display: none;
+}
+
+#comment-area-spinner {
+  max-height: 24px;
+  max-width: 24px;
 }
 
 
