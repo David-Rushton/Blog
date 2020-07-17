@@ -102,10 +102,10 @@ module.exports = async function (context, req) {
         }
 
         if(method == 'GET')
-            article = await db.getArticle();
+            article = await db.getArticle(id);
 
         if( ! article || article.modifiedCount == 0 )
-            throw new upVoteException(404, `cannot find article: ${id}`);
+            throw new commentsException(404, `cannot find article: ${id}`);
 
 
         context.res = {
@@ -139,9 +139,4 @@ module.exports = async function (context, req) {
 
         db.disconnect();
     }
-
-
-
-
-
 };
