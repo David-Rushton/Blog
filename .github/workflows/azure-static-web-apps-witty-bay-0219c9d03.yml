@@ -35,7 +35,7 @@ jobs:
 
       - name: Get DB Container Name
         run: |
-          echo github.ref \
+          echo github.ref
           if [ github.ref == 'refs/heads/master' ]; then
             echo "::set-env name=db_container_name::articles"
           else
