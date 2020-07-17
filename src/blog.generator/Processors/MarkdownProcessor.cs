@@ -38,6 +38,7 @@ namespace Blog.Generator.Processors
                 .Replace("$(article-tags-encoded)",     HttpUtility.UrlEncode(context.GetDelimitedNakedTags(",")))
                 .Replace("$(article-image-credit)",     context.Image.Credit)
                 .Replace("$(article-image-provider)",   context.Image.Provider)
+                .Replace("$(version-number)",           context.ScaffoldContext.VersionNumber)
             ;
 
             context.Html.Content = htmlContent;
