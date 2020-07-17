@@ -1,28 +1,4 @@
 /**
- * in non-production environments warnings and errors are made more visible to the user
- */
-(extendedLoggingInNonProudctionEnvironments = () => {
-
-    const isProduction = window.location.href.startsWith('https://david-rushton.dev');
-    const originalConsole = window.console;
-
-    if( ! isProduction ) {
-
-        console.warn = function(message) {
-            originalConsole.apply(this, arguments);
-            alert(message);
-        };
-
-        console.error = function(message) {
-            originalConsole.apply(this, arguments);
-            alert(message);
-        };
-    }
-
-})();
-
-
-/**
  * cosmetic upgrades
  */
 (extendFormatting = () => {
