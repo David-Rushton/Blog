@@ -1,4 +1,5 @@
 ﻿using Blog.Generator.Contexts;
+using Blog.Generator.Db;
 using Blog.Generator.Processors;
 using System;
 using System.CommandLine.DragonFruit;
@@ -16,6 +17,9 @@ namespace Blog.Generator
         /// <param name="articlesSourceRoot">Location of markdown articles</param>
         /// <param name="articlesTargetRoot">Location to inject articles</param>
         /// <param name="releaseNotesPath">Path to the release notes file</param>
+        /// <param name="dbConnectionString">Cosmos db Connection string</param>
+        /// <param name="dbName">Cosmos db name</param>
+        /// <param name="dbContainer">Cosmos db container name</param>
         /// <param name="newBadgeCutoffInDays">The maximum age for articles to be badged as new</param>
         static async Task Main(
             string versionNumber,
@@ -24,6 +28,9 @@ namespace Blog.Generator
             string articlesSourceRoot,
             string articlesTargetRoot,
             string releaseNotesPath,
+            string dbConnectionString,
+            string dbName = "blogdb",
+            string dbContainer = "articles",
             int newBadgeCutoffInDays = 10
         )
         {
@@ -43,6 +50,9 @@ namespace Blog.Generator
                 if(String.IsNullOrEmpty(versionNumber))
                     throw new Exception("--version-number is a required arg");
 
+                if(String.IsNullOrEmpty(dbConnectionString))
+                    throw new Exception("--connection-string is a required arg");
+
                 if( ! Directory.Exists(templateRoot) )
                     throw new Exception($"Invalid path to site template: {templateRoot}");
 
@@ -58,13 +68,15 @@ namespace Blog.Generator
             {
                 var config = new Config(
                     versionNumber, blogRoot, templateRoot, articlesSourceRoot, articlesTargetRoot,
-                    releaseNotesPath, newBadgeCutoffInDays
+                    releaseNotesPath, dbConnectionString, dbName, dbContainer, newBadgeCutoffInDays
                 );
+                var articleDb = new ArticleDb(config);
                 var contextFactory = new ContextFactory(config);
-                var processorPipeline = new ProcessorPipelineBuilder(config)
+                var processorPipeline = new ProcessorPipelineBuilder(config, articleDb)
                     .UseDropExistingSiteProcessor()
                     .UseCloneSiteFromTemplateProcessor()
                     .UseInjectMarkdownArticlesProcessor()
+                    .UseArticleIdProcessor()
                     .UseYamlProcessor()
                     .UseMarkdownProcessor()
                     .UseBlockQuoteFormatProcessor()

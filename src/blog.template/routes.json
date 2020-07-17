@@ -1,6 +1,39 @@
 {
+    "mimeTypes": {
+        "md": "text/markdown"
+    },
+
     "routes": [
+        {
+            "route": "/login/github",
+            "serve": "/.auth/login/github",
+            "statusCode": 301
+        },
+        {
+            "route": "/login/google",
+            "serve": "/.auth/login/google",
+            "statusCode": 301
+        },
+        {
+            "route": "/login/twitter",
+            "serve": "/.auth/login/twitter",
+            "statusCode": 301
+        },
+        {
+            "route": "/logout",
+            "serve": "/.auth/logout",
+            "statusCode": 301
+        },
+        {
+            "route": "/.auth/login/aad",
+            "statusCode": "404"
+        },
+        {
+            "route": "/.auth/login/facebook",
+            "statusCode": "404"
+        }
     ],
+
     "platformErrorOverrides": [
         {
             "errorType": "NotFound",

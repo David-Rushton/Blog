@@ -3,7 +3,7 @@ title: Making Code Pop
 slug: I spend a lot of time writing my code, I want to look its best
 tags: [intro]
 date: 2020-06-14
-image: /blog.articles/media/blur-close-up-code-computer-546819.jpg
+image: /articles/media/blur-close-up-code-computer-546819.jpg
 image-credit: luis gomes
 image-provider: Pexels
 ---

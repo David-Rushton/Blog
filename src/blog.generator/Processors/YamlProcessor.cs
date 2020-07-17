@@ -13,7 +13,6 @@ namespace Blog.Generator.Processors
 {
     public class YamlProcessor : MarkupProcessor
     {
-        const string _tagGlyph = "🏷️";
         readonly IDeserializer _yamlPipeline;
 
 
@@ -30,7 +29,7 @@ namespace Blog.Generator.Processors
 
             context.Title = frontMatter.Title;
             context.Slug = frontMatter.Slug;
-            context.Tags = frontMatter.Tags.Select(tag => $"{_tagGlyph}{tag}").ToArray();
+            context.Tags = frontMatter.Tags.Select(t => context.NewTagItem(t)).ToList();
             context.PostedDate = frontMatter.PostedDate;
             context.Image.Credit = frontMatter.ImageCredit;
             context.Image.Provider = frontMatter.ImageProvider;

@@ -96,5 +96,11 @@ namespace Blog.Generator.Processors
             pipelineBuilder.RegisterPipelineProcessor(new ReleaseNotesProcessor(markdownPipeline));
             return pipelineBuilder;
         }
+
+        public static ProcessorPipelineBuilder UseArticleIdProcessor(this ProcessorPipelineBuilder pipelineBuilder)
+        {
+            pipelineBuilder.RegisterPipelineProcessor(new ArticleIdProcessor(pipelineBuilder._articleDb));
+            return pipelineBuilder;
+        }
     }
 }

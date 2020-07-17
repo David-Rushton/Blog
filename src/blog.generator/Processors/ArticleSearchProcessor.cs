@@ -9,7 +9,7 @@ namespace Blog.Generator.Processors
 {
     public class ArticleSearchProcessor : FinaliseProcessor
     {
-        const string _searchUrl = "/blog.articles/search.html";
+        const string _searchUrl = "/articles/search.html";
 
 
         public override void Invoke(FinaliseContext context)
@@ -33,12 +33,12 @@ namespace Blog.Generator.Processors
             var searchByTag =
                 from article in context.MarkupContexts
                 from tag in article.Tags
-                group article by tag into articleTags
-                orderby articleTags.Key
+                group article by new {tag.Value, tag.NakedValue} into articleTags
+                orderby articleTags.Key.Value
                 select new
                 {
-                    Tag = articleTags.Key,
-                    TagId = $"tag-{articleTags.Key.Substring(3)}",
+                    Tag = articleTags.Key.Value,
+                    TagId = articleTags.Key.NakedValue,
                     Articles = articleTags.ToList(),
                     ArticlesCount = articleTags.Sum(a=>1)
                 }
@@ -67,7 +67,7 @@ namespace Blog.Generator.Processors
                         article.Title,
                         article.Slug,
                         article.GetPostedDateAsString(),
-                        article.Html.Url
+                        article.Html.Url.RelativeUrl
                     ));
                 }
             }
@@ -103,7 +103,7 @@ namespace Blog.Generator.Processors
                     article.Title,
                     article.Slug,
                     article.GetPostedDateAsString(),
-                    article.Html.Url
+                    article.Html.Url.RelativeUrl
                 ));
             }
 

@@ -1,13 +1,22 @@
 {
     "cSpell.words": [
+        "Bson",
+        "NOLOGO",
         "Pexels",
+        "blogdb",
         "cdnjs",
         "featurette",
+        "linkedin",
         "pwsh",
+        "repos",
         "setup",
         "unstyled",
+        "upvote",
+        "upvotes",
+        "uuidv",
         "vars"
     ],
+    "terminal.integrated.fontFamily": "Cascadia Code PL",
     "azureFunctions.deploySubpath": "src\\api",
     "azureFunctions.postDeployTask": "npm install",
     "azureFunctions.projectLanguage": "JavaScript",
@@ -19,5 +28,5 @@
         "enable": true,
         "baseUri": "/api",
         "proxyUri": "http://127.0.0.1:7071/api"
-     }
+        }
 }

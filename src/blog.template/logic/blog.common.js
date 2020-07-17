@@ -1,20 +1,53 @@
-// Highlight.js used to highlight syntax
-hljs.initHighlightingOnLoad();
+/**
+ * in non-production environments warnings and errors are made more visible to the user
+ */
+(extendedLoggingInNonProudctionEnvironments = () => {
+
+    const isProduction = window.location.href.startsWith('https://david-rushton.dev');
+    const originalConsole = window.console;
+
+    if( ! isProduction ) {
+
+        console.warn = function(message) {
+            originalConsole.apply(this, arguments);
+            alert(message);
+        };
+
+        console.error = function(message) {
+            originalConsole.apply(this, arguments);
+            alert(message);
+        };
+    }
+
+})();
 
 
-// Bootstrap does not format tables by default
-// These class have to be applied
-document.querySelectorAll('table').forEach(tbl => {
-    tbl.classList.add('table');
-    tbl.classList.add('table-hover');
-});
+/**
+ * cosmetic upgrades
+ */
+(extendFormatting = () => {
 
-document.querySelectorAll('thead').forEach(thead => {
-    thead.classList.add('thead-light');
-});
+    // Enable Highlight.js
+    // Pretty prints code examples
+    hljs.initHighlightingOnLoad();
 
 
-// smooth scroll back to the top of the page
+    // Bootstrap does not format tables by default
+    document.querySelectorAll('table').forEach(tbl => {
+        tbl.classList.add('table');
+        tbl.classList.add('table-hover');
+    });
+
+    document.querySelectorAll('thead').forEach(thead => {
+        thead.classList.add('thead-light');
+    });
+
+})();
+
+
+/**
+ * Smooth scroll to top of page
+ */
 function scrollToTop() {
     const smoothScroll = () => {
         const c = document.documentElement.scrollTop || document.body.scrollTop;

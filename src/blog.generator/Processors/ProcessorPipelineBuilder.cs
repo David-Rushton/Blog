@@ -1,3 +1,4 @@
+using Blog.Generator.Db;
 using Blog.Generator.Processors.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,11 @@ namespace Blog.Generator.Processors
         List<MarkupProcessor> _markupProcessors = new List<MarkupProcessor>();
         List<FinaliseProcessor> _finaliseProcessors = new List<FinaliseProcessor>();
         readonly internal Config _config;
+        readonly internal ArticleDb _articleDb;
 
 
-        public ProcessorPipelineBuilder(Config config)
-            => (_config) = (config)
+        public ProcessorPipelineBuilder(Config config, ArticleDb articleDb)
+            => (_config, _articleDb) = (config, articleDb)
         ;
 
 

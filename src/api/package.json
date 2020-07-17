@@ -1,11 +1,19 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Interacts with the blog-db database",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/David-Rushton/Blog"
+  },
+  "license": "MIT",
   "scripts": {
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "mongodb": "^3.5.9",
+    "uuid": "^8.2.0"
+  },
   "devDependencies": {}
 }
