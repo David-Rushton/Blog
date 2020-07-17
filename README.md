@@ -40,6 +40,7 @@ I'm building a blog.  Here are my goals:
 ## Share!
 
 - [ ] Data thoughts and news (republish?  what is the plan here?)
+- [x] Comments
 - [x] Profile and links
 
 ## Enjoy!
