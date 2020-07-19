@@ -16,8 +16,6 @@ async function getArticle() {
                 throw new articleException(`cannot find article id in db: ${id}}`);
 
             _articleDocument = await response.json();
-
-            console.debug('called article api');
         }
 
         return _articleDocument

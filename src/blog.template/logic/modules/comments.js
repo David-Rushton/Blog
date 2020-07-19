@@ -1,20 +1,19 @@
-import * as article from './article.js';
-
 let _username = null;
 let _loggedIn = null;
 
 
 /**
  * fetches comments from db and updates UI
+ * @param {object[]} comments - array of comments
  */
-(async () => {
+async function loadComments(comments) {
     try {
 
         // Sets value of _username and _loggedIn fields
         await getUsername();
 
         setAuthControlsVisibility();
-        await loadAndDisplayComments();
+        loadAndDisplayComments(comments);
     }
     catch(e) {
 
@@ -24,7 +23,7 @@ let _loggedIn = null;
 
         document.querySelector('#comment-area-spinner').remove();
     }
-})();
+}
 
 
 /**
@@ -89,12 +88,12 @@ function setAuthControlsVisibility() {
 
 /**
  * comments are read from the db and displayed in the UI
+ * @param {object[]} comments - array of comments
  */
-async function loadAndDisplayComments() {
+function loadAndDisplayComments(comments) {
 
-    const articleDoc = await article.getArticle();
-    if('comments' in articleDoc.article) {
-        articleDoc.article.comments.forEach(c => {
+    if(comments) {
+        comments.forEach(c => {
 
             addComment(c.commentId, c.comment, c.username, c.posted);
         });
@@ -181,4 +180,4 @@ function commentException(message) {
 }
 
 
-export { addComment };
+export { loadComments, addComment };

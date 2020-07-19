@@ -1,17 +1,14 @@
-import * as article from './article.js';
-
 const _upvoteTag = document.querySelector('#article-up-vote-count');
 let _score = 1;
 
 
 /**
  * fetches the current upvote score form the db and refreshes the display
+ * @param {int} upvoteScore - current upvote score
  */
-(async () => {
+function loadUpvoteScore(upvoteScore) {
     try {
-
-        const articleDoc = await article.getArticle();
-        _score = articleDoc.article.upVotes;
+        _score = upvoteScore;
     }
     catch(e) {
 
@@ -21,7 +18,7 @@ let _score = 1;
 
         refreshUpVoteScore(_score);
     }
-})();
+}
 
 
 /**
@@ -39,12 +36,12 @@ function refreshUpVoteScore(score) {
 
 /**
  * increments the upvote score
+ * @param {string} - id of the article to upvote
  */
-async function incrementUpvoteScore() {
+async function incrementUpvoteScore(id) {
 
     refreshUpVoteScore(_score++);
 
-    const id = article.getArticleId();
     const response = await fetch(`/api/v1/upvotes/${id}`, { method: method });
 
     if( ! response.ok ) {
@@ -66,4 +63,4 @@ function upvoteException(message) {
 }
 
 
-export { incrementUpvoteScore };
+export { loadUpvoteScore, incrementUpvoteScore };
