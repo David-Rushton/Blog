@@ -135,7 +135,7 @@ async function getUsername() {
         if( ! authResponse.ok )
             throw new commentException('cannot fetch login details');
 
-        const authJson = authResponse.json();
+        const authJson = await authResponse.json();
         const { clientPrincipal } = authJson;
 
         _loggedIn = (clientPrincipal != null);
