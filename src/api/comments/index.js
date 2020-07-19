@@ -41,7 +41,7 @@ function getUsername() {
     const user = JSON.parse(decoded);
 
 
-    if(user.userRoles.includes('admin'))
+    if(user.clientPrincipal.userRoles.includes('admin'))
         return `${adminUserPrefix}${user.userDetails}`;
 
     return user.userDetails;
