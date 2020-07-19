@@ -15,7 +15,7 @@ function commentsException(status, message) {
     this.message = message;
 
     this.toString = function() {
-        `status: ${status} message: ${message}`;
+        return `status: ${status} message: ${message}`;
     };
 }
 
@@ -41,7 +41,7 @@ function getUsername() {
     const user = JSON.parse(decoded);
 
 
-    if(user.userRoles.includes('admin'))
+    if(user.clientPrincipal.userRoles.includes('admin'))
         return `${adminUserPrefix}${user.userDetails}`;
 
     return user.userDetails;
@@ -86,54 +86,32 @@ module.exports = async function (context, req) {
 
     try {
 
-        const method = req.method.toUpperCase();
         const id = context.bindingData.id;
-        let article;
+        const comment = getCommentDetailsOrThrowIfMissing(context.bindingData);
+        let response;
 
         await db.connect(config.db);
+        response = await db.addComment(id, comment);
 
-
-        if( ! ['GET', 'POST'].includes(method) )
-            throw new commentsException(500, `request method not supported: ${method}`);
-
-        if(method == 'POST') {
-            const comment = getCommentDetailsOrThrowIfMissing(context.bindingData);
-            article = await db.addComment(id, comment);
-        }
-
-        if(method == 'GET')
-            article = await db.getArticle(id);
-
-        if( ! article || article.modifiedCount == 0 )
+        if( ! response || response.modifiedCount == 0 )
             throw new commentsException(404, `cannot find article: ${id}`);
 
 
         context.res = {
             status: 200,
             body: {
-                message: method == 'GET' ? `article comments found: ${id}` : `article comment added: ${id}`,
-                article: article
+                message: `comment added to article: ${id}`
             }
         };
     }
     catch(e) {
 
-        if(e instanceof commentsException) {
-            context.res = {
-                status: e.status,
-                body: {
-                    message: e.message
-                }
-            };
-        }
-        else {
-            context.rest = {
-                status: 500,
-                body: {
-                    message: e.toString()
-                }
-            };
-        }
+        context.res = {
+            status: (e instanceof commentsException) ? e.status : 500,
+            body: {
+                message: e.message
+            }
+        };
     }
     finally {
 

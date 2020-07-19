@@ -5,49 +5,49 @@ const config = require('../lib/config');
 
 
 /**
- * Exception method for reporting encountered issues
+ * Method for raising exceptions
  * @param {int} status - http status code
- * @param {string} message - exception message
+ * @param {status} message - exception message
  */
-function upVoteException(status, message) {
+function articleException(status, message) {
     this.status = status;
     this.message = message;
 
     this.toString = function() {
-        `status: ${status} message: ${message}`;
-    };
+        return `status: ${status} message: ${message}`;
+    }
 }
 
 
 // Api entry point
-module.exports = async function(context, req) {
+module.exports = async function (context, req) {
 
     const db = new BlogDb();
 
     try {
 
-        const method = req.method.toUpperCase();
         const id = context.bindingData.id;
-        let response;
+        let article;
 
         await db.connect(config.db);
-        response = await db.incrementUpVotes(id);
+        article = await db.getArticle(id);
 
-        if( ! response || response.modifiedCount == 0 )
-            throw new upVoteException(404, `cannot find article: ${id}`);
+        if( ! article )
+            throw new articleException(404, `cannot find article: ${id}`);
 
 
         context.res = {
             status: 200,
             body: {
-                message: `upvoted article: ${id}`
+                message: `article found: ${id}`,
+                article: article
             }
         };
     }
     catch(e) {
 
         context.res = {
-            status: (e instanceof upVoteException) ? e.status : 500,
+            status: (e instanceof articleException) ? e.status : 500,
             body: {
                 message: e.message
             }
@@ -57,4 +57,4 @@ module.exports = async function(context, req) {
 
         db.disconnect();
     }
-};
+}
