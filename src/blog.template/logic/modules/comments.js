@@ -79,10 +79,8 @@ function setAuthControlsVisibility() {
 
     if(_loggedIn) {
         document.querySelector('#comment-login').classList.add('no-show');
-    }
-    else {
-        document.querySelector('#comment-logout').classList.remove('no-show');
         document.querySelector('.comment-add-comment').classList.remove('no-show');
+        document.querySelector('#comment-logout').classList.remove('no-show');
     }
 }
 
@@ -122,8 +120,11 @@ async function getUsername() {
 
     if(_username == null) {
 
-        // TODO: create a local dev env with proxy access to stage/prod auth services
-        if(window.location.href.startsWith('http://127.0.0.1:')) {
+        // TODO: create a local dev env with proxy access to stage/prod auth services.
+        // current local dev environments called make a call to the auth API.  Instead we inject a test username.  The
+        // username is only used by the client.  The backend api has a separate method for handling auth services.
+        let siteUri = window.location.href;
+        if(siteUri.startsWith('http://127.0.0.1:') || siteUri.startsWith('http://localhost:')) {
             _username = 'test-user';
             _loggedIn = true;
             return ;
