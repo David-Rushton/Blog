@@ -40,9 +40,10 @@ function refreshUpVoteScore(score) {
  */
 async function incrementUpvoteScore(id) {
 
-    refreshUpVoteScore(_score++);
+    _score++;
+    refreshUpVoteScore(_score);
 
-    const response = await fetch(`/api/v1/upvotes/${id}`, { method: method });
+    const response = await fetch(`/api/v1/upvotes/${id}`, { method: 'POST' });
 
     if( ! response.ok ) {
         const responseJson = await response.json();

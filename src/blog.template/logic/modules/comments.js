@@ -13,6 +13,7 @@ async function loadComments(comments) {
         await getUsername();
 
         setAuthControlsVisibility();
+        initialiseNewCommentDialog();
         loadAndDisplayComments(comments);
     }
     catch(e) {
@@ -29,7 +30,7 @@ async function loadComments(comments) {
 /**
  * Adds a new comment to the article
  */
-async function addNewComment() {
+async function addNewComment(id) {
 
     try {
 
@@ -46,11 +47,13 @@ async function addNewComment() {
 
         const commentObj = {
             parentCommentId: id,
-            username: username,
+            username: _username,
             comment: commentTag.value
         };
 
-        addComment('000-000-000', commentObj.comment, username, new Date().toLocaleString());
+        addComment('000-000-000', commentObj.comment, _username, new Date().toLocaleString());
+
+        commentTag.value = '';
 
         await fetch(`/api/v1/comments/${id}`, {
             method: 'POST',
@@ -58,8 +61,6 @@ async function addNewComment() {
             body: JSON.stringify(commentObj)
         });
 
-
-        commentTag.value = '';
         document.querySelector('footer').scrollIntoView(false);
     }
     catch(e) {
@@ -83,6 +84,19 @@ function setAuthControlsVisibility() {
         document.querySelector('#comment-logout').classList.add('no-show');
         document.querySelector('.comment-add-comment').classList.add('no-show');
     }
+}
+
+
+/**
+ * Injects the current username
+ */
+function initialiseNewCommentDialog() {
+
+    // no action is required if not logged in.
+    // logging in results in a page refresh, meaning we do not need to deal
+    // with state transitions.
+    if(_loggedIn)
+        document.querySelector('#comment-username').innerHTML = _username;
 }
 
 
@@ -180,4 +194,4 @@ function commentException(message) {
 }
 
 
-export { loadComments, addComment };
+export { loadComments, addNewComment };
