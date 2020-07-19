@@ -5,11 +5,17 @@ import * as upvotes from './modules/upvotes.js';
 (async () => {
 
     const articleDoc = await article.getArticle();
+    const articleId = article.getId();
 
 
-    upvotes.loadUpvoteScore(articleDoc?.article?.upvotes || 1);
+    upvotes.loadUpvoteScore(articleDoc?.article?.upVotes || 1);
     comments.loadComments(articleDoc?.article?.comments);
 
-    document.querySelector('#article-up-vote').addEventListener('click', async () => upvotes.incrementUpvoteScore() );
-    document.querySelector('#comment-add-comment-button').addEventListener('click', async () => comments.addComment() );
+    document.querySelector('#article-up-vote')
+        .addEventListener('click', async () => upvotes.incrementUpvoteScore(articleId))
+    ;
+
+    document.querySelector('#comment-add-comment-button')
+        .addEventListener('click', async () => comments.addNewComment(articleId))
+    ;
 })();
