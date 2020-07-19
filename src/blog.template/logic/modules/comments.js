@@ -81,8 +81,8 @@ function setAuthControlsVisibility() {
         document.querySelector('#comment-login').classList.add('no-show');
     }
     else {
-        document.querySelector('#comment-logout').classList.add('no-show');
-        document.querySelector('.comment-add-comment').classList.add('no-show');
+        document.querySelector('#comment-logout').classList.remove('no-show');
+        document.querySelector('.comment-add-comment').classList.remove('no-show');
     }
 }
 
