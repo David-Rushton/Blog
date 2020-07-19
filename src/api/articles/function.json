@@ -8,7 +8,7 @@
         "methods": [
           "get"
         ],
-        "route": "v1/article/{id:guid}"
+        "route": "v1/articles/{id:guid}"
       },
       {
         "type": "http",
