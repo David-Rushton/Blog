@@ -120,6 +120,7 @@ async function getUsername() {
 
     if(_username == null) {
 
+    /*
         // TODO: create a local dev env with proxy access to stage/prod auth services.
         // current local dev environments called make a call to the auth API.  Instead we inject a test username.  The
         // username is only used by the client.  The backend api has a separate method for handling auth services.
@@ -129,6 +130,7 @@ async function getUsername() {
             _loggedIn = true;
             return ;
         }
+    */
 
 
         const authResponse = await fetch('/.auth/me', { method: 'GET', mode: 'no-cors' });

@@ -1,0 +1,38 @@
+version: "3.2"
+services:
+  vnu:
+    image: validator/validator
+    ports:
+      - "8888:8888"
+    network_mode: "host"
+
+  api:
+    image: mcr.microsoft.com/azure-functions/node:3.0-node12
+    ports:
+      - "7071:80"
+    environment:
+      - AzureWebJobsScriptRoot=/home/site/wwwroot
+      - AzureFunctionsJobHost__Logging__Console__IsEnabled=true
+      - FUNCTIONS_WORKER_RUNTIME=node
+      - DB_NAME=blogdb
+      - DB_CONTAINER=articles
+      - DB_RW_CONNECTION_STRING
+    build:
+      context: ./src/api
+    volumes:
+      - type: bind
+        source: ./src/api
+        target: /home/site/wwwroot
+
+  blog:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - type: bind
+        source: ./src/blog
+        target: /usr/share/nginx/html
+      - ./conf/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - vnu
+      - api
