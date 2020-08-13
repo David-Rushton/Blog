@@ -32,7 +32,7 @@ services:
       - type: bind
         source: ./src/blog
         target: /usr/share/nginx/html
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./conf/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - vnu
       - api
